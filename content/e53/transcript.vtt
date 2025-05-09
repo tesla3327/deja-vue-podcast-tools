@@ -1,0 +1,601 @@
+WEBVTT
+
+00:00:01.040 --> 00:00:02.320
+<v Alexander Lichter>Welcome to DejaVue.
+
+00:00:03.120 --> 00:00:12.400
+<v Michael Thiessen>Your favorite Vue podcast. You just don't know it yet. Although, you know, a year in, you've had how many episodes now? 52. This is the fifty third, I think.
+
+00:00:12.400 --> 00:00:12.720
+<v Alexander Lichter>Exactly.
+
+00:00:13.125 --> 00:00:23.685
+<v Michael Thiessen>A lot of chances to to check it out. But if you're new here, as many of you probably are, then welcome. The first episode you're listening to, hope it's a good one.
+
+00:00:23.685 --> 00:00:34.690
+<v Alexander Lichter>Exactly. And, I mean, we're talking about Nuxt three dot sixteen, so that must be good if using Nuxt.js out there. And, of course, that's not the only topic. We also sneaked in Nuxt UI v3, so the big major update there.
+
+00:00:34.690 --> 00:00:50.575
+Wanna talk about it too. And that's also interesting for all you Vue users out there. If you don't use Nuxt but plain Vue because, well, surprise, it's usable with Vue only as well. Bit confusing, but we'll get to that. And as Michael said, if that's the very first episode listening, get through that and then go for the backlog.
+
+00:00:50.895 --> 00:00:54.335
+There are a lot of amazing ones. So, yeah, let's get started. Right?
+
+00:00:54.335 --> 00:01:16.845
+<v Michael Thiessen>Yeah. Let's let's dive into it. We've got a bunch of fun things to talk about. So Nuxt three dot 16 came out just like top level, but we'll dive into the features one by one, but named layers, which is great. We've got some delayed or lazy hydration, which was added in Vue, and then now it's made its way to Nuxt.
+
+00:01:16.845 --> 00:01:26.880
+Some extra things with debugging and new version of Nitro in there with better errors and some other stuff in there as well. So, yeah, that's a pretty good release.
+
+00:01:27.040 --> 00:01:45.255
+<v Alexander Lichter>Yeah. It's like every minor version, it's pretty much filled with good stuff. And there's even a tiny thing people might not necessarily notice until they spin up the new project. We can even start with that, which is, well, a new way to initialize your Nuxt project. We can just run a create Nuxt, like npm create Nuxt and then get started.
+
+00:01:45.255 --> 00:01:59.880
+There is a little bit of history of why that was, let's say, changed. First of all, getting the package name was one thing before we had, like, create Nuxt app. That was for, like, Nuxt v2 Then we had just, like, Nuxt in it. That was the default for a while, and that will still work.
+
+00:01:59.880 --> 00:02:21.835
+And now we have create Nuxt, which is basically just the Nuxt CLI, the init part ripped out in its entirety and published, which means you don't have to, like, download the whole CLI to get started. So that might be even, like, speeding it up a tiny bit. And, of course, the whole CLI also came with some updates. Like, if you run it, you see a wonderful ASCII art. You see a little Nuxt logo there.
+
+00:02:21.990 --> 00:02:33.110
+Pretty wonderful. And shout out to cmang at cmang on on GitHub for that ASCII art there for the contribution. So that's the start, but there's even more. Michael, did you try it out already by any chance?
+
+00:02:33.590 --> 00:02:42.245
+<v Michael Thiessen>Yeah. I tried it. We actually use it in Mastering Nuxt. It came out just in time for me to rerecord the like, that very first lesson where we
+
+00:02:42.405 --> 00:02:42.725
+<v Alexander Lichter>Perfect.
+
+00:02:42.645 --> 00:02:43.605
+<v Michael Thiessen>set up the Project.
+
+00:02:43.605 --> 00:02:57.740
+So nice little streamlined way of doing that. Yeah. And I mean, I think it's great that it's like a it's not and, like, if you're already using Nuxt, you're probably not gonna see this as much because it's only for new projects. Right? But, yeah, an easier way to get started.
+
+00:02:57.740 --> 00:02:58.620
+It's always better.
+
+00:02:58.620 --> 00:03:15.985
+<v Alexander Lichter>Same for reproductions and stuff. And there is also one thing that a lot of people really wished for, which was also heavily discussed in the team, the wizard, right, in create-nuxt-app that people had like, oh, do you want ESLint? Do you want Tailwind? Do you want one of 10 other UI libraries? And finding the balance there is tricky.
+
+00:03:15.985 --> 00:03:32.250
+Like, with Nuxi in it before, this was always like, okay. Here's your minimal setup. And a lot of people were saying, okay. I don't want to repeat myself again or copy some defaults over this, that. So we've also seen the issues, of course, on GitHub in the repository saying, yeah, what's with Wizard?
+
+00:03:32.410 --> 00:03:57.670
+And eventually in the team, we thought about, okay, maybe it's better to just select modules. So to say, okay, do I want the table module, the excellent module, and so on and so on, Nuxt fonts, Nuxt images, which are the more common ways. So basically having a middle ground, but also not burden the user with too much mental load. It's like, have to go through that 20 page questionnaire, 20 questions questionnaire and then get started. That's not ideal either.
+
+00:03:57.910 --> 00:04:03.830
+<v Michael Thiessen>Yeah. It doesn't really reduce the friction if you have to spend, like, an hour weighing the the pros and cons of everything. And
+
+00:04:03.990 --> 00:04:04.310
+<v Alexander Lichter>Exactly.
+
+00:04:04.310 --> 00:04:05.910
+<v Michael Thiessen>Sometimes you just wanna get started.
+
+00:04:05.910 --> 00:04:17.885
+<v Alexander Lichter>And, ideally, so from that idea as well that there might be modules and that might be also your own in the future. Right? As you say, okay. No problem. I installed the module and the module can do something during the installation.
+
+00:04:18.125 --> 00:04:46.925
+So even and that's just an idea floating in my head right now. It could be that you say your own template could be a module setting it up in the future and you just pass it along. So I think there there are a lot of good things coming to also make, like, fully custom templates possible. I mean, even right now, you can start like, if you use NPM create Nuxt at latest, then you have to do dash dash space dash t. Because with npm, you have this, like, weird double dash to append arguments.
+
+00:04:46.925 --> 00:05:06.715
+With pnpm, Yarn, you don't have to do that. And with dash t, you can define a template. But right now, of course, that's, I think, limited to the templates we provide. The most interesting one is v4-compat compat to get automatically the version four compatibility mode and all the features and breaking changes for Nuxt four. Actually, mainly breaking changes for Nuxt four besides the folder structure enabled by default.
+
+00:05:06.715 --> 00:05:09.515
+So that's usually what I do when creating a new project.
+
+00:05:09.755 --> 00:05:36.595
+<v Michael Thiessen>Yeah. That makes that's a nice feature to have the template to just dive right in there. Because at this point, I mean, NUX four is not out yet, but it is Getting there. At that point where it's like, if you're gonna do a project, you probably should just start with that in in that compatibility mode so that you can just when it does come out, you can just, you know, flip it right over without having to do a whole ton of refactoring.
+
+00:05:36.595 --> 00:05:44.675
+<v Alexander Lichter>Exactly. So I think it's helpful, and especially if you're not worried with, like, trying some more experimental things. If you say, okay. Look. Everything that's merged, it will come.
+
+00:05:44.675 --> 00:05:52.560
+I I just straight away wanna get it. Yeah. It's a great way to try it out. Of course, you can also set it manually. You don't have to necessarily set it up with a template.
+
+00:05:52.560 --> 00:05:56.560
+You can do it afterwards. But, yeah, that's a just a more streamlined way to get started.
+
+00:05:56.800 --> 00:06:23.330
+<v Michael Thiessen>Yeah. I'm looking forward to the ability to have more templates and stuff like that as well because I think if you have templates and you don't necessarily need to have, like, starter repos and things like that, as much you can just use NPM create Nuxt, pass in the template, and, like, however you wanna wanna use it, you can have a whole bunch of stuff already, like, preconfigured there and ready to go. That'd be really neat.
+
+00:06:23.330 --> 00:06:35.285
+<v Alexander Lichter>Yeah. I agree. Like, the template part, it's always I feel like it's a double edged sword because on one hand, it's great to have, like, things straight away set up already. You can, like, define your custom ones. On the other hand, of course, maintenance.
+
+00:06:35.285 --> 00:06:59.095
+Right? Like, people have to maintain it. And before with, like, CreateNice, that that was always a bit tricky just because of how the architecture was like with, okay. You have to make sure the files for each of the template are updated, and you couldn't do, like, incremental ones like a template based on another template and so on. So having that said, there are some, like, really good also starters that you can start without, like, PMPM create Nuxt, but so I said that that's already an option.
+
+00:06:59.255 --> 00:07:06.215
+But, yeah, let's see what will happen in the future with Nuxt CLI and maybe even going further on that little template argument there.
+
+00:07:06.600 --> 00:07:57.725
+<v Michael Thiessen>Yeah. One of the most interesting new features that dropped is the lazy hydration support for Nuxt, which lets us control when a component hydrates. So if you're not as familiar with how Nuxt works with the universal rendering system, basically it combines server side rendering with single page app where the first time you hit that server, it will send you back that fully server rendered page, but then it also sends back that app bundle so that from there on out when you click around on the page and stuff like that, it acts like a single page app. So you get the performance benefits of both. But in order to do that, after that first page load, the app has to basically transition from server side rendering to single page app mode.
+
+00:07:57.725 --> 00:08:25.415
+And that part is hydration where we take all of the data that we fetched and basically take it from the backend and put it onto the browser and turn the page from a static HTML to a fully interactive JS app. Before that would just happen, it would just hydrate. But now we have all this control. See, like, I haven't dug into this myself yet, but, you know, there's all of the how many different ways are there? There's all these attributes.
+
+00:08:25.415 --> 00:08:28.550
+There's, like, seven of them? Eight of them. I don't even know how many
+
+00:08:28.550 --> 00:08:37.030
+<v Alexander Lichter>Technically infinite. Right? Because you even have, like, an option with, like, called hydrate when. So you can just define your own ref, whenever the ref turns true, it's fine.
+
+00:08:37.030 --> 00:08:37.670
+<v Michael Thiessen>Okay.
+
+00:08:37.670 --> 00:08:49.405
+<v Alexander Lichter>So, yeah, I agree. It's it's pretty amazing. We have, like, lazy hydration. And to add out there, I think, was a really good explanation in terms of hydration works. Why you don't want to hydrate your full page, of course, it's cost intensive.
+
+00:08:49.405 --> 00:09:08.160
+And if you have CPU cycle wise and also bandwidth wise and if you have static content that you know will always stay static, then why downloading an extra JavaScript and executing that part of JavaScript on the client again just to say, okay, it's here. Great. Fine. Thanks to Vue.js, maybe to start there as well, Vue.
+
+00:09:08.160 --> 00:09:29.660
+Js 3.5 implemented that lazy hydration with some strategies with also the intention back then to say, okay. Let Nuxt build something more streamlined on top of it. So the idea was always, okay. You could use it. You could use it also in in, like, previous Nuxt versions since three dot five, But you'd have to do some legwork yourself, which is not only, okay, how do I do this?
+
+00:09:29.660 --> 00:09:48.665
+I have to use define async component. But also, how do I make sure to not load the JavaScript? Because commonly the components are preloaded and so on and so on. So that long standing PR got finally merged and, yeah, number 26,468. I'll also link, of course, to that in the show notes.
+
+00:09:48.665 --> 00:09:51.225
+And that brings all the the laziness there.
+
+00:09:51.760 --> 00:10:04.160
+<v Michael Thiessen>Yeah. So what are the best practices around this? So you don't need to lazy hydrate everything on your page, of course, because then you have to make everything async, right? Because it only works with async components.
+
+00:10:04.160 --> 00:10:05.200
+<v Alexander Lichter>Yeah. Correct.
+
+00:10:05.200 --> 00:10:43.655
+<v Michael Thiessen>So there's some different ones here, hydrate on visible, hydrate on idle, hydrate on interaction. So those make sense, okay, you only want to hydrate an element once it actually scrolls into the view, or once the browser is idle, or there's a hydrate on media query, so we can, if you've got a mobile nav and a desktop nav, we can only hydrate the one that actually is being used. So do you have any other thoughts around best practices? I guess this is a newer feature, so maybe we haven't figured out best practices for this one just yet. But do you have any thoughts on that?
+
+00:10:43.655 --> 00:10:53.580
+<v Alexander Lichter>Always have opinions. Always have thoughts. That's a pro and a con itself. So there's there's one strategy that is, I think, pretty important. It's called hydrate never.
+
+00:10:53.580 --> 00:11:35.245
+So whenever you have static content and you know I don't need JavaScript there at all, just say never hydrate and and you get the benefits of, like, not loading a JavaScript, not executing that, and you're good. So that's one thing. The other thing is you need to make sure to only lazy hydrate things. And it's bit like with lazy loading things that are below default because above default, it can, well, cause some problems, especially if the user if the user is starting straight away, there might be exception to rules like very expensive components. But if the user is on your page and wants to click things and they're only hydrating, let's say, an interaction, then that will, of course, if they try to click on it, it will download the component and execute the JavaScript first.
+
+00:11:35.245 --> 00:11:49.480
+So that might be a delay, which is not ideal. And same with, like, hydrate on visible. You don't need to say, okay, hydrate that when it is in the viewport if it is in there straightaway. So, like, above the fold, like, in the initial right here. It's a bit like with lazy loading images.
+
+00:11:49.480 --> 00:11:53.000
+You also shouldn't do, like, loading lazy on images that are above the fold.
+
+00:11:53.000 --> 00:11:59.720
+<v Michael Thiessen>Yeah. That makes sense. We can basically take some of the the stuff we already know about lazy loading and just apply it here.
+
+00:11:59.960 --> 00:12:00.520
+<v Alexander Lichter>Exactly.
+
+00:12:00.520 --> 00:12:29.370
+<v Michael Thiessen>So this hydrate never, it sounds like, like I'm wondering if it works similarly to, so we have a v-once directive in Vue, which lets us do the whole like interpolation, but then after that it treats us static content. So the hydrate never is basically like a similar way of doing that, but we do the interpolation on the server and then on the front end, we just never hydrate it. It's just fully static.
+
+00:12:29.885 --> 00:12:53.540
+<v Alexander Lichter>Yeah. More or less, exactly. Because for the whole hydration, it applies to the whole components, not only the template but also the script part, of course. Basically you do everything on the server first and then, as you said before, it has to be taken over by the client. And there you have what I would call a replay effect because you go through all the components that are in the server and you have to run the same code on the client again.
+
+00:12:53.540 --> 00:13:15.470
+Now, internally, there might be some ifs with, oh, on client do this and on server do that. Also in Nuxt internally, for example, use fetch and use async data, we'll say, oh, if there is already some data fetched in the server, we'll take it over and we don't run the fetch again. So to avoid that replay because you might not need it, that's where Hydrate never is for. So, yeah, it will happen once on the server and then not on the client again. Correct.
+
+00:13:15.550 --> 00:13:16.350
+<v Michael Thiessen>Okay.
+
+00:13:16.510 --> 00:13:16.990
+<v Alexander Lichter>I think Yeah.
+
+00:13:16.990 --> 00:13:19.390
+<v Michael Thiessen>That's a good one to to to know. Yeah.
+
+00:13:19.470 --> 00:13:32.135
+<v Alexander Lichter>Yeah. Oh, absolutely. And it's, I think, key if you have, like, a static footer or something with only external links, then that's a perfect scenario. Or, like, a lot of text. Let's say you render some markdown and you have no internal links in there.
+
+00:13:32.135 --> 00:13:48.090
+Then why would you hydrate that? It's just additional cost, so to say. I think another thing you can do, and as I mentioned already, the hydrate when. It's not a directive. It's actually a prop that you pass in there that allows you to basically say, Okay, you have a ref and whenever the ref is triggered, then you should hydrate.
+
+00:13:48.090 --> 00:14:12.410
+So you can do all the customizable things, all the performance improvements your business logic needs to have. That's key. And of course, that only is important for the initial request if it's also server rendered. So if you don't use SSR, you can not forget about the topic, at least push it a little further away. Because for client applications, for client side only SPAs, that's not relevant as there is no transfer from the server to the client.
+
+00:14:12.410 --> 00:14:32.395
+Otherwise, I think there's another interesting part. There's also an @hydrated event that you can listen to. So whenever a component is hydrated, you can do a lot of other things. So just to make, like, don't know, make other components aware that this is available, like, show some messages whatsoever. So there are also a few options that the parent component can then use a bit like, hey.
+
+00:14:32.395 --> 00:14:37.190
+It's it's up there and ready. And you don't need any hacks around, oh, is it actually interactive or whatsoever?
+
+00:14:37.510 --> 00:14:37.750
+<v Michael Thiessen>Right.
+
+00:14:37.750 --> 00:14:38.950
+<v Alexander Lichter>That's also a big pro.
+
+00:14:39.030 --> 00:14:40.630
+<v Michael Thiessen>Yeah. That's good to have that in there.
+
+00:14:40.630 --> 00:15:11.450
+<v Alexander Lichter>And I think the last thing, at least that came to my mind regarding lazy hydration, there are still some limitations in terms of usage. So the main part is because how it works internally, and I've also showcased that in in a video already, I'll link also that in the show notes, means that you can only use it with single file components and you need to use auto import. So direct imports don't work for that. So you can't just say, I import this and this from components or whatsoever. And you need to have the lazy prefix, of course, which is automatically added by Nuxt.
+
+00:15:11.450 --> 00:15:29.505
+And another thing is the prop itself, the, for example, hydrate dash never or hydrate dash on dash visible, you have to explicitly pass that through the template or JSX or whatever you use. You cannot use something like vbind because then we can statically analyze that it's in there and we can't do the transformation based on that.
+
+00:15:29.745 --> 00:15:30.305
+<v Michael Thiessen>Right.
+
+00:15:30.385 --> 00:15:37.460
+<v Alexander Lichter>So, yeah, these are some gotchas. Some some people definitely experienced. And they're also highlighted in the docs, but better say it twice than ever.
+
+00:15:37.620 --> 00:15:44.100
+<v Michael Thiessen>Yeah. I think this will be an interesting feature to see what we can do with it. And I'm looking forward to experimenting with this one now.
+
+00:15:44.100 --> 00:16:00.725
+<v Alexander Lichter>Yeah. Especially performance wise, I think this will bring a lot of, lot of gains. Because before you had no choice to, well, hydrate it all, and now you can say above the fold, the rest on visible, or, like, on idle and so on. So, yeah, definitely for everybody out there who has, like, a public facing page. And it's already on two dot 16.
+
+00:16:00.805 --> 00:16:04.885
+Well, if not upgrade now and implement lazy hydration, there you go.
+
+00:16:05.310 --> 00:16:37.430
+<v Michael Thiessen>Another feature is the named layer aliases. So, yeah, we get this hash layer slash the name of your layer you can access when you're doing imports, but you can also provide custom names through the next config. So if you wanna have a different name for the layer, then, yeah, you can do that, which I think this will make it a little bit easier and a bit more organized to access things from different layers in your app. It's a bit of a smaller one, but definitely quality of life improvement there.
+
+00:16:37.430 --> 00:17:08.540
+<v Alexander Lichter>Absolutely. I think everybody using layers was waiting for that in a way, but there are not that many people using layers, so also worth checking it out. Whenever, I don't know, you, for example, slice your application into domains or features locally or you have a more elaborate structure or use white labeling or similar, then you would probably use Nuxt layers. And before you had the problem that you can't reference single layers and say, I don't know, hey, give me a certain component or a certain image or whatever from a different layer. And this made things a bit more opaque.
+
+00:17:08.780 --> 00:17:18.755
+Now it's easier because to say, okay, I grabbed that from that layer with that name. I can import things. It's very clear where they come from and it's all customizable. And it works fine also with TypeScript.
+
+00:17:19.315 --> 00:17:27.635
+<v Michael Thiessen>Yeah. And you don't have to do relative paths or anything Oh, yeah. Like that, which can be a whole mess. So
+
+00:17:28.900 --> 00:17:40.740
+<v Alexander Lichter>Yeah. I'm I'm happy that there are solutions for that now. Like, also, this is something I I remember we talked about quite a bit here and there. And it wasn't too trivial to get to a good solution, but, yeah, it's up now. Definitely give it a try.
+
+00:17:40.740 --> 00:17:47.535
+And, well, if you have any suggestions or feedback or beware bugs, let us know.
+
+00:17:47.855 --> 00:18:04.810
+<v Michael Thiessen>Well, yeah. And I think as developers, we're familiar with that. Sometimes the things that appear simple on the surface and are just, like, clean and obvious are actually the things that took the longest to figure out how to do. And then also to actually implement takes a long time.
+
+00:18:05.530 --> 00:18:06.490
+<v Alexander Lichter>I've had
+
+00:18:06.890 --> 00:18:21.945
+<v Michael Thiessen>in the past where, you know, I spent like weeks on this one on a feature that was like a button, but all the stuff in the back end was very complicated. So it was this kind of funny way that it didn't look like a whole lot, but it was.
+
+00:18:22.105 --> 00:18:28.770
+<v Alexander Lichter>Yeah. It's the same. I know you have PR and you come up with 10 lines of code. And they're like, yeah. I I took two days for that.
+
+00:18:28.770 --> 00:18:39.250
+And then people are like, how do you take like, how does it take you ten day two days for 10 lines of code? And they're like, yeah. Well, this is not how they started with. Like and first finding Yeah. Like, finding the issue.
+
+00:18:39.250 --> 00:18:43.865
+Then like, okay. Here is how it works. Here is no. There's another thing. We've been through that.
+
+00:18:43.865 --> 00:19:10.280
+I remember, like, at at Vue JS Amsterdam, I was sitting with with Daniel for a little bit, we looked into revamping the data fetching layer for Nuxt, which is not out yet, but also p aired to that for everybody interesting is in the in the show notes, it's not fully merged yet, at least not all parts. And we were looking into things. We were diving really deep, then what test was failing. So it was really a big rabbit hole. Eventually, the changes were not super drastic.
+
+00:19:10.875 --> 00:19:17.675
+In between, we had hundreds of lines of code and changed. Okay. This doesn't work. Let's go back. And we came up with, I would say, pretty elegant solution.
+
+00:19:17.915 --> 00:19:24.075
+But, yeah, that was a journey. And then sometimes, okay. This just takes very long to find the right way to do it.
+
+00:19:24.430 --> 00:19:47.965
+<v Michael Thiessen>Yeah. At some of the places I've worked, it's been where the senior devs would, like, do a PR, like, every couple days. That might be, like, three lines of code or one line of code. And that's like, what are you doing? And like the junior devs are like committing all this code and just like, you know, but that one issue was like 99% just trying to figure out what the problem was.
+
+00:19:47.965 --> 00:20:01.740
+And then it was like, oh, hey, if we add this one line to configure this, like, slightly differently, then we can sidestep all this other stuff. And getting to that solution is all the work. So
+
+00:20:02.140 --> 00:20:08.705
+<v Alexander Lichter>Exactly. And that's always good when you have, like, don't a PR and can describe at least, hey. This was my thought process. This is This is what what I did. So it's Oh, yeah.
+
+00:20:08.705 --> 00:20:15.905
+At least a bit more transparent. But still, very often, you don't see the work that is done behind the the whole thing there.
+
+00:20:16.305 --> 00:20:33.290
+<v Michael Thiessen>And so with Nuxt three dot 16, we've also got Nitro and other UnJS packages have been upgraded, but Nitro two dot 11. And I think the main thing in that one is better error messages.
+
+00:20:33.975 --> 00:20:57.100
+<v Alexander Lichter>I think it's a great feature that before, I felt the errors, the stack traces, were always a bit tricky. Back in time, actually, Nuxt two, we also had it. It was called Yauth. So it was a wonderful, nice error page with some stack trace and everything also nicely in CLI. And that made a comeback for Nitro v 2.12 sorry, v 2.11.
+
+00:20:57.180 --> 00:21:15.940
+And, yeah, it's now used in v four. So that's all fine. You don't have to, like, make sure, I don't know, to set source maps up to, like, pinpoint stuff because you straight away see, okay. Here's the error and this is right in that file where the problem is. So this should make debugging, especially in the server side, a lot easier than before.
+
+00:21:16.260 --> 00:21:22.260
+So, yeah, worth trying it out because it's there by default. You can't do anything against that. I mean, can disable it, but it's there.
+
+00:21:22.260 --> 00:21:33.275
+<v Michael Thiessen>Yeah. So instead of getting just, like, an error page that doesn't have anything useful, it's got your stack trace, nice, intact highlighting, and yeah.
+
+00:21:33.275 --> 00:21:45.460
+<v Alexander Lichter>It's pretty sweet. And and talking about debugging, actually, there's another thing. It might be a minor thing in in a minor version, but of Nuxt JS. There's also better way to debug stuff now.
+
+00:21:45.460 --> 00:22:01.575
+Because before, there was this flag in the Nuxt config. It was just called debug, You can set it true or to false. It was always enabled in dev. That's great, especially if you want to debug things. But then it starts like, okay, you turn it on and you get tons of messages from anywhere.
+
+00:22:01.575 --> 00:22:21.585
+Like, wait, I only wanted to debug hydration, for example. I didn't want to debug all the rest in maybe even, let's say, a production like staging environment where, Okay, this is just about hydration errors. I want to get better messages. And that was not really possible in the past. But now luckily this doesn't only take a boolean.
+
+00:22:21.585 --> 00:22:37.130
+This also takes an object where you can configure what debugging features you want to turn on or off. So now you can granularly choose, Okay, let's debug all the things or maybe just, I don't know, modules and watchers or all the hooks or everything except Nitro.
+
+00:22:37.370 --> 00:22:51.465
+<v Michael Thiessen>Yeah. So I'll just do a quick rundown of the different flags here. You got templates, modules, watchers, hooks, and there you can specify client or server hooks. And you've got Nitro, router, hydration.
+
+00:22:51.705 --> 00:22:57.865
+<v Alexander Lichter>Exactly. And more to come if there's anything else needed, but I think that's that was the the default we rolled with so far.
+
+00:22:58.190 --> 00:23:12.030
+<v Michael Thiessen>Yeah. This is gonna make things a lot nicer because, yeah, like you said, you don't sometimes just having debug messages for everything isn't helpful because you actually can't find the actual thing you're looking for, and that's, yeah, that's not really much better.
+
+00:23:12.355 --> 00:23:25.635
+<v Alexander Lichter>Exactly. So, yeah, worth worth trying it out if you ever have issues. I know, at least anecdotal evidence, I know from a lot of people have never used the debug flag. Might be worth trying it out if you have some issues. So I heard it's useful.
+
+00:23:25.875 --> 00:23:51.945
+<v Michael Thiessen>Yeah. For whatever reason, I also forget to use the Nuxt dev tools, and, like, they're so good and have so much in them, and I just forget that they're there. Even though there's, that little floating thing at the bottom that you just click on, and I just forget that I can open that up and check things out. But I'm trying to get better at, like, forcing myself to to use that more more and more because I think it's, yeah, it's it's got useful stuff in there.
+
+00:23:52.025 --> 00:24:10.440
+<v Alexander Lichter>Absolutely. And good that you mentioned that because Nuxt DevTools also saw a v two major release actually of three dot 16. So it's not like a massive update as in tons of new features. It's mainly necessary breaking changes, whereas the major version should be. So now DevTools before, they're always based on Vite.
+
+00:24:10.760 --> 00:24:46.135
+So now they require Vite six. So at least the Nuxt v 3.15 or it could probably also just override the version if you're early on still. I think one of the biggest things that was added is that you can now take a look at your Nuxt Nitro, also Veed configs mainly for debugging as well to make sure, okay, what do certain modules, for example, change in your configs and how does the eventual config look like? For that Discovery JS is used like, in the DevTools itself as a library. So that could help a lot by seeing, okay, this config, that's the end.
+
+00:24:46.135 --> 00:24:51.815
+Here's how modules change. No. This is not how I wanted it. So, yeah, another great idea to debug stuff.
+
+00:24:51.975 --> 00:24:56.970
+<v Michael Thiessen>Yeah. And you can also choose a different editor for opening things up into
+
+00:24:57.210 --> 00:24:57.850
+<v Alexander Lichter>True.
+
+00:24:57.930 --> 00:25:08.385
+<v Michael Thiessen>Which I think is great because a lot of us have switched over to cursor or, you know, there's a whole bunch of other editors out there, zed, NeoVim, etcetera.
+
+00:25:08.465 --> 00:25:09.585
+<v Alexander Lichter>WebStorm. Yeah.
+
+00:25:10.625 --> 00:25:23.840
+<v Michael Thiessen>WebStorm, the list goes on. There's been like an explosion lately, I think. And especially with all these AI assisted ones and not everyone's using Versus Code anymore. So yeah, you should be able to configure that.
+
+00:25:23.840 --> 00:25:25.440
+<v Alexander Lichter>Do you still use VS Code?
+
+00:25:25.440 --> 00:25:31.000
+<v Michael Thiessen>Well, I'm using cursor. So in a way, I'm using VS Code. Yeah. It feels like VS Code to me.
+
+00:25:32.240 --> 00:25:34.400
+<v Alexander Lichter>Yeah. That's I mean, it's a fork.
+
+00:25:34.400 --> 00:25:47.215
+<v Michael Thiessen>Basically. Yeah. Yeah. Exactly. I still use the original, but I use the insider's version that I upgraded a couple days ago or so and to also use a co pilot with the new agentic workflow. So that's pretty fun.
+
+00:25:47.695 --> 00:26:03.320
+<v Alexander Lichter>In that sense, upgrading can also lead to performance improvements. And, yeah, there were quite some actually in 3.16 Actually, Harlan did a PR also out of nowhere that improved the performance of basically starting your application.
+
+00:26:03.560 --> 00:26:33.570
+And that was pretty insane. So I think this is cut down by I have to check the numbers again. But the idea is finding modules, looking them up in different places, that can take quite a while, especially because there are a lot of scenarios where, well, these modules could be. And what Harlan did is he basically changed in the PR simply the order of where to take a look. And that's methods for the Nuxt prepare command or Nuxty prepare command.
+
+00:26:33.845 --> 00:26:52.920
+In his case, like, a 62% faster, so, like, down from from eight seconds down to three. And for nuxi dev, 25% speed improvements from twenty seconds down to fifteen. And that's basically by making sure the resolution is a bit smarter. It's it's a bit more than just the order around that. But, yeah, I'll I'll link the PRs in the show notes so people can have a look.
+
+00:26:52.920 --> 00:27:01.720
+<v Michael Thiessen>Yeah. Another great example of what we were just talking about before of, like, just, like, shifting some lines around and rearranging it, then suddenly, you know, we get some performance gains there.
+
+00:27:02.095 --> 00:27:07.935
+<v Alexander Lichter>Yeah. Yeah. And it's still without breaking changes. So that's the the best part. There were a few things where we thought, like, okay.
+
+00:27:07.935 --> 00:27:17.850
+Let's revisit. Because Daniel, like, originally put the order in a different place or, like, considered a different scenario, but things work fine. So, yeah, win win for the community. And it's that's that's not even it. Right?
+
+00:27:17.850 --> 00:27:39.905
+We Nuxt itself uses a module called or a package called exsolve now. Also, of course, from the UnJS ecosystem, which also means it speeds up module resolution because that is faster than the resolver from before. There are some nitro aliases that were duplicated before, so that will be easier. There's some other resolution steps that are skipped.
+
+00:27:39.905 --> 00:27:45.000
+And last but not least, that's also nice to mention, we switched from, or have to check actually.
+
+00:27:45.000 --> 00:28:06.225
+I think before there were some components or there were some files that used esbuild and acorn before to parse certain code. So think of like, okay, you have a component, let's say, for the page meta. I think that's a great example. So you want to somehow extract parts of your component of the script part there and save that somewhere. We do this for the rel page meta.
+
+00:28:06.225 --> 00:28:29.975
+And for that, you have to, of course, go through the components, see if defined page meta is there and so on and so on. And for that, you need a parser and something to go through the components again. And now we switched from ESBolt and Acorn over to OXC, so to the Oxidation Compiler all around Void Zero. People might have heard about it before, which is Rust based and super fast. So that is also a great improvement.
+
+00:28:30.135 --> 00:28:32.055
+And things work, of course, as before.
+
+00:28:32.135 --> 00:28:33.895
+<v Michael Thiessen>Is that in three dot 16?
+
+00:28:33.895 --> 00:28:39.815
+<v Alexander Lichter>That is also in three dot 16. Yes. So there we adopted oh, I see. It was like PR. Let me check here.
+
+00:28:39.815 --> 00:28:44.070
+Thirty thousand sixty six where Daniel moved all the things over.
+
+00:28:44.230 --> 00:28:44.790
+<v Michael Thiessen>Okay.
+
+00:28:44.950 --> 00:28:54.790
+<v Alexander Lichter>Things just work. Also there, a big benefit. It will be even better when we have rolled down in Veed. Not when an episode comes out. I guess you can try it out already, but it's not landed yet.
+
+00:28:54.790 --> 00:28:58.635
+And then things will be even faster then, so a lot of speed boosts coming up.
+
+00:28:58.635 --> 00:29:16.670
+On that note, also, terms of speed boosts, that's always pretty important to mention. Performance improvements are great, especially if you can measure them. And at Duxed, we use, of course, our own VTest benchmarkings. But also for benchmarks, we use something called Cod Speed.
+
+00:29:16.670 --> 00:29:40.025
+So we basically say, Okay, we have a very basic setup, like the minimal one, just boot up a Nuxt application. And the same with our fixtures for tests, a lot of things are included. And based on that, we have a CI task that says, Okay, boot it up and compare it to the time before. Rather like a pretty simple approach. And I know a lot of people who don't have that, but especially in big applications that can make a huge difference.
+
+00:29:40.360 --> 00:30:06.585
+And it even caught some cases where accidentally, Oh, there was something, maybe dependency, maybe something that was enabled by accident. That's not like bump the bundle size because there's other checks, but was way longer to boot up the application, which also is a problem. And then we don't even talk about how long does a request to that application take. So, yeah, really worth to measure these improvements as well. As always, with performance improvements, you want to have that somehow quantifiable.
+
+00:30:07.070 --> 00:30:38.510
+<v Michael Thiessen>Yeah. Not just functional testing, but also the performance testing so that because that's a I mean, for NUCs as a framework, that's a very important metric for like, when I'm building an app, I'm not gonna worry as much about performance because that's why I use Nuxt. So Fair. Like I do like like obviously I do wanna test for performance and like make sure my SEO is gonna be good and that users can load the stuff and get around the app. But it's definitely a lot more serious of a thing for the framework itself.
+
+00:30:38.590 --> 00:30:39.870
+<v Alexander Lichter>Definitely. There
+
+00:30:40.190 --> 00:30:41.790
+<v Michael Thiessen>was so much performance testing.
+
+00:30:41.950 --> 00:30:59.395
+<v Alexander Lichter>There, especially the framework or library level, if you fix or improve things, then it will have an impact on so many people. So of course, that's a big part. But that's no excuse to not test the performance of the application, especially if it's public facing. So definitely worth doing that. Also in the CI, never hurts to set these up.
+
+00:30:59.395 --> 00:31:01.955
+But of course, takes time. You have to dig into that and so on and so on.
+
+00:31:02.370 --> 00:31:12.850
+<v Michael Thiessen>Yeah. But, you know, it's worth it. Testing is one of those things that that often gets forgotten about, but it's also important. So just throwing it out there. Quick reminder to do some testing.
+
+00:31:13.090 --> 00:31:31.825
+<v Alexander Lichter>Exactly. Pause the episode or continue listening while while implementing it. You know the drill. And I think for Nuxt 3.16, there are a few more things. So we linked the the blog post, of course, that's always part of a new minor release for for you in the show notes to see what other amazing things are in there, like Unhead v two, for example, decorator support, some some minor changes here and there.
+
+00:31:31.905 --> 00:31:38.540
+So worth checking out. And if you have a favorite, like, feature or improvement, let us know. Let us know what it is.
+
+00:31:38.860 --> 00:31:42.780
+<v Michael Thiessen>Yeah. Give us some comments, some replies. Good to hear from you.
+
+00:31:43.100 --> 00:31:51.405
+<v Alexander Lichter>Yeah. And then I guess we jump all the way over to the other big release that came up recently, UI v three. Michael, tell us.
+
+00:31:51.405 --> 00:32:09.860
+<v Michael Thiessen>Yeah. Nuxt UI v three and also runs in Vue. I'm gonna mention that a few times because it's called Nuxt UI, but there was some recent work done that allows it to run just with Vue. You don't need to be running Nuxt to use this, which is great. And, yeah, a big update.
+
+00:32:09.860 --> 00:32:36.860
+I think this one is full of breaking changes, which is, great because there's a whole bunch of new stuff that it enables, but also difficult if you are upgrading from v two. I've been using v three. I have actually not used v two myself, so not as familiar with that and where we've been. But the new version is very nice, and I can, yeah, I can tell you that it's been a real pleasure to work with over the last couple months. I was using the beta, but it came out full release a couple weeks ago.
+
+00:32:36.860 --> 00:33:01.475
+<v Alexander Lichter>I must say Nuxt UI v two was also really nice to use. But of course, now with Tailwind v four, which is one of the reasons a lot of people wanna upgrade, because we we too will not get Tailwind v four support. And also with being based on Reka UI, which some people might know before as, like, Radix UI, that gets a more, let's say, robust foundation. And also it's accessible out of the box because the primitives are tested for accessible. So that's great.
+
+00:33:02.010 --> 00:33:14.330
+A lot of breaking changes. And if the whole thing so headless UI is not not anymore part of it, that's why Reka UI is there. Right? There are a few things. So migrating over might be more a bit trickier.
+
+00:33:14.330 --> 00:33:33.870
+If you have never tried Nuxt UI, then it's worth trying it out right now because that's a it's a good start. There are also other people. For example, Jakub, who was also here on the show already, he said, like, his migration was pretty straightforward, but he also said, like, okay. It was not important to do, like, things pixel perfect. So depending on your requirements, it might not be as difficult as it sounds.
+
+00:33:34.510 --> 00:33:49.255
+<v Michael Thiessen>Yeah. And one of the the big changes too is that so we we switched to Tailwind v four, but then also there's a new design system which uses CSS properties. Is that what they're called? I always forget there.
+
+00:33:49.255 --> 00:33:50.295
+<v Alexander Lichter>CSS variables.
+
+00:33:50.615 --> 00:33:51.255
+<v Michael Thiessen>Variables.
+
+00:33:51.255 --> 00:33:52.055
+<v Alexander Lichter>Yeah. I think.
+
+00:33:52.055 --> 00:33:57.895
+<v Michael Thiessen>Yeah. Variables, properties. I think there's sometimes both terms are thrown out there, which is confusing.
+
+00:33:57.895 --> 00:33:58.135
+<v Alexander Lichter>Yes.
+
+00:33:59.200 --> 00:34:43.820
+<v Michael Thiessen>Anyway, the whole variables in CSS, Nuxt UI v3 is using that, is done so that we can sort of simplify how the theming is done, so instead of always having to specify the exact tailwind class, we can have a bunch of variables like UI text highlighted or UI text muted, UI background, whatever. And so that way we can have this abstraction over your tailoring classes, have a design system built in. Then of course you can customize those variables, and then because the components all use that, then it's just easier instead of you just have one place to customize things.
+
+00:34:44.295 --> 00:35:20.785
+<v Alexander Lichter>Yeah. And another thing that's nice to UI V3 is based on is the tailwind variants. So that's actually, once again, another thing that was, I think, first propagated for Stitches was introducing variants and the people behind Hero UI said, Oh, it's great. So they brought that over to Tailwind CSS. You can basically define your variants, let's say a shorthand for base, a button, whatsoever, and then reference that by calling, well, tv, fortainment variants, defining all the things and then calling whatever the definition is as a function and then saying, Okay, I want to have this size.
+
+00:35:20.945 --> 00:35:53.270
+Let's say you define your variants and sizes like small, big, medium, and then have all different kinds of, I don't know, text size, padding margin. Then you can just say, hey, my my button, I wanted the size medium and maybe another variant like color primary, and you get all the things. So this is once again another layer on top of Tailwind, but it makes a lot of sense, especially defining variants for components in a very sane way. So definitely worth looking into that. In the end, that's something the Nuxt UI team adopted And, yeah, they're happy with that.
+
+00:35:53.270 --> 00:35:55.030
+So I hope you'll be happy with it as well.
+
+00:35:55.190 --> 00:36:11.905
+<v Michael Thiessen>Yeah. And one thing to point out is that I think this is maybe confusing for some people, but the Nuxt UI is the the people behind Nuxt UI is Nuxt Labs, which is a company run by Sebastian Chopin, I believe.
+
+00:36:12.065 --> 00:36:20.705
+Correct. And so it's separate from the open source side of Nuxt. Maybe you wanna take over this one and explain a little bit of the differences there.
+
+00:36:20.705 --> 00:36:32.250
+<v Alexander Lichter>Yeah. I think the best one to explain it is Sebastian, which is why we don't have him here in the episode, but we'll hope he'll come on soon and we talk about all that in-depth. Yeah. Because I think that's that's pretty important. But to add on there, it's it's absolutely correct.
+
+00:36:32.250 --> 00:36:51.820
+So Nuxt UI is mainly maintained by by Benjamin. Nuxt UI itself is fully open source. There is a pro variant called Nuxt UI Pro, and all revenue goes to Nuxt Labs, which is a company that's the founder, to basically more or less make sure, okay. Look. We can make a little sustainable business out of things around Nuxt.
+
+00:36:51.820 --> 00:37:17.170
+Js. So they do Nuxt Hub, Nuxt Studio, Nuxt UI, some consulting as well and so on. So if you use any of these products, then of course you also help people like, for example, Daniel or Anthony or Pooya working on Nuxt on that side. So that's one part of the equation. And yeah, it is a bit confusing because all the other things like Nuxt Hub or because Nuxt Hub is also open source to some degree.
+
+00:37:17.170 --> 00:37:38.015
+Right? That's all in a separate org. But with Nuxt UI, not the case. So that's also something we're we're looking into to maybe make that more clear and separate it because while it is, as I said before, Nuxt UI is open source but not maintained by the Nuxt team itself, not by us, so to say. Still a wonderful UI library or a component library, I'm happy using that as well.
+
+00:37:38.015 --> 00:37:41.775
+Used it before in various videos, so definitely worth checking that out.
+
+00:37:42.190 --> 00:38:08.645
+<v Michael Thiessen>Yeah. And so the with Nuxt UI, there's the free open version of Nuxt UI, which comes with a whole bunch of components you can use. And then there's Nuxt UI Pro, which is the paid one. And there you get some extra components and some templates and things like that. You can quickly throw together a landing page for SaaS and stuff like that using the Next UI components.
+
+00:38:08.805 --> 00:38:17.660
+<v Alexander Lichter>Exactly. So some templates, you don't have to build them from scratch. You can use them. Also, you can alter them as you want, that's fully up to you. You can copy the code over.
+
+00:38:17.660 --> 00:38:40.625
+So you basically don't say I have to use the template as is. You just get to even change the components around as you like. It's, in a way, a really easy way for, let's say, a little head start. It has 40 plus sections that you can just use in your application. And once again, it's fully optional if you want the time to say, okay, I can build something like that on my own with everything accessible and so on and so on.
+
+00:38:41.080 --> 00:39:00.135
+Then go ahead. You can use all the Nuxt UI components, as we said, MIT license for free, or go with Nuxt UI Pro. That's it. And on that note, of course, we have a little link in the show notes if you're interested in Nuxt UI Pro. We even have a discount code in there, so check out the whole thing with code, data view, if you're interested.
+
+00:39:00.215 --> 00:39:08.770
+<v Michael Thiessen>Yeah. And if you buy through that link, then you also help to support our show here, which isn't free to run, by the way.
+
+00:39:08.770 --> 00:39:09.730
+<v Alexander Lichter>True that. True that.
+
+00:39:09.730 --> 00:39:40.440
+<v Michael Thiessen>You maybe didn't know that, but we have a wonderful editor who does all the work all this work for us. And, you know, we have to pay for these this recording setup and stuff. And also paying for Nuxt UI Pro. I'm not trying to sell you on it here, but just to like add further clarification. So Daniel Rowe, who's leading the Nuxt team on the open source Doesn't work for next labs, but he gets some of his funding from the team at next labs.
+
+00:39:40.440 --> 00:40:03.150
+So the revenue that they make off of the products around the nuxt ecosystem gets funneled back to Daniel and a bunch of other people who are doing the open source side of things. So it's like this whole complicated web of things. And so, I think it helps to support Nuxt and the whole ecosystem and everything. So I like how that works.
+
+00:40:03.390 --> 00:40:06.670
+<v Alexander Lichter>Yes. And it's win win win win. Right? Okay. You get a head start.
+
+00:40:06.670 --> 00:40:21.875
+You support open source. And, yeah, we're all happy at the end. And, ideally, your company paying for that, so they also see something back. I I also talked a lot with companies like, yeah, ideally, want to, I don't know, sponsor some creators, but then people are like, okay. But why?
+
+00:40:21.875 --> 00:40:34.540
+We can also just use it for free. So maybe that's also a way to to give something back, so to say. Yeah. If you have any questions as as usual there, you can reach out to us in terms of Nuxt UI itself. Like, you both use it quite a bit.
+
+00:40:34.540 --> 00:40:46.685
+Just hit them up in the comments. And if you've tried it, let us know what you think about it. And I also think there that's more or less everything around Nuxt UI  v three. There anything we've we've missed out? Don't think so.
+
+00:40:46.685 --> 00:40:47.085
+Right?
+
+00:40:47.085 --> 00:40:57.380
+<v Michael Thiessen>I don't think we've missed anything. Yeah. We mentioned it's that works with Vue. Mention it again. And, yeah, I think that's that's it.
+
+00:40:57.380 --> 00:40:58.500
+I think we covered it all.
+
+00:40:58.660 --> 00:41:17.005
+<v Alexander Lichter>Perfect. Then we can only tease for next week's episode because we talked a little bit about sustainability of open source, totally not on purpose here. That just fit in very nicely. Next week, we'll definitely dive into that a bit more, so stay tuned for that episode. Make sure you listen to the old ones if you don't know them yet.
+
+00:41:17.725 --> 00:41:27.140
+Yeah, Michael, we should also maybe think about another slogan for the podcast. People are already pointing out, like, hey. After almost a year of watching or listening, I know you. So maybe we have to come up with one.
+
+00:41:27.140 --> 00:41:35.780
+<v Michael Thiessen>Yeah. And the weird thing about the slogan is I don't even remember like, we didn't brainstorm it. It just it just sort of happened. I think you said it one time, and then
+
+00:41:36.075 --> 00:41:37.115
+<v Alexander Lichter>we kept it, I guess.
+
+00:41:37.115 --> 00:41:42.635
+<v Michael Thiessen>And then now it's it's just a thing that we do. So Yeah. Yeah. Maybe we have to to swish it up.
+
+00:41:43.115 --> 00:41:43.595
+<v Alexander Lichter>Let's see.
+
+00:41:43.595 --> 00:41:49.915
+<v Michael Thiessen>Do you have any suggestions for us? We we'd love to know. Put in comments. Maybe we'll maybe we'll take your suggestions.
+
+00:41:50.380 --> 00:41:59.340
+<v Alexander Lichter>Yeah. Well, you know what? Just do a little social media post as well. And if people have a new slogan idea, let's let's go. Then maybe we make a little mini episode just rating them.
+
+00:41:59.500 --> 00:42:00.940
+<v Michael Thiessen>Let's see. Need a slogan?
+
+00:42:01.020 --> 00:42:05.100
+<v Alexander Lichter>Like, no. Like, a mini episode just rating them. Like, hey. This slogan, how do feel about it?
+
+00:42:05.420 --> 00:42:05.740
+<v Michael Thiessen>Yeah.
+
+00:42:06.035 --> 00:42:14.035
+<v Alexander Lichter>Okay. A lot of extra content ideas. Nevertheless, I hope you enjoyed the episode, and we'll see you all in the next one. Until then, folks.

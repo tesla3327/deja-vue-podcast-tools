@@ -1,0 +1,48 @@
+Join hosts Michael Thiessen and Alexander Lichter for a special episode of DejaVue - a fascinating panel discussion on open source sustainability with three open source enthusiasts:
+Daniel Roe (Nuxt Team Lead),
+Chad Whitacre (Head of Open Source at Sentry), and
+Rijk van Zanten (CTO and co-founder of Directus).
+
+The panelists dive deep into what sustainability truly means in open source and get deep into the weeds of different licensing models, debating whether open source functions as a gift economy, and discuss the challenges of project governance.
+
+The panel also discusses important questions about leadership structures in open source projects, the role of companies in funding development, and practical ways everyone can contribute to making the ecosystem more sustainable - whether financially or through other meaningful contributions.
+
+Enjoy the episode!
+
+Our Guests
+
+Daniel Roe - Nuxt Team Lead
+Bluesky
+Web
+Chad Whitacre - Head of Open Source at Sentry
+Bluesky
+Twitter
+Web
+
+Rijk van Zanten - CTO and co-founder of Directus
+Bluesky
+Twitter
+Web
+
+Chapters
+
+{{chapters}}
+
+Links and Resources
+
+Mastering Nuxt*
+xkcd on standards
+Jacob Kaplan-Moss: Paying Maintainers is Good
+Sentry
+Directus
+Nuxt
+BSL
+Fair Source
+MIT
+AGPL
+OSI
+BDFL
+Nuxt Governance
+Open Source Steward in the CRA
+Daniel Roe: Contributing to Nuxt
+Open Source Pledge

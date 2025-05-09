@@ -1,0 +1,30 @@
+00:00
+Intro
+00:54
+Nuxt 3.16 Feature Overview
+01:27
+A new way to initialize Nuxt projects
+07:06
+Lazy Hydration in Nuxt
+16:05
+Named Layer Aliases
+17:45
+Lines of Code vs. Complexity
+20:16
+What a new Nitro minor brings to the table
+21:33
+Fine-grained debugging options
+23:25
+Nuxt Devtools v2
+25:47
+Faster module resolution (and faster boot up time)
+27:39
+Using OXC to speed up component parsing
+28:58
+Benchmark performance improvements
+31:43
+Nuxt UI v3
+40:58
+Sneak peek at next weeks episode 👀
+41:17
+Suggest a new slogan!

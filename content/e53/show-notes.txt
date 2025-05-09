@@ -1,0 +1,31 @@
+Nuxt 3.16 dropped and it's packed with goodies! In this episode, Alex and Michael break down all the cool stuff in this release that'll make your Nuxt development smoother.
+
+They dive into the new command to initialize a Nuxt application, the performance-game-changing lazy hydration support that'll boost your app's performance, and named layer aliases (that you've been waiting for). Plus, huge performance improvements, better error messages with Nitro 2.11 and debugging improvements that'll save you hours of head-scratching.
+
+But wait, there's more! The duo also geeks out over Nuxt UI v3, which (surprise!) now works with plain Vue.js too - not just Nuxt. Learn how it leverages Tailwind v4, introduces a sweet CSS variables-based design system, and builds on Reka UI primitives for better accessibility. And somehow, a discount code for Nuxt UI Pro* *cough DEJAVUE cough* gets snuck in there too!
+
+Enjoy the episode!
+
+Chapters
+
+{{chapters}}
+
+Links and Resources
+
+Mastering Nuxt is out now!*
+Nuxt UI*
+Get 20% OFF Nuxt UI PRO* with discount code DEJAVUE
+
+Nuxt 3.16 blog post
+Vue implementing Lazy Hydration
+Nuxt Lazy Hydration PR
+Lazy Hydration in-depth
+More about Nuxt Layers
+Revamping data fetching in Nuxt PR
+Nitro 2.11
+Youch
+Harlan's PR to speed up module resolution
+OXC PR
+Rolldown-vite
+CodSpeed
+Tailwind Variants

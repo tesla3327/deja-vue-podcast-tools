@@ -1,0 +1,730 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:16.155
+<v Alexander Lichter>Hey, everybody. Welcome back to DejaVue, your favorite Vue podcast out there. And today, you might hear my host Michael is unfortunately not here. He lost his voice, but he'll be back next week and, of course, on all the other or most of the other older episodes that you should check out if you haven't already.
+
+00:00:16.395 --> 00:00:32.000
+And, of course, I wouldn't be here doing that podcast alone. It would be strange, but I got a lovely guest. He is, well, a Vue use maintainer among a lot of other libraries. Like, the list is pretty long on the GitHub profile. And he's also the lead of the e18e initiative that we'll talk about a bit.
+
+00:00:32.080 --> 00:00:34.480
+Welcome, James Garbutt. James, how are doing?
+
+00:00:34.560 --> 00:00:40.720
+<v James Garbutt>Yeah, not bad. Thanks for having me here. Yeah, it's an increasingly big list of things that I'm maintaining.
+
+00:00:41.355 --> 00:00:49.275
+<v Alexander Lichter>So tell a few more. I mean, okay, mentioned VueUse, lead of E18E. Like, I don't know, Bombshell, Chokidar. What else is on the list there?
+
+00:00:49.275 --> 00:01:05.570
+<v James Garbutt>So I maintain parse5 and Chai as well. It's quite a lot of the libraries that I do maintain are more granular level, know, in that it's all the building blocks of all the frameworks and tools, basically.
+
+00:01:05.985 --> 00:01:10.305
+<v Alexander Lichter>So the typical problem, like people use them, but people don't know about them.
+
+00:01:10.625 --> 00:01:30.500
+<v James Garbutt>Yeah, exactly. Especially chokidar, for example, like, most projects that need to watch files will use chokidar. And you're not necessarily aware that it's a dependency in your tree, to be honest, but it's such a fundamental package. And yet it's probably the least known one that I maintain.
+
+00:01:31.425 --> 00:01:40.385
+<v Alexander Lichter>Interesting. Yeah. I mean, of course, like, being a Nuxt team and Nuxt using Chocolatar, I've heard it multiple times. We looked into some issues with watchers, how to use them more efficiently and so on and so on.
+
+00:01:40.385 --> 00:01:49.760
+But true, I would say out there, people might be like, maybe heard the name, but, yeah, they will definitely find it in their dependency list if they do like, I don't know, a pnpm y, chalkydart.
+
+00:01:49.760 --> 00:02:09.975
+<v James Garbutt>Yeah, 100%. Yeah. And it's probably the same with parse5 quite a lot of things just because anything that passes HTML, you know, linters and formats and tools like that, they have to pull it from somewhere. And there's only, you know, maybe a handful of parsers out there. So it's probably somewhere in the dependency tree.
+
+00:02:10.455 --> 00:02:23.670
+<v Alexander Lichter>Most likely, indeed, indeed. But before we dive into the big topic e18e, maybe let's rewind a little bit and maybe start with your journey into programming, web development. So how did you get into all of that eventually?
+
+00:02:23.670 --> 00:02:31.805
+<v James Garbutt>Yeah, a long time ago. From what I remember, I was writing web scrapers when I was a teenager.
+
+00:02:32.125 --> 00:02:33.085
+<v Alexander Lichter>Oh, nice.
+
+00:02:33.085 --> 00:02:52.540
+<v James Garbutt>I think I wrote an IMDb web scraper or something just for sake of getting movie info and things. I think I was writing, you know, a few other scrapers for things around the time. And then I started contributing to some PHP projects as well, which I've thankfully forgotten.
+
+00:02:55.095 --> 00:02:58.055
+<v Alexander Lichter>But was the scraper in PHP as well back then?
+
+00:02:58.055 --> 00:03:27.245
+<v James Garbutt>Some of them were, yeah. Because this is before scraping everything exists in Python. So yeah, quite a lot of it was written in PHP. And then I gradually moved on to the front end side of things where, you know, it paired well at the time I was doing the back end in PHP and the front end in JavaScript, and then started focusing more on the front end libraries and things like that. And then that's, you know, where I started getting into GitHub projects and things.
+
+00:03:27.405 --> 00:03:36.925
+So you can see like way back in my repositories, you know, I got bored one day and made like a RAR implementation like WinRAR in JavaScript.
+
+00:03:36.925 --> 00:03:39.005
+<v Alexander Lichter>Oh, wow. Why?
+
+00:03:39.630 --> 00:03:42.510
+<v James Garbutt>Just to see if it was possible.
+
+00:03:42.750 --> 00:03:44.750
+<v Alexander Lichter>Just for the sake of it. Yeah. Okay, fair.
+
+00:03:44.750 --> 00:03:50.590
+<v James Garbutt>It did get featured on a blog post that was something like libraries you should never write in JavaScript.
+
+00:03:52.995 --> 00:03:58.195
+<v Alexander Lichter>I can imagine. But on the other hand, everything that you can write in JavaScript will be written in JavaScript nowadays.
+
+00:03:58.195 --> 00:03:58.675
+Right?
+
+00:03:58.675 --> 00:04:03.075
+<v James Garbutt>Yeah. Yeah. Just to prove that it's possible. A bit like the Doom stuff going on recently.
+
+00:04:03.075 --> 00:04:14.320
+<v Alexander Lichter>Oh, so good. Yeah. I mean, Dimitri is like, that was insane to see. Also, like, beyond, I don't know, Flappy Bird and TypeScript where, like, okay, there was a parser in in Zig, I think, and all that. And Dimitri was like, no.
+
+00:04:14.320 --> 00:04:18.480
+No. No. Not like that. We'll we'll do it differently. Like, actually, it is mind blowing.
+
+00:04:18.480 --> 00:04:23.815
+Link in in the show notes, by the way, for everybody who hasn't heard. Yeah. TypeScript, a Doom in TypeScript is a thing.
+
+00:04:23.895 --> 00:04:44.340
+<v James Garbutt>Yeah, it's absolutely nuts. But seeing any project like that is really cool because it's a proper hobby project as in nobody needed it. It's just to prove that you can build something like that. And it's the same with RajAS and you know, anything else people have built that is not necessarily a requirement. It's just something fun, right?
+
+00:04:44.340 --> 00:04:52.965
+<v Alexander Lichter>True. And that also means like you can see the direction, you can do whatever you feel like, no pressure. But when it's done, you're like, hey. It's cool. It works now.
+
+00:04:52.965 --> 00:04:55.685
+It does what it should, and it's a it's a fun project indeed.
+
+00:04:55.685 --> 00:04:56.965
+<v James Garbutt>Yeah. 100%. Yeah.
+
+00:04:57.685 --> 00:05:12.630
+<v Alexander Lichter>So from that and, like, adventuring through PHP, eventually adding to JavaScript, how how did you get into, like, using a bit of Vue.js? I mean, of course, you use different frameworks and maybe also not at all. So how did that happen?
+
+00:05:12.790 --> 00:05:55.145
+<v James Garbutt>Yeah. So for a long time, I was in the web components community, you know, help like contributing quite a lot to LitElement, which is the, you know, the Google sort of web components library. And it's from the point of view of building components and things Vue is very similar. And so Svelte and a few other things, you're always building from the component level and using those building blocks to create a project. So as part of the learning experience of making sure I don't end up in just a web components bubble, occasionally, I would go out and just try out some framework or some of the library or something.
+
+00:05:55.785 --> 00:06:14.100
+And, you know, one day I thought, okay, well, let's do some Vue Because why not? You know, it's a very similar concept, even if it's not built the same, and ended up getting interested in that. And then sort of just contribute in here and there some fixes and stuff.
+
+00:06:14.100 --> 00:06:21.615
+But I know a few people that work on VueUse, for example, through the e18e side of things as well.
+
+00:06:22.655 --> 00:06:39.820
+I'm just from pushing fixes and things. And that's where I became a maintainer of that. But then also the Vite side of things, you know, quite a lot of the Vite folks are in the e18e community and help run it in some cases. So, yeah, just over several years, I've got more and more into Vue.
+
+00:06:40.860 --> 00:06:54.035
+<v Alexander Lichter>Very nice. Very nice. But I I also wanna highlight one thing you said here because you said, okay, to not end up in a bubble, in your case, the web component bubble, you would like try out other things here and there. Would you say this is something more people should do no matter what like framework or stack they use?
+
+00:06:54.420 --> 00:07:32.290
+<v James Garbutt>Yeah, I think so. You know, like, an example recently is I'll be going to Svelte summit later this year. And just to make sure that I get back on top of knowing a little bit of Svelte, I decided to go read through some of the repos and stuff, know, and try some out, do an example, contribute a few fixes, and just see where that goes. And then at least you've refreshed your knowledge or got some new knowledge. But yeah, it's very easy to end up in a little pocket where the only thing you know is Vue or React or some other thing.
+
+00:07:32.290 --> 00:07:50.265
+And maybe that's okay, because that's what your job uses. But you know, me personally, I like the idea of just delving into something totally different every now and then just to see if, you know, is there something there that you would enjoy using? Or just to make sure you're not stuck in a little hole?
+
+00:07:51.200 --> 00:08:01.120
+<v Alexander Lichter>Yeah. Also broaden the horizon or maybe even see some concepts that you think, how could I do that in the framework of my choice? What's the option there? Why is it, I don't know, easier or more difficult and so on and so on as well?
+
+00:08:01.120 --> 00:08:25.340
+<v James Garbutt>Yeah. A 100%. And you can see this happening where collaboration happens a lot more across frameworks, you know, like signals, for example, it's probably solid that started that off. And everybody has sort of collaborated on the concept now. So people are able to switch frameworks quite often, because roughly the same pattern is used in quite a lot.
+
+00:08:25.340 --> 00:08:33.180
+And now it's a really good way of making sure you learn like, you know, patterns, especially.
+
+00:08:33.655 --> 00:08:56.650
+<v Alexander Lichter>Agreed. Yeah. And I mean, signals are such a good example of framework convergence where a lot of modern frameworks basically said, okay, this is the way to go. Solid and especially Ryan there paved the way. And even though the syntax or, like, how to write signals, it's not the same in, like, Angular or Preact or Solid or Svelte with Runes or also Vue with with refs or shallowRef if you don't wanna have deep reactivity.
+
+00:08:56.730 --> 00:09:10.745
+You can still take a lot of what you know already over. It's like, okay. Then I write a different here. Here, This is how to getter and setter looks like or I need them, I can just mutate them straight away. But the core concept in a way stays the same.
+
+00:09:10.905 --> 00:09:36.565
+<v James Garbutt>Pretty much, yeah. And going back to the web components example, I was writing lit components for years. And they actually look structurally pretty similar to quite a lot of other libraries and frameworks. So it's not too difficult to move between them because you know, most people settle on similar patterns. And you can probably say the same with Svelte and Vue.
+
+00:09:36.565 --> 00:09:40.165
+You know, there's a lot of similarities just in the syntax.
+
+00:09:40.565 --> 00:09:41.045
+<v Alexander Lichter>Definitely.
+
+00:09:41.045 --> 00:09:49.570
+<v James Garbutt>You should be able to switch over without much of a learning curve, because you already learned how to deal with components in that way.
+
+00:09:49.730 --> 00:10:10.505
+<v Alexander Lichter>No, agreed. And I think that it gets more tricky on the meta framework level where like, I don't know, SvelteKit and Nuxt might be a bit more different than like, say, Svelte and Vue, or same with a lot of other frameworks and their meta frameworks. Though maybe then we all see a bit of convergence here when it comes to Nitro, for example, like Analog and Solid Start, TanStack Start and so on all using Nitro under the hood.
+
+00:10:10.585 --> 00:10:14.825
+<v James Garbutt>Yeah, that's true. And I also became a maintainer of UnJS.
+
+00:10:15.760 --> 00:10:16.960
+<v Alexander Lichter>Congrats. Nice.
+
+00:10:18.560 --> 00:10:35.785
+<v James Garbutt>Just reminded me of that one. Which is inside Nitro. But yeah, Nitro is a really good one because it should be joining a lot of the frameworks just like Vite did really, you know, so that you have one common stack between them basically.
+
+00:10:35.785 --> 00:10:43.910
+<v Alexander Lichter>That would be ideal. Yeah. Like Vite, let's say for for everything, quote, unquote, on the front with, like, okay. We we, of course, do all the bundling. We do the dev server.
+
+00:10:43.910 --> 00:10:56.585
+We have, like, HMR and everything. And then Nitro for everything, like, back end related with, like, I don't know, server functions and, I don't know, different patterns of generating and so on. So, yeah, right now, this this looks like where we're heading.
+
+00:10:56.665 --> 00:11:14.720
+<v James Garbutt>Yeah, 100%. And there's no point in duplicating all of that work. Like if these frameworks can all collaborate on creating a common set of building blocks, at least, then it's gonna save everybody time. So I think it's a really cool project. But see where it goes, to be honest.
+
+00:11:14.720 --> 00:11:26.165
+<v Alexander Lichter>Yeah. Also really, really curious how that will turn out eventually. And you already said it like we do basically people from a lot of different backgrounds and also frameworks work together. We see it on Vite. We see it on Nitro.
+
+00:11:26.165 --> 00:11:28.405
+But we also see that in e18E.
+
+00:11:28.565 --> 00:11:42.750
+Now e18e as a numeronym sounds a bit cryptic, of course, if you say the first time, like, A11y, I18n and so on. But these are of course more common to most developers. So what is e18e? What does it stand for?
+
+00:11:42.830 --> 00:12:36.900
+<v James Garbutt>Yeah, it stands for ecosystem performance. And basically born out of a long time ago, people realizing that quite a lot of dependency trees have a lot of bloat in JavaScript, especially. So not only like unmaintained packages, but maybe, you know, duplicate versions of packages where you've got multiple versions, and maybe like different packages, which achieve the same thing. And so, you know, long ago, I was trying to chip away at this and clean up some of the dependency trees, but just by myself creating pull requests all over the place. And then it sort of came from a Twitter thread, I think originally where Bjorn, who's well, like the name we'll put in the notes, I guess.
+
+00:12:37.300 --> 00:12:37.940
+<v Alexander Lichter>Bjorn Lu.
+
+00:12:37.940 --> 00:12:44.740
+<v James Garbutt>Yes. Bjorn was working on Astro, I think at the time, improving astro build times.
+
+00:12:45.305 --> 00:12:46.585
+<v Alexander Lichter>Right, exactly.
+
+00:12:46.585 --> 00:13:20.375
+<v James Garbutt>I think Anthony was working on improving Vite build times or something like that. But the group of us came together and realized, well, hold on, we're all trying to make tooling and frameworks and things like that a lot faster and lighter. So maybe we should create at least a space to discuss this. And that's when we created the Discord server, which then e18e came out of that. And then we created a website, made a blog, all the usual stuff, and then started getting more and more people involved.
+
+00:13:20.455 --> 00:13:56.835
+And then, you know, eventually, got organizations like Storybook, for example, the Storybook people have worked with us quite a lot to reduce their dependency tweets and things. And the V Team and Ashtron's felt so yeah, over time, like everybody is getting involved. But the whole point of it is to improve performance basically of the things we all use in our stacks. So that could be developer tooling or it could be the runtime libraries or framework tools, things like that. But it could be anything.
+
+00:13:56.835 --> 00:14:08.870
+It's like a community initiative. We're not the people doing all of these PRs. We're sort of just making them more visible a lot of the time so that people can help. But it seems to be going well so far.
+
+00:14:09.990 --> 00:14:39.965
+<v Alexander Lichter>Oh, absolutely. I mean, the name is the name is all around everywhere, which is, I think, a a great sign that people care about performance and not only in their applications, but also regarding their dependencies and the ecosystem, as the name So timeline wise, just to get that roughly right, when was the Discord and the website, the blog post created? Because I remember, like, when I I've seen Anthony last year in Bordeaux for, like, our our Nuxt team meeting. He was, like, scribbling the logo of e18e. So it was, like, in the summer or so.
+
+00:14:39.965 --> 00:14:41.725
+And I was like, okay, that will be fun.
+
+00:14:41.805 --> 00:15:04.825
+<v James Garbutt>Yeah. So I think it was the start of twenty twenty four maybe, like early twenty twenty four. But I'll have to double check that. But if you know, at the beginning, it was a very small group of us, it was basically like six people maybe because we also had Marvin in there for a short time who wrote the speeding up the system.
+
+00:15:04.825 --> 00:15:11.305
+<v Alexander Lichter>Yeah, Marvin Hagemeister also doing amazing job all around the ecosystem links to his blog posts, of course, down in the show notes.
+
+00:15:12.345 --> 00:15:40.135
+<v James Garbutt>And we had Pooya, he's doing UnJS, which has quite a lot of focused utilities, so it crosses over in that he's trying to create lightweight focused things that work across all platforms. And these are a lot faster and smaller in most cases than all the older alternatives. So people like that were involved from the start. And we sort of just bounced ideas around.
+
+00:15:40.215 --> 00:15:45.815
+So a year and a half ago now, I guess to figure out like, what's the purpose of this community?
+
+00:15:45.815 --> 00:16:41.085
+What should we be doing? And ultimately, you know, we came up with the categories that we have now on the website, which is clean up, which is basically, you know, reducing dependency trees and removing or maintaining packages and things like that. And then we have speed up, which is contributing to fundamental tools and popular packages, performance improvements. And then we have level up, which is basically producing new packages most of the time, which sort of lighter alternatives to much older, full fat packages. Because, you know, in that the last case is more opinionated one in that we're not necessarily replacing the packages because some repos still need the feature rich package.
+
+00:16:41.740 --> 00:17:02.705
+But quite a lot don't, they only use a small part of the functionality. So in those cases, there should be a lighter alternative. And that's kind of what the gap we're trying to fill. But yeah, those areas, we basically have ongoing work in all three of them now, which is across most frameworks and tools. There's a PR somewhere that someone's working on.
+
+00:17:03.025 --> 00:17:30.695
+<v Alexander Lichter>That's amazing. So you also said basically these three pillars on the website, they are the basically pillars of the ecosystem performance itself. So from reducing dependencies, which means, well, less code that might be emitted after build and also less bandwidth to use as well. Then the speed up part, is that really related to what, for example, Buran and Marvin do, especially, like, I don't know, reduce build times or like compile times or similar?
+
+00:17:30.775 --> 00:18:12.540
+<v James Garbutt>Yeah, pretty much. So a good example of some of this stuff is using the Oxc sort of, well, the ox compiler, like the resolver inside build tools, which previously used the resolve package is a lot faster. So if we can pull that into a lot of tools, then obviously, the dev tools get faster, the CI builds get faster, we can ship faster, we can run tests faster, you know, and so on. So it's not always an end user thing is my point as well. But we also do contribute to end user libraries, which will be a you know, runtime code we've improved.
+
+00:18:12.620 --> 00:18:27.535
+So it could be anything really, it's just if someone notices a slow package, then we'll contribute and start doing investigation work to look through CPU profiles and things like that, you know, to figure out how to speed it up.
+
+00:18:27.775 --> 00:18:45.990
+<v Alexander Lichter>I see. Okay. Let's say someone wants to contribute, so to say, or like someone or a few things, okay, there might be an opportunity somewhere. How do you first of all, like, identify, let's say, areas of improvement in the ecosystem? Because, of course, there are a lot.
+
+00:18:45.990 --> 00:18:59.585
+Like, I'm not exaggerating. Of course, there are tons of areas. But how do you get started off like, okay, that might be a good way to improve. Here are some dependencies that can be cut or here's basically seconds that we can reduce to milliseconds.
+
+00:18:59.905 --> 00:19:54.685
+<v James Garbutt>Yeah, so it can be tackled from either end really. So if you think about it, there's the depend of this way, you can improve the deep dependencies that all of us depend on without knowing. And if you make those faster and smaller, then obviously, a lot of tools will eventually pull the new version in, and they'll be faster and they'll be smaller and so on. And you can also tackle it from the other end where it's take a framework, for example, we will investigate like the framework tooling or something, see how fast it is, how much memory it uses or how big it is, and contribute to that. But either way, we have like issues repository in the e18e org on GitHub, which basically has like a long list of meta issues.
+
+00:19:54.685 --> 00:20:24.615
+So you know, someone may have opened an issue saying, this is the umbrella issue for storybook. And we keep track of all the related issues in there, things that we've noticed that we could improve. So if someone wants to get involved, like you can just go to the issues repo that we have, and look at one that hasn't been picked up yet. And it should be explained well enough that you can literally get started today on it. But you know, there's also unknowns, we need people to create more issues.
+
+00:20:25.095 --> 00:20:37.850
+So stuff like that, just hop on the discord and, you know, let us know what you want to look into, and we'll help you. And we'll do some investigation work, create some issues, get people involved.
+
+00:20:38.010 --> 00:20:51.415
+<v Alexander Lichter>That sounds good. Yeah. So people definitely join the Discord also for that link in description slash show notes and get involved because well, what are the prerequisites? So to say if someone says I wanna I wanna do something, I wanna get involved. Do you need like any specific knowledge?
+
+00:20:51.415 --> 00:20:53.095
+Do you need to be like a performance pro?
+
+00:20:53.590 --> 00:21:36.895
+<v James Garbutt>Not really. A big point in this existing is to introduce more people to contributions as well. Because if you think about it, like one of the big gains, for example, from this is that people building new packages, are faster and smaller than existing ones in the past struggled to get those packages adopted. Because there's this whole thing of, well, this one's been around for ten years, and it's got 40,000,000 downloads, let's use that one. But now that we have a whole community behind these people, we're giving people the opportunity to get their package into wide usage and stuff.
+
+00:21:36.895 --> 00:22:12.255
+So it's opening door for a lot more new contributors. So you don't really need to know anything if you know, within reason. If you come along to this card, especially and just take part in the discussions, someone will raise something at some point and anyone's, you know, allowed to chip in and just say, can I help out? And almost everything is done as a, you know, a pair or a group at least there's more than one person involved. So it's not often that you would just be doing it solo.
+
+00:22:12.335 --> 00:22:14.495
+You know, that's why we have a community for this.
+
+00:22:14.655 --> 00:22:29.530
+<v Alexander Lichter>Totally makes sense. And it also means are there like issues tagged as good first issues, especially for people who maybe have never contributed before? Or are there people designated to help? Of course, the whole community is there to help, but do you have a specific flow there?
+
+00:22:29.945 --> 00:22:58.615
+<v James Garbutt>Yeah, so most of the issues are labeled fairly well in that. I can't remember them all by my memory. There's a couple where, for example, it's needs first contact. And this is where we've probably identified that there's a possible performance improvement in some repo. But obviously, step one is to talk to the maintainers of that repo, make sure that they're open to contributions for it.
+
+00:22:58.615 --> 00:23:29.615
+And even something like that, we still need someone to go create the issue on their end and ask if they're up for contributions. And that's a contribution creating the issue. And if they say yes, then, you know, the next step is to contribute the fixes that we've come up with. So all these issues should be labeled pretty well like that in the e18e repo, And some will already have that. And they'll just be a list of more granular issues, and you can pick one up.
+
+00:23:29.775 --> 00:23:51.975
+So yeah, like just browse around the issues repo. And there's plenty in there. But also, if you just use some tools that you think, well, this should be faster, you know, bring it up and we'll investigate it together. And more than likely, there is a way to make it faster. You know, most things can be improved.
+
+00:23:51.975 --> 00:23:58.215
+<v Alexander Lichter>Oh, yeah. I'm more than sure about that, especially in the JavaScript world. That's almost always a given.
+
+00:23:58.215 --> 00:23:59.975
+<v James Garbutt>Yeah. 100%. Yeah.
+
+00:23:59.975 --> 00:24:23.185
+<v Alexander Lichter>When we come to these improvements, like, what are the biggest, let's say, ripple effects you've seen? Especially, as you mentioned before, maybe improving the speed of, like, a library that's used by so many other, like, other dependencies that are then used in frameworks or or bigger tools. I'm curious what's yeah. What's your experience there? Anything was like that was really surprising or that was breathtaking to see how that's unfolded eventually?
+
+00:24:23.505 --> 00:24:38.900
+<v James Garbutt>Yeah. There's there's a couple of examples. Like, the most recent one actually is minizlib library, which went from something like 2.7 mega, I think it was to 300 kilobytes or something.
+
+00:24:39.220 --> 00:24:39.860
+<v Alexander Lichter>Wow.
+
+00:24:39.940 --> 00:25:01.790
+<v James Garbutt>Crazy. This was trimming away some new dependencies basically. But that is used by earlier I explained that you can tackle it from the deep end of the dependency tree. This is an example of that where it's a very deep dependency that most of us don't know about. But that is pulled in by a package called tar.
+
+00:25:02.190 --> 00:25:35.200
+And tar is used by many, many tools to deal with tar files, obviously. And like once they pull the update, they will drop 2.7 well, two meg of storage. So, you know, stuff like that will bubble up gradually over time. And then popular tools that you do install will see that saving. And it's not only the size, you know, like, in a lot of these cases, by removing some dependencies and using native functionality, for example, it speeds it up as well.
+
+00:25:35.280 --> 00:25:36.880
+<v Alexander Lichter>True. Best code is no code.
+
+00:25:37.120 --> 00:25:53.790
+<v James Garbutt>Yeah, exactly. So at runtime and install time, it can be faster just by modernizing things a lot of the time. And you know, the other example that goes around a lot is the storybook dependency tree. And there's a screenshot somewhere that I don't have at hand, but you'll
+
+00:25:53.790 --> 00:25:57.070
+<v Alexander Lichter>see We'll link it if you haven't seen it. Yes, yes.
+
+00:25:57.150 --> 00:26:21.420
+<v James Garbutt>And it's basically a big dependency tree of storybook going down to something that's like four packages or something. And you know, they've done great work reducing that over time. So anything like that, it has a massive impact on all the build tools we use and things. So the more of that we see, you know, the smaller like the stack will get, which is good.
+
+00:26:21.740 --> 00:26:36.155
+<v Alexander Lichter>Agreed. Yeah. Fully true. Have so many modules out there, which is already crazy, more than any other package managing system like Maven or what Python has with PIP and so on and so on.
+
+00:26:36.155 --> 00:26:38.155
+I wonder one or two things that you mentioned.
+
+00:26:38.155 --> 00:26:51.970
+For example, are you also then helping other tools to migrate to a newer version, let's say, that has these performance benefits? Are these then, once again, issues linked in the E18E repository or like the issues repo that people can tackle?
+
+00:26:52.050 --> 00:27:21.540
+<v James Garbutt>Yeah, so generally, we have tracking issues for updating packages as well. So sometimes it's in the same issue as you know, fixing the package. Sometimes it's a separate issue. But generally, we try and go end to end where let's say we have improved the package to be really small or something, the issue isn't complete until we've started migrating projects to that as well. So it is a long job in a lot of cases.
+
+00:27:21.540 --> 00:27:57.430
+But otherwise, you know, it would take a very long time to get adopted because not everyone would update or even know there's a new version. So yeah, quite often some of the work is just letting people know you don't even have to do the update yourself, just making it more known that there is a new version, and it'll save you this much CPU time or size or whatever. And then maintainers themselves can do the move. But yeah, increasing like visibility of stuff like that, it's a big thing that we're trying to focus on. And it's the same with migrations to other tools.
+
+00:27:57.430 --> 00:28:09.565
+If there's a tool that's deprecated or unmaintained or something, we have the module replacements repo, which is to try document, don't use this thing, use this thing.
+
+00:28:09.885 --> 00:28:10.925
+<v Alexander Lichter>Perfect. Perfect.
+
+00:28:10.925 --> 00:28:19.165
+<v James Garbutt>And there's just a giant list of stuff to switch from a to b and a lint plugin as well, which helps you detect that stuff.
+
+00:28:19.370 --> 00:28:25.930
+<v Alexander Lichter>I just want to ask that as well. Yeah. If there's like a lint plugin, it's even better. That's more more people should use that it sounds like.
+
+00:28:25.930 --> 00:28:44.335
+<v James Garbutt>Yeah. Like, we we are working at the minute as well on a CLI that can do some of this stuff so that you don't need ESLint to do it necessarily. Because there's quite a lot of projects that want to, you know, make use of these link checks basically, but don't use ESLint.
+
+00:28:44.550 --> 00:28:47.990
+<v Alexander Lichter>Yeah. Like biome, Oxlint, so on so on. Yes.
+
+00:28:47.990 --> 00:29:05.415
+<v James Garbutt>Yeah. Exactly. Or you wanna run it in CI or something as just as a check. So, like, yeah, there's ongoing work to create a CLI there, which will probably tie in a fair bit to the node modules inspector that Anthony made, which is also a really cool little web app. True.
+
+00:29:05.415 --> 00:29:08.055
+If you haven't seen that, go to it. It's really good.
+
+00:29:08.535 --> 00:29:21.600
+<v Alexander Lichter>Also link in the description for all the good things. I feel like there will be a lot of links in there today. It's really nice just to see, okay, what's actually installed and it's actually doing that, right? Like, it's actually fetching all the dependencies of dependencies.
+
+00:29:21.600 --> 00:29:54.150
+<v James Garbutt>Yes. So it installs it in a container in your browser just using NPM or PNPM and just inspects the dependency tree. But you know, he recently integrated publint as well, which is a really cool tool by beyond that basically links that you've published the package correctly. So it'll tell you things like, you forgot this in your package dot JSON, or there's a broken export or something like that. And, you know, all of this is coming together in this one tool that we're working on.
+
+00:29:54.465 --> 00:30:08.960
+So the idea is all those different checks and like other types, wrong is another tool, you know, anything like that, there should be like one umbrella CLI that can just tell you like these things are warnings or whatever.
+
+00:30:08.960 --> 00:30:15.040
+<v Alexander Lichter>Is there any like open repository for that already or like where people can follow the progress on that?
+
+00:30:15.120 --> 00:30:18.400
+<v James Garbutt>Not quite yet, but there will be one very soon.
+
+00:30:18.845 --> 00:30:27.005
+<v Alexander Lichter>Perfect. As soon as you have the link also there, we'll we'll drop it in. Maybe we can do it until the release or maybe afterwards then we'll we'll edit it later on.
+
+00:30:27.085 --> 00:30:35.570
+I'm wondering when especially mentioned, for example, replacing packages or upgrading major versions. How do you think about backwards compatibility?
+
+00:30:35.570 --> 00:30:52.295
+So for example, like supporting older node versions and then well, we could trim the package by a lot by just saying, okay. We, as you said before, replace it with maybe existing native methods. So how does that usually work considering that maybe people are not on the newest node version that provides that?
+
+00:30:52.455 --> 00:31:27.135
+<v James Garbutt>Yes. Basically, would say that there's always gonna be some projects that do need to support older node. And so, we're not trying to get rid of the packages that have that support. We're just providing an alternative for people that don't need to support older node. Because you know, I don't know what percentage but let's say it was half and half, that would mean that half of the people installing this one that supports like node one or something, don't need it to support that.
+
+00:31:27.550 --> 00:31:53.865
+They'd happily have it support node 18 and above or something. So if we at least make sure there's a choice, then all the people that do need to support older nodes can carry on using the packages that are staying that way. And then the people that are happy to require node 18 or something can move to the alternatives. You should be able to have multiple choices, which should support both ends of it basically.
+
+00:31:54.330 --> 00:32:05.690
+<v Alexander Lichter>Agreed. Yeah. Especially because, for example, if you say you bump a major like, we bring out a new major version of a package, not even alternative, but just a new major version. The old major versions are still there. The old versions in general.
+
+00:32:05.690 --> 00:32:10.485
+So people can rely on them if they need like the compatibility with the older node.
+
+00:32:10.485 --> 00:32:48.985
+<v James Garbutt>That's true. Look at one of the things we blogged about recently was the ES modules migration. And now that you can require an ES module in node 20 and above. Quite a lot of packages that we worked with recently published new major versions, require node 20 and above, basically, if you want to use require, but then if you use ES modules, it's 18 and above, basically. But yeah, in those cases, those packages happily made a new major because you can still install the old version if you need like older node.
+
+00:32:49.065 --> 00:33:11.325
+And most of those packages basically settled on features in that they're not going to change the API anytime soon. So it's like, they'll happily backport fixes and stuff. But then the latest version will be a lot like more modern. So yeah, that's a good example of where, you know, we should be happy to create new major versions really.
+
+00:33:11.485 --> 00:33:32.040
+<v Alexander Lichter>As long as the features are also back ported, I guess, to make sure other people like who can't use the newest node version can still support for new things. Or do you think like, where do you think you'd make the cutoff point? Like, it also depends on library, of course. But if you say, okay, new major version, all have to upgrade or bad luck versus where you would back port things?
+
+00:33:32.715 --> 00:34:01.025
+<v James Garbutt>Yeah. It's difficult one because it changes per package, obviously. So for example, we moved quite a few ESLint plugins to ES modules only recently. And for those, they already required ESLint eight and eight and nine have flat config support, I think. So you would basically be fine if you're already using a flat config, which is just, you know, a config that's an ES module.
+
+00:34:01.105 --> 00:34:30.645
+But if you're using an old school config like an eslintrc file, then we will probably just say carry on using the old version and just assume that the old version is tied to that. And, you know, if you want the new features, upgrade to flat configs, and then you're fine. I think it's that should be fine. Because again, most of these packages are working fine as is anyway. So these, like, if you want the new features, it's just an upgrade processes in it.
+
+00:34:30.645 --> 00:34:40.565
+And the migration is not usually that bad, like especially in ESLint, you can have an MJS file for your config while still being in a common JS repo.
+
+00:34:41.190 --> 00:34:55.215
+<v Alexander Lichter>That should be good. Yeah. Yeah. Course, like, if you have a few dependencies that are they're not supported or, like, have some issues with newer node versions, then you're kinda trapped. Like, I think we we all know that that problem where, like, you would like to upgrade, but maybe that's the thing.
+
+00:34:55.215 --> 00:35:11.380
+Or the platform you're running on doesn't support it or whatsoever. Like, I I've seen I've seen various, let's say, good excuses for actually, like, good reasons that people would like to upgrade but can't. But it's also, I think, the, like, zero point something percent in there then.
+
+00:35:11.380 --> 00:35:18.900
+<v James Garbutt>And you know, as long as you're not breaking the versions they're on, then Important detail. Should in theory be fine.
+
+00:35:19.380 --> 00:35:25.025
+<v Alexander Lichter>Agreed. Yes. So they can stay on there. If they want new things, then the way is upgrading in a way.
+
+00:35:25.345 --> 00:35:38.705
+<v James Garbutt>Yeah. True. And, yeah, like the replacement packages, for example, when we make a replacement, we would just tell people stay on the other package until you're ready. You know, you don't need to switch. You've got functionality you need.
+
+00:35:38.705 --> 00:35:45.400
+You can get the performance improvements once you are able to upgrade it. Well, not upgrade, but switch over.
+
+00:35:45.400 --> 00:35:50.360
+<v Alexander Lichter>Makes sense. Yeah. First, make it work and then see when you can improve things. Agreed.
+
+00:35:50.360 --> 00:36:01.205
+In terms of replacement packages, do we have a good example for like a replacement package that's out there that's maybe well known for for a certain other one, like as so people can can imagine how it would look like?
+
+00:36:01.365 --> 00:36:23.590
+<v James Garbutt>Yeah. So there's a couple of examples that, like, solve things different ways. So one example is there's the lint-staged package, there's an alternative called nano staged. And it's, you know, it's a lot smaller, but it does exactly the same job. So in that case, like, it's a really easy switch.
+
+00:36:24.145 --> 00:36:27.185
+And you keep the same functionality basically.
+
+00:36:27.265 --> 00:36:32.785
+<v Alexander Lichter>So it's really drop in. So like, okay, you can just change the package and what alias it even if you want to add just works.
+
+00:36:32.865 --> 00:36:51.500
+<v James Garbutt>Yeah. And that's similar with in NPM scripts quite often, you'll see like npm-run-all. And npm-run-all isn't maintained from what I remember. So there's an npm-run-all2, which is maintained, but is also a lot smaller and more modern.
+
+00:36:51.735 --> 00:37:32.155
+And you literally just change the package you've installed, and it has the same binary. So your scripts stay the same. But yeah, an example where it's not like that, where it's a code dependency is something like, again, the ESLint plugins are a good one where if you don't need to support really old node versions, there's the ESLint import plugin, which does support old node versions, but you can you like you can switch to the ESLint plugin import x, I think it's called, which is basically just a fork where it's much lighter, and it's faster. And it supports more modern exports and things.
+
+00:37:32.315 --> 00:37:56.045
+If you can switch over and you don't need to support old node, then you might as well. But the functionality like the same link rules exist, you know, all the config should roughly be the same. It should just be that you switch the dependency, maybe fix up some conflicts, and then it's faster. So yeah, stuff like that. If we produce an alternative, it should be easy to migrate.
+
+00:37:56.045 --> 00:38:01.325
+And like the big example, actually, that I totally forgot was tinyglobby.
+
+00:38:01.645 --> 00:38:07.590
+<v Alexander Lichter>I was waiting a bit for that. Yes. All over the place in various libraries.
+
+00:38:07.750 --> 00:38:25.655
+<v James Garbutt>Yeah. So tinyglobby is built on top of fdir. That's a very fast file system crawler kind of thing. And then tinyglobby is built on top of that to provide glob support. But yeah, it's super light, and it's much faster.
+
+00:38:26.055 --> 00:39:03.550
+So we've seen crazy adoption of that over the last year, let's say, to where it's got, like many millions of downloads now. So stuff like that, the API is almost the same as the other global libraries it's replacing. So in most cases, it's a really easy switch. But again, like, you know, not all repos should switch because they genuinely do want to support older versions of node or in this case, they want to support some more obscure glob patterns that tinyglobby doesn't support. Just things like that.
+
+00:39:03.710 --> 00:39:06.990
+So it depends on like your project, obviously.
+
+00:39:06.990 --> 00:39:17.205
+<v Alexander Lichter>That, for example, tinyglobby doesn't support it. It's a deliberate choice. So it doesn't like blow up the package size, for example, or introduces another dependency that most people don't need.
+
+00:39:17.365 --> 00:39:50.525
+<v James Garbutt>Yeah, so some basically, there's quite a few glob libraries floating around. And they all roughly implement bash globs, but slightly different, you know, different levels of support. And there's some pretty obscure patterns that not many people use in the wild. But you know, if you've got a use for that, like there's certain packages that are much bigger to support that. So TinyGlobby and a few other libraries are actually smaller in some cases, because they don't support these extreme patterns.
+
+00:39:50.765 --> 00:40:09.885
+But to be honest, it does support most patterns from what I've seen. So it should just be a fairly simple switch. And you know, the maintainers are very active. So they update anyway, when someone finds, you know, an extra feature that would be nice to have or something. But importantly, keeping it small.
+
+00:40:10.205 --> 00:40:10.765
+<v Alexander Lichter>Yes.
+
+00:40:11.005 --> 00:40:15.725
+No. No. The features the feature creep can't come in here. I I also understand that. Yeah.
+
+00:40:15.725 --> 00:40:38.080
+And there are always trade offs in the end. Right? And I think, like, you highlighted it very well in the past, like half an hour or almost forty five minutes to say, like, okay, there are cases where it might make sense to support all the node versions, then use the package that's out there. But for, like, the the happy cases, the the big majority, that might not be the case. So it's better to, like, rely on a more modern alternative.
+
+00:40:38.805 --> 00:40:40.165
+But you have the choice.
+
+00:40:40.405 --> 00:41:18.165
+<v James Garbutt>Yeah. And, you know, like you were asking, sometimes it makes sense to drop some functionality to gain performance. What we've seen quite a lot in many packages is that not only the size, but they're often slow because they're accounting for something that nobody really uses in the wild or maybe like a small number of people do. So, you know, an example of this is we're working on the new prettier CLI. And one of the slowdowns prettier has is that you're allowed to override the config at any level.
+
+00:41:18.405 --> 00:41:43.905
+So every directory goes into, it has to check if there's a config file. And obviously, there's multiple possible formats as to check all of them. And in reality, like most usages we've seen have one config file. And if you could just say, just use this one and don't look for other ones, you would save seconds of time, you know, in a format run.
+
+00:41:43.985 --> 00:41:51.300
+<v Alexander Lichter>Of course, like with ESLint, like, I don't know, root true of like, hey, this is the end. You don't have to check further. Here we are. Take that.
+
+00:41:51.380 --> 00:41:52.580
+<v James Garbutt>Exactly. Yeah.
+
+00:41:52.580 --> 00:42:01.225
+<v Alexander Lichter>There's also a good example of, like, runtime improvement. Like, actually, okay. This as I said before, prettier. Like, it's a tool a lot of people out there are using. What else?
+
+00:42:01.225 --> 00:42:12.585
+It's better to just give them free performance right out of the box and still enabling them to say, Okay, they have to set up where you have nested rules because of their requirements, then they can still use it and have to configure something differently.
+
+00:42:13.150 --> 00:42:33.795
+<v James Garbutt>Yeah, 100%. And yeah, we see that in quite a lot of libraries where you can improve the speed of it, like the CPU performance just by dropping some features. You know, in chokidar, we dropped glob support. It's faster and much smaller now. But, you know, some people do need globs for Choquetada.
+
+00:42:33.795 --> 00:42:52.670
+So we're working on that as well now. But it would be a separate thing that you install because the majority don't need gloves. So by not having it in core, it's a much faster and smaller library. And then if you do need it, you can install it separately. That's the idea.
+
+00:42:53.550 --> 00:43:05.595
+<v Alexander Lichter>Yes. Like a bit what frameworks also do, like keeping the core lean and then making sure to have some kind of, I don't know, modular architecture or just saying here's an addition, you can install it, it will be available and there you go.
+
+00:43:05.675 --> 00:43:23.970
+<v James Garbutt>Yeah. A 100%. Yeah. And if we see more architecture like that, then a lot of tools and packages will get a lot faster. Because the happy path, like say, you know, the main use case of it would be like concise and really fast, at that point, it'd be optimized.
+
+00:43:24.595 --> 00:43:32.035
+And all the extra stuff you pull in if you need it. So I'd love to see that pattern in more packages in the wild.
+
+00:43:32.595 --> 00:43:42.350
+<v Alexander Lichter>True. Maybe it's also a good candidate for like an e18e blog post, if that doesn't exist already to like, maybe just share, hey, this could be a future also for the whole ecosystem.
+
+00:43:42.350 --> 00:43:44.910
+<v James Garbutt>Yeah. That's true. Yeah. Good idea.
+
+00:43:45.870 --> 00:43:48.590
+<v Alexander Lichter>Yeah. Let's see when it will come out then.
+
+00:43:49.310 --> 00:44:02.145
+Do you have any other patterns in mind like that one that basically either could like be good to improve performance or pattern that you see that are rather problematic for performance that you would suggest not to use?
+
+00:44:02.625 --> 00:44:55.195
+<v James Garbutt>I think one so it's not really a code pattern, but I would say be more observant of your dependencies is a major thing that we should push for. Because, you know, if you're aware of what a dependency pulls in, that will help you decide which package you choose in a set of choices, because they may pull in a package that you know you already have in your tree. And so NPM will be able to de dupe it. Whereas if you just don't care, you'll end up with a lot of packages that do the same thing you know, at the deep level, and then it's just blow, isn't it? And so if people become more observant of what you're actually installing, and that's where the node modules inspector is useful, Then you can de dupe all of that stuff and just reduce a lot of clutter basically.
+
+00:44:55.195 --> 00:45:06.870
+So yeah, I recommend people doing that more often. And even if it's a really small package, it's just to get you into the habit of actually looking and reviewing it, see what you can find.
+
+00:45:07.030 --> 00:45:15.590
+<v Alexander Lichter>I think that that would be a good practice, but I guess also very impractical given the multitude of packages you usually install in a bigger project.
+
+00:45:16.075 --> 00:45:19.595
+<v James Garbutt>Yeah. Hopefully, we can solve some of that with this CLI.
+
+00:45:20.075 --> 00:45:24.875
+<v Alexander Lichter>True. True. Then you can just run through and say, okay. Look here. Or maybe even suggesting, hey.
+
+00:45:24.875 --> 00:45:31.035
+You used that package already. Maybe there's a better dependency that does the same and already reuses some dependencies, some other ones.
+
+00:45:31.700 --> 00:45:32.500
+<v James Garbutt>Yeah. Yeah.
+
+00:45:32.500 --> 00:45:44.260
+<v Alexander Lichter>That could be interesting. Yeah. Another way that might work is also, like, maybe leveraging that in tools directly, like Vite having some kind of, like I mean, we already can, like, have bundle inspections seen that, but even beyond that.
+
+00:45:44.635 --> 00:46:09.300
+<v James Garbutt>Yeah. Yeah. Like, quite a lot of dependencies could be, you know, forced, maybe forcefully deduped through overrides and stuff as well. Because you can quite often end up with sort of well, actually, in Vite you can end up with bundled dependencies, for example, where you're not actually deducing because it's in a bundle somewhere. And we have a post about this on the blog.
+
+00:46:09.300 --> 00:46:16.165
+But sometimes it does make sense in the case of Vite to bundle some of its dependencies. But then in other tools, it doesn't make sense.
+
+00:46:16.165 --> 00:46:39.100
+<v Alexander Lichter>That's also a really good one. I definitely also linked below. We had it for, for example, for Nuxt CLI that we decided to bundle some. And then we said, like, okay, look, let's try it out without it. And of course, we got it not only smaller, but also if you use the CLI directly with Nuxt, then well, it's also faster because it doesn't have to execute this like for the bundle itself and then for the start command separately.
+
+00:46:39.340 --> 00:47:26.370
+<v James Garbutt>Yeah, 100%. So it's a balancing act, though, because sometimes it does make sense to bundle things, you know, that ultimately should be able to have a really lean dependency tree without bundling if all packages were perfectly focused and sized correctly and all this, but it's not true, obviously. And so there's quite a few dependencies where you'll only use a small part of them. And so in those cases, sometimes it does make sense to bundle it, because you're only pulling one function in, let's say, but if you use like most of a package, then just make it a regular dependency because you're going to pull it in anyway. And that's kind of the balance where tools like B have to make the decision, you know, which one to pull in and which one not.
+
+00:47:26.370 --> 00:47:40.835
+<v Alexander Lichter>In terms of bundling, maybe this is good for the listeners of yours in there, because bundling is also meant as, of course, like we have the bundle of our application, we put all dependencies in there. Maybe it's good to explain maybe also what dependency inlining is for people not aware of that.
+
+00:47:40.835 --> 00:47:58.350
+<v James Garbutt>Yeah, so there's quite a few dependencies where it's a package that's too granular. It's a micro package, we call it where you might as well do it in your code in line. And an example of this is the, like, the infamous is-number package.
+
+00:47:58.510 --> 00:48:02.670
+<v Alexander Lichter>Classic. Yes. Or is-even or is-odd, all of them.
+
+00:48:02.830 --> 00:48:06.670
+<v James Garbutt>Is yeah. I think is-even actually depends on is-odd and just
+
+00:48:06.830 --> 00:48:10.955
+<v Alexander Lichter>Or the other way around. Yeah. And is-number yeah. It's fun
+
+00:48:12.155 --> 00:48:47.255
+<v James Garbutt>These is number package does actually have a use, but it's not what you think. And so in reality, most people shouldn't be using it, you know, most people should just use type of some variable is number, and that's fine. And so you should certainly in line that code, basically, instead of using the package. And you know, the few cases where it is actually needed, then use the package fine. But they may be few enough that you just put it in a module in the repo that needs it.
+
+00:48:47.495 --> 00:49:15.805
+Because again, it's probably not that many packages that need that. But you can also automate some of this, you know, like when you put like Vite, for example, publish bundled files to NPM. So they're just in lining entire tree shaking dependencies. But, you know, again, that's because they only use a small part of those dependencies. So it doesn't make sense to pull the whole thing in to get like a two line function out of it or something.
+
+00:49:15.805 --> 00:49:19.405
+So, yeah, there's those two ways of sort of inlining stuff.
+
+00:49:19.405 --> 00:49:42.495
+<v Alexander Lichter>And, of course, the the benefit of inlining would say, like, you wouldn't have to download the big package just to get, a two line function out there or, like, 10 lines. But on the other hand, it also means deduplication doesn't really work then because if there's another dependency, let's say, from your yourself or the framework that's the same package, it will be downloaded and the coded Vitest will also be downloaded obviously. So we have like one and a bit times the package.
+
+00:49:42.575 --> 00:50:07.955
+<v James Garbutt>Yeah, exactly. And it's a difficult balance. And so Vite, for example, is gradually moving some dependencies back out of the bundle to be normal dependencies. But yeah, it'll depend like how much of those they use. And the ones that they move out then can be deduced because they're used in, you know, in other dependencies that you have and other tools and things.
+
+00:50:07.955 --> 00:50:26.090
+So it's a difficult decision. But that Yeah, there's a tough balance there. And the Vite Team are trying to do a little bit of that. And storybook as well do quite a lot of it. Because storybook, for example, bundle quite a lot of their dependencies, but quite a lot are internal as well.
+
+00:50:26.090 --> 00:50:46.145
+So you know, like storybook itself in mono repo has various storybook packages that you wouldn't install, but they're pulled in as part of the package you would install. So in those cases, it makes sense to bundle it. Because, you know, you're only going to pull it in as a dependency of storable. No one else is going depend on it.
+
+00:50:46.145 --> 00:50:47.665
+<v Alexander Lichter>Yeah, that's fair. That's fair.
+
+00:50:48.440 --> 00:51:06.855
+Now looking a little bit ahead, now we have I mean, we're now in quarter two of twenty twenty five. What are there like, what is on the horizon for e18e this year besides the CLI you're working on? Anything else you can share that's maybe exciting or some foreshadowing?
+
+00:51:06.935 --> 00:51:38.415
+<v James Garbutt>Yeah, so we're trying to focus quite a bit more on collaborations with organizations, not only companies, but like GitHub organizations, where we can have a closer relationship and help out contribute into their repos. So you know, I recently, we started collaborating with Netlify. Netlify doing a big cleanup with their CLI at the minute. And you know, some of the community are interested in that. So we're collaborating to work together on that.
+
+00:51:38.495 --> 00:52:19.960
+We're doing the new prettier CLI, as I mentioned earlier. We're also working on a few things in the eleventy repo, just minor cleanup stuff, doing the CLI that I mentioned, at some point, we will make chokidar globs kind of library of some sort, we figure out what it should be. And yeah, there's just various organizations wanting to get involved, you know, wanting to help us out as well. And I think like we're gonna start doing more blog posts as well to, you know, showcase some of this stuff, because not all of it's that visible. It's just scattered around issues and Discord chats, basically.
+
+00:52:20.335 --> 00:52:40.560
+<v Alexander Lichter>Yeah, I think that's a key part of just raising the awareness and also, of course, not only showing, hey, this is what we did and here's why this is that amazing, the benefits of it. But also, of course, as you just mentioned, what can people installing dependencies do? Or what can people want to contribute to for though you have already some good stuff in place?
+
+00:52:40.720 --> 00:53:13.010
+<v James Garbutt>Yeah. And we're continuing a lot of work as well, like the ES modules migration, we will carry on helping projects out moving to ES modules only, because that's like a long task, you know, there's so many packages, but we'll be there to help if anyone needs it. And then, yeah, we'll be improving the node modules inspector. We'll keep chipping away at that. We're gonna try be at more events this year so that people have chance to actually talk to us about this stuff, you know, and ask us questions and things.
+
+00:53:13.090 --> 00:53:18.930
+So that should be interesting as well. And yeah, just roaming around all the different frameworks basically and helping out.
+
+00:53:19.685 --> 00:53:32.325
+<v Alexander Lichter>Yeah, I think that's one of the greatest things that is like all framework agnostic, no matter what background you have, you can contribute probably also to what one of your favorite libraries or dependencies you use, but also to just things that help the ecosystem in general.
+
+00:53:32.570 --> 00:54:04.940
+<v James Garbutt>Yeah, and so a big task that we're working on at the minute is coming together and creating like some useful metrics to show the progress that we've made. So at some point, there will be a blog post to, you know, showcase some of the reduction in size or the speed increase of certain tools and things like this, where we can actually visualize some of these stats and see how it made a difference. So just like the storybook dependency tree picture that a few of us have seen, we want more of that to show
+
+00:54:04.940 --> 00:54:05.980
+<v Alexander Lichter>100%
+
+00:54:05.980 --> 00:54:32.355
+<v James Garbutt>you know, we have an effect, and mostly downloads from the cleanup side, showing that downloads go down of something that's deprecated and go off of something that's replacing it. But we also need to show like, we've improved CPU performance or memory usage or whatever popular tools. We're trying to bring all that together at the minute and put it into a blog post.
+
+00:54:32.780 --> 00:54:41.900
+<v Alexander Lichter>Perfect. And I hope also maybe a talk at some conferences as well or some events because, I mean, that's also a great way to showcase that and get people involved.
+
+00:54:42.140 --> 00:54:46.700
+<v James Garbutt>Yeah. So I'm gradually getting roped into doing talks.
+
+00:54:47.580 --> 00:54:53.795
+<v Alexander Lichter>Some people might influencing this like, hey, James. Yeah, you should.
+
+00:54:53.795 --> 00:55:29.765
+<v James Garbutt>So I think this year, I will be doing a couple of talks. So once they become a thing, I'll let everyone know. It would be really cool to share some of this stuff, you know, and explain what the community has been upturned. You know, like, one of the big things of this as well is that it's such a sort of a highly focused and concentrated group of people from all areas of front end. So, you know, an example is, we asked once in the discord, well, shall we start removing lodash from loads of projects?
+
+00:55:30.725 --> 00:55:40.010
+Or shall we contribute to lodash, you know, to make it smaller. And the creator of lodash just pops up in the discord and says, please get rid of it.
+
+00:55:42.650 --> 00:55:43.290
+<v Alexander Lichter>Amazing.
+
+00:55:43.690 --> 00:56:08.660
+<v James Garbutt>And it's just the fact that everybody's in there, basically, most frameworks have like some of their team in the discard at least, because we're trying to collaborate with everybody, we want to improve the stack in general that everybody uses. So that means all frameworks, Because it's, you know, it's an initiative rather than just us doing it. We want to help people do it themselves, like improve performance themselves.
+
+00:56:08.980 --> 00:56:29.435
+<v Alexander Lichter>Yeah. And as you said, you have people from all different kinds of frameworks, libraries, the TC39, Vite as well. Yeah, it's really nice to see that, I would say, a lot of people and especially a lot of maintainers, but also individuals who might stumble into open source the first time, they have a shared goal to make the ecosystem better.
+
+00:56:29.630 --> 00:56:32.270
+<v James Garbutt>Yeah. Yeah. Definitely. It's it's really fun.
+
+00:56:32.910 --> 00:56:39.310
+<v Alexander Lichter>So once again, you you definitely should join the Discord link. It's, of course, also in the description, as mentioned before.
+
+00:56:39.310 --> 00:56:51.785
+And now the the second to last question, James. So as you're leading the e18e initiative, so to say, is there anything that you can share in terms of like how to structure these things very well? How to organize it?
+
+00:56:51.785 --> 00:56:54.345
+And what helped basically succeeding there?
+
+00:56:54.820 --> 00:57:32.630
+<v James Garbutt>Yeah, so it was difficult initially, you know, to learn how to structure even a community in general. But, you know, with the right core group of people, you at least can get everything through discussion, basically. So most changes we want to make in the Discord, for example, or on how the GitHub be structured or anything like that, we basically just raise it in the Discord. And the regulars sort of the people that are generally around in the discord a lot will give their opinion. And when we all agree on something, we'll make that change.
+
+00:57:33.395 --> 00:58:01.050
+And you know, a big thing, by beyond has been to push for transparency when we're changing stuff like how the community works. So there's not even really a concept of admins or anything. I can't lead it. There's actually maybe like five of us that are technically leads, but we're not like we don't see ourselves as admins or anything. It's just a big community of people.
+
+00:58:02.125 --> 00:58:40.985
+And we try decide everything as a community rather than dictate it or anything. So I would say if you can get a good enough group that can do that and settle on something, then most of it just works out in the end. But a big thing as well has been making sure that there's a good documentation of how to get involved and things like that. And so we've worked quite a lot on putting docs and labels on issues and things like that to make it a lot lower sort of bar for entry. And that seems to have worked well, you know, for new people being able to help.
+
+00:58:41.490 --> 00:58:48.850
+<v Alexander Lichter>So that's once again organizing things, basically enabling people to help with as little hurdle as possible, so to say?
+
+00:58:48.930 --> 00:59:12.070
+<v James Garbutt>Yeah, pretty much. Like initially, it was basically just a big pile of issues that I worked You know, I made the PRs and I made the issues most of the time. And so there weren't any labels or anything like that. And it was very difficult for people to get involved because of that. There was loads of work to be done, but it was all stuck in my head or just laying around all over the place.
+
+00:59:12.070 --> 00:59:37.650
+And then a few people in the community came together and sort of made the documentation and all the labels that we moved some of the projects around and things like that and just organized it much nicer. And then it's got to a point now where someone can just turn up in the issues repo and pick one and start working on it. So it's once you've got to that point, it's really easy for people to get started, basically.
+
+00:59:37.730 --> 00:59:41.810
+<v Alexander Lichter>There's no bottleneck anymore. Right? So that's that makes sense.
+
+00:59:41.970 --> 01:00:01.290
+<v James Garbutt>Yeah. And it's you know, again, we're trying to get more and more people involved in open source as well. So you need a easy entry point so that new people that don't contribute to anything yet can contribute to something as big as Vite, for example, and feel okay about it.
+
+01:00:02.090 --> 01:00:02.410
+<v Alexander Lichter>True.
+
+01:00:02.410 --> 01:00:34.210
+<v James Garbutt>That is a big thing, you know, like where people were hesitant to open PRs and things because there's nobody backing them open, they have no reputation or anything, they're not contributors normally. But again, now there's a whole community behind them. So you know, they can basically ask for help anytime or anything. And we'll keep track of the issues as well as a community and help out in them and things like that. So it's yeah, it's been really good for introducing new contributors.
+
+01:00:34.770 --> 01:00:46.825
+<v Alexander Lichter>Perfect. And I think with that, once again, we can't sit often enough. Check it out. It's a it's a really cool initiative. And the best part is also, like, there is as you said before, there is no, let's say, formal, oh, yeah.
+
+01:00:46.825 --> 01:00:59.940
+Here's here's my application form I have to sign up. You can just go there and do it. There are people helping. There are issues to get started. So there is really no hurdle, and you will help, well, the whole ecosystem.
+
+01:01:00.260 --> 01:01:01.380
+<v James Garbutt>Yeah, definitely.
+
+01:01:01.540 --> 01:01:06.580
+<v Alexander Lichter>Perfect. Then very last question, James, where can people follow you?
+
+01:01:06.980 --> 01:01:22.275
+<v James Garbutt>Well, so these days, generally Bluesky, And my username is the same everywhere. It's 43081j. And that's a zero. And it means nothing. It's random numbers.
+
+01:01:22.835 --> 01:01:24.995
+<v Alexander Lichter>Random numbers, J for James, I hope?
+
+01:01:24.995 --> 01:01:26.595
+<v James Garbutt>J for James. Yeah.
+
+01:01:27.395 --> 01:01:42.170
+<v Alexander Lichter>Sweet. I love the stories behind behind usernames. That's so great. Also, of course, I'll link to to Bluesky and, well, GitHub, I guess, well in the show notes. James, thank you so much for for coming on, talking about e18e in in your journey so far.
+
+01:01:42.170 --> 01:01:46.605
+Anything that we didn't cover in time? Anything you still wanna mention?
+
+01:01:46.685 --> 01:02:21.815
+<v James Garbutt>Just to get involved, you know, like we're all always happy to have people come along and help out. And, you know, if even if you wanna learn how to do performance stuff like CPU and memory profiling and things like that, just come along and there'll be someone somewhere in the Discord that will help you out and you'll end up contributing to something probably millions of people use or something like that. So yeah, just join the Discord, have a look at the issues repo, come say hi, and we'll be happy to pair with you on all sorts of cool stuff.
+
+01:02:21.975 --> 01:02:47.618
+<v Alexander Lichter>Sweet. Then do as James said. And while you do that, of course, don't forget to check out the older episodes of DejaVue. We have a lot of interesting ones in the backlog, for example, last week's open source sustainability panel or other episodes that are, of course, a bit more Vue focused in details of like, Pinia, or how signals work under the hood as well. Ad if this is Not the oldest episode, then just let it run, and let let it catch up.
+
+01:02:47.618 --> 01:02:49.858
+See you all soon in the next episode, and until then.

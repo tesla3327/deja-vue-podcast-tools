@@ -1,0 +1,44 @@
+00:00
+Welcome to DejaVue
+00:34
+Which libraries do you maintain?
+02:10
+How did you get into programming?
+04:57
+What lead you to Vue.js
+06:40
+Not ending up in a framework bubble
+09:41
+Meta frameworks converging
+11:28
+What is e18e?
+15:40
+The purpose of e18e
+18:27
+How to participate?
+20:38
+Are there prerequisites?
+23:59
+Ripple effects from e18e improving the ecosystem
+26:36
+Helping other projects migrate
+30:27
+Considering backwards compatibility
+35:50
+Example for replacement packages
+37:56
+tinyglobby
+40:40
+Edge cases and modular architecture
+43:49
+Performance pattern and anti pattern
+45:32
+Bundling dependencies
+50:48
+What is planned for e18e in 2025?
+56:39
+How do you lead and structure the e18e initiative?
+01:01:42
+Anything else we didn't cover?
+01:02:21
+Wrapping up

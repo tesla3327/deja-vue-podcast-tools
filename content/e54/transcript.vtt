@@ -1,0 +1,907 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.360
+<v Michael Thiessen>Welcome to DejaVue.
+
+00:00:02.320 --> 00:00:17.135
+<v Alexander Lichter>It's your favorite Vue podcast. You just don't know it yet. Or maybe you do probably because, well, that's more than one year of Deja Vue in episode 54. And As you might see and hear in a second, it's a special one. Michael, what do we have here?
+
+00:00:17.295 --> 00:00:29.250
+<v Michael Thiessen>We have a bunch of people here, not just one guest, but we've got three guests. We're doing a panel on open source sustainability, so that's going be a fun discussion to get into.
+
+00:00:29.570 --> 00:00:44.455
+<v Alexander Lichter>Absolutely. Probably you've already read it in the title like, hey, that's a good topic. Who do we have here, all to, to join us in the panel to indulge us in nice discussions, maybe a little feud coming up? No, of course, that's not the case. Rijk and Daniel, they won't get into that.
+
+00:00:44.455 --> 00:00:55.895
+And, yeah, please, let's let's do it from left to right. Whoever wants to go first, introduce yourself. Who who are you on here? Maybe a bit about, like, you're involved in open source and, yeah, what what are you up to?
+
+00:00:56.680 --> 00:00:58.360
+<v Rijk van Zanten>Left to right on whose screen?
+
+00:00:58.680 --> 00:01:02.520
+<v Michael Thiessen>Alphabetical order.
+
+00:01:04.360 --> 00:01:07.000
+<v Chad Whitacre>Gosh. Daniel, you were starting to
+
+00:01:06.360 --> 00:01:08.760
+<v Daniel Roe>I see myself as on the left. That's my
+
+00:01:09.080 --> 00:01:10.695
+<v Chad Whitacre>You're on my left. Yeah, same here.
+
+00:01:10.695 --> 00:01:29.710
+<v Daniel Roe>Okay. So maybe I am just canonically on the left. My name is Daniel. I am an open source developer, full time open source developer. I lead the team building Nuxt, which has some other people on the team as well, including Alex here and some other amazing folk as well.
+
+00:01:29.790 --> 00:01:38.845
+And before that, I had a small software as a service startup. I had a creative agency before that. And then before that, I did totally different things.
+
+00:01:38.845 --> 00:01:47.005
+<v Chad Whitacre>Was a church leader, studied law, lots of stuff in the background. But yeah, that's me.
+
+00:01:47.325 --> 00:01:48.605
+Am I canonically next?
+
+00:01:49.100 --> 00:01:49.980
+<v Alexander Lichter>You are.
+
+00:01:50.380 --> 00:02:24.400
+<v Chad Whitacre>All right, my name is Chad Whitacre. I'm head of open source at Sentry. I've been at Sentry for a little over four years leading initiatives in open source sustainability from a company side trying to fund open source maintainers. And we launched something about six months ago called the Open Source Pledge, where we're trying to get other companies to join us in paying the maintainers. But my background is in web development going back into the Python web framework wars of the arts that gave rise to Django and Flask and whatnot.
+
+00:02:24.960 --> 00:02:31.040
+So that's kind of where I cut my teeth in Python community web development going back a ways and landed here at Sentry.
+
+00:02:32.065 --> 00:02:32.785
+<v Alexander Lichter>Sweet!
+
+00:02:33.745 --> 00:03:01.585
+<v Rijk van Zanten>Awesome! And then last but not least, I'm Rijk van Zanten, the CTO and Co Founder of Directus, also an open source developer. That project has gone through some iterations and trying to make it sustainable as an open source project. So we turned it into a company to make the things sustainable long term. My background is in user experience design originally, and then rolled into agency work as a more of a software developer, full stack type of person, do a little bit of everything and then into this.
+
+00:03:02.705 --> 00:03:21.210
+<v Alexander Lichter>Here we are. And these are our wonderful three panelists including Michael. Michael, who is a wonderful full time educator around the Vue Nuxt ecosystem. So I mean, co host of this podcast obviously as well. And, yeah, bringing out the new content as well as his new addition of of Mastering Nuxt launched recently.
+
+00:03:21.210 --> 00:03:24.170
+So definitely check it out if you're into Nuxt or wanna be.
+
+00:03:24.650 --> 00:03:39.425
+<v Michael Thiessen>Yeah. And my cohost Alex here is, Daniel mentioned, part of the Nuxt core team and recently DevRel at Void Zero. So that's pretty awesome. And so you'll be seeing more of him on the internet for sure.
+
+00:03:40.225 --> 00:03:43.265
+<v Alexander Lichter>Yeah, hopefully. Hopefully, more than before even.
+
+00:03:43.345 --> 00:03:44.785
+<v Chad Whitacre>Alex, congrats on that.
+
+00:03:44.785 --> 00:03:45.105
+<v Daniel Roe>Yeah.
+
+00:03:45.105 --> 00:03:45.665
+<v Alexander Lichter>Oh, yeah, thanks!
+
+00:03:45.665 --> 00:03:46.385
+<v Chad Whitacre>That's awesome, man.
+
+00:03:46.385 --> 00:03:46.545
+Yeah.
+
+00:03:46.840 --> 00:03:49.400
+<v Alexander Lichter>Thank you so much. Go ahead.
+
+00:03:49.400 --> 00:04:02.675
+<v Daniel Roe>I mean, speaking of open source sustainability, it's a real move towards open source sustainability, right? When companies like Void Zero are able to employ people like Alex who work and build open source software.
+
+00:04:03.475 --> 00:04:06.355
+<v Alexander Lichter>True that. Good points. And that's actually a good point.
+
+00:04:06.355 --> 00:04:15.690
+We talk a lot about open source attainable already, at least the term. And maybe let's start with what it actually means and more importantly, why is it even important?
+
+00:04:15.690 --> 00:04:20.890
+Why do we need that in a way? Let's start maybe with Daniel here. Yeah. Perfect.
+
+00:04:21.610 --> 00:04:36.955
+<v Daniel Roe>This is the point where we try and bring out that famous xkcd cartoon with all of the Internet's infrastructure resting on that one open source project maintained by a single person somewhere in some remote place.
+
+00:04:37.115 --> 00:04:45.270
+<v Chad Whitacre>Nebraska, Daniel. Come on, Nebraska. Nebraska. Exactly. Those Nebraska projects.
+
+00:04:46.150 --> 00:04:54.390
+Yeah. I was talking to somebody the other day. Who was it? Oh yeah. Are you all aware of this open source endowment that's getting started?
+
+00:04:55.295 --> 00:05:15.050
+It's pretty under the radar. This might be one of the first. I don't know if I'm breaking some news here, there's an open source endowment that's getting started. Anyway, in one of the hacker news posts, kind of leading up to this, somebody came out and was like, I'm the person. I've been maintaining this project for twenty years and I live in Nebraska or whatever.
+
+00:05:15.050 --> 00:05:15.530
+We're like,
+
+00:05:15.530 --> 00:05:18.730
+<v Alexander Lichter>Oh, it's real. This person's real. Yeah.
+
+00:05:18.730 --> 00:05:20.010
+<v Chad Whitacre>We got to track them down.
+
+00:05:20.490 --> 00:05:21.210
+<v Alexander Lichter>Amazing.
+
+00:05:21.770 --> 00:05:42.080
+<v Chad Whitacre>Yeah. I have a pretty specific definition of open source sustainability. If that's what we're leading with here is definitions. I distinguish between sustainability and what I call subsidization. Sustaining versus subsidizing.
+
+00:05:42.960 --> 00:06:06.230
+It really comes from an analysis of the economics of open source, because the economics of open source, open source kind of by definition, you know, this is the rabbit holes. We can see what what threads we wanna pull on here. But kind of puts itself outside of what we'd call the market economy. It's part of the definition of open source. The code is freely distributable.
+
+00:06:06.950 --> 00:06:22.215
+Free as in cost, as well as free as in speech, free as in beer and free as in speech. Okay. Open source is sort of like shooting itself in the foot. The strength is the weakness. The reason we all love it and use it, and the reason that it's so successful is because it's so easy to adopt because you don't have to pay for it.
+
+00:06:22.215 --> 00:06:48.735
+But that of paints us into a corner where it's like, Oh crap, I kind of want to get paid for this, right? But I can't use kind of the traditional ways to do that. So I think of open source sustainability as when maintainers are paid fairly without having to jump through hoops. So obviously some things to debate in there, but sustainability is that. And then I think of subsidization as jumping through hoops.
+
+00:06:48.735 --> 00:07:15.420
+It's like, okay, I can get paid fairly for my work, but I have to go get a job at a company and I have to work some on what the company wants me to work on. I only get to work half time on my open source project or whatever. Or I'm going to be a YouTube creator and I'm going to create educational content. It's like, well, that's the thing that I'm selling and I get to do the open source over here. So any kind of business model that's adjacent to open source, I think of that as subsidizing open source.
+
+00:07:15.645 --> 00:07:30.070
+But I really want to use that term sustainability. The way that I use it is when maintainers are getting paid fairly without having to jump through hoops. That's my salvo. Yeah. Put that one in the hopper.
+
+00:07:30.070 --> 00:07:33.750
+<v Daniel Roe>I'm not sure how much I agree with that.
+
+00:07:33.990 --> 00:07:36.790
+<v Chad Whitacre>Okay. Well, that makes for a great podcast episode.
+
+00:07:36.790 --> 00:07:37.350
+<v Alexander Lichter>Exactly.
+
+00:07:37.670 --> 00:08:02.380
+<v Daniel Roe>Exactly. So not just saying what he said all the time. So the thing that my niggle, and maybe you're going to Probably you've already thought of these things. But my niggle is it seems to So the jumping through hoops is basically saying how much friction is there, I guess, for sustainability.
+
+00:08:02.380 --> 00:08:47.745
+And I understand that and maybe would go more in that direction than I would. So I don't like the term subsidization as opposed to sustainability because the idea of subsidization is that effectively something else is paying for the open source. So in other words, I might be getting this wrong, but the idea, for example, if you're employed by a company and then you work on open source in your spare time, it's like you are subsidizing open source with something else that you're doing, like working for the company. Or the idea if you're doing content, you're subsidizing your open source work by that. But in my mind, both of those are really valid ways for open source to be sustainable.
+
+00:08:47.825 --> 00:09:23.470
+Because I would say the question is, on a holistic level, is this something that can keep going? So I think sustainability is about the ability to keep going. And if something is about hoops and friction, that is something that's going to make it not be a sustainable choice because it's going to slow it down. It's going to stop it from going. But you can have a scenario, for example, where someone creates an open source project, people use that project, they want to understand how to use it better, they buy courses produced by that person.
+
+00:09:23.710 --> 00:09:37.245
+And to me, that doesn't sound like subsidization. That sounds like sustainability because it's about a system that is workable and keeps going. Maybe you would agree with me. I don't know. I might be misunderstanding what
+
+00:09:37.085 --> 00:09:41.485
+<v Rijk van Zanten>But the subsidization leads to sustainability then, is the prompt, right?
+
+00:09:42.300 --> 00:09:42.940
+<v Daniel Roe>Exactly.
+
+00:09:43.580 --> 00:09:44.620
+<v Chad Whitacre>Well, I think what I
+
+00:09:44.620 --> 00:10:08.475
+hear you saying is there's a distinction between maybe the individual maintainer and then the project. And so if we're talking about the project, is the project that system that keeps going, that system that goes into the future, whether a particular maintainer is part of it or not, comes or goes, or whatever an individual maintainer's relationship to it or situation is. Is that a distinction that's in what you're saying there?
+
+00:10:08.940 --> 00:10:42.690
+<v Daniel Roe>I think I don't see that as the distinction. I just see that as a matter of scale. So if, for example, I'm looking at a project that has several maintainers or whether maintainers are involved in that, and I think of that as an ecosystem. So you might have some developers who are being sustained in some ways and have their own patterns, just as you have people who bring their own contributions because people aren't even contributing in the same way. So the idea that they might have a sustainable relationship with a project in different ways makes sense too.
+
+00:10:42.770 --> 00:10:44.850
+<v Chad Whitacre>Okay, we got to get more specific here, forgive me.
+
+00:10:44.850 --> 00:10:50.450
+So Daniel, what's your relationship I know you're on the Nuxt core team. What's your own Who employs you?
+
+00:10:50.735 --> 00:10:59.455
+<v Daniel Roe>I'm not employed. So I am sponsored by a number of people and companies. Have received my
+
+00:10:59.535 --> 00:11:01.375
+Probably from Sentry. Yeah.
+
+00:11:01.535 --> 00:11:02.015
+<v Chad Whitacre>Okay.
+
+00:11:02.015 --> 00:11:02.575
+Phew.
+
+00:11:03.855 --> 00:11:04.335
+<v Alexander Lichter>Phew
+
+00:11:05.535 --> 00:11:16.170
+<v Daniel Roe>I would say that by far the most significant contributor is NuxtLabs, is a company that was created by the original founder of Nuxt. Yeah. Okay.
+
+00:11:16.490 --> 00:11:17.690
+<v Chad Whitacre>So you're living the dream.
+
+00:11:17.770 --> 00:11:18.890
+<v Daniel Roe>I'm independent.
+
+00:11:19.725 --> 00:11:24.285
+<v Chad Whitacre>Okay, So you are an independent maintainer and you're sponsored by companies?
+
+00:11:24.445 --> 00:11:24.925
+<v Daniel Roe>Yes.
+
+00:11:24.925 --> 00:11:25.325
+<v Chad Whitacre>Primarily.
+
+00:11:25.325 --> 00:11:27.725
+And have probably some individuals in there too.
+
+00:11:27.805 --> 00:11:58.145
+<v Daniel Roe>And I think in a project though, there's space for people having different relationships with that project, whether some of them are sponsored, some are giving free time, some of them are consultants, maybe people hire them because of their expertise in the project. Some of them are maybe producing educational content like wildly successful podcasts, which bring in millions. Obviously, I'm setting the dream for DejaVue there. I'm not sure if you're there yet, but
+
+00:11:58.385 --> 00:11:59.665
+<v Alexander Lichter>Getting there. Getting there, folks.
+
+00:12:01.420 --> 00:12:04.540
+<v Daniel Roe>It feels like these are all valid pieces of an ecosystem.
+
+00:12:05.100 --> 00:12:25.275
+<v Chad Whitacre>So let me be clear: subsidization, I don't think is invalid. I think it's fine to have that. I guess Jacob Kaplan Moss wrote a post a year ago or something where he kind of went on this rant. It was like, Look, it's all fine. Let's not shame people for how they get paid and how they negotiate their own relationship with their open source work and their paid work.
+
+00:12:25.275 --> 00:12:51.075
+And so all of the options are good. I think that's where I would want to connect with you there. And yet, and this is where I'm curious to hear more about your situation and some of your story, the idea of an independent maintainer who's able to provide value to the world by creating open source software, I think of it I'm going to bring this out. Y'all ready for this? Ian's ready for this, to use the Pittsburghese.
+
+00:12:51.155 --> 00:13:08.690
+Open source is a gift economy. It's not a market economy. It's a gift economy. What does that mean? In a market economy, we have clean transactions where, you know, I showed the robot, you know, my phone, and it lets me walk away with the M and M's.
+
+00:13:08.690 --> 00:13:33.780
+And there's no relationship between me and the robot after that. Okay? In a gift economy, I offer a gift, and when you accept that gift, it comes with an obligation or at least an invitation or some kind of expectation that you're going to return the gift in the future. So if we go out to eat together, if the five of us go out to eat together, And at the end, it's like, who's going pay the check is the question. It's more of like you go out with a friend, right?
+
+00:13:33.780 --> 00:14:05.220
+It's like, I, Daniel, if you and I got to eat together, at the end of the meal, it's like we both pull out our phones and have this little tug of war for who's going to take the check, and I let you take the check, what am I gonna say at the end of that? I say, I'll get it next time. And so we walk away from that exchange of value, the gift of the meal, we walk away from that with a relationship, with an obligation or an invitation or a connection that lasts in the future. That's how I think of open source.
+
+00:14:05.220 --> 00:14:08.020
+<v Rijk van Zanten>Although today it just super isn't.
+
+00:14:09.275 --> 00:14:10.155
+<v Chad Whitacre>Open source?
+
+00:14:10.075 --> 00:14:11.755
+<v Rijk van Zanten>It feels like to me from my perspective,
+
+00:14:11.995 --> 00:14:15.355
+<v Chad Whitacre>it's a bad gift economy. It's a disorganized gift economy. That's how I see it.
+
+00:14:15.355 --> 00:14:25.450
+<v Rijk van Zanten>For the gift giver, it's the gift economy, but for the gift receiver, they treat it as a just regular market economy. Then you end up in this weird sort of one-sided
+
+00:14:26.570 --> 00:14:28.170
+<v Chad Whitacre>Yes. Yes.
+
+00:14:28.170 --> 00:14:41.875
+<v Daniel Roe>The thing is, as you were saying that, I was like, yes, yes, yes, until you explained what you meant by what a gift economy was. Because I totally think open source is a gift Okay.
+
+00:14:42.915 --> 00:14:43.475
+<v Chad Whitacre>Meaning what?
+
+00:14:43.475 --> 00:15:07.555
+<v Daniel Roe>I think that that definition turns a gift economy into a market economy. It just makes implicit assumptions about how the payback is going to happen. I think a gift economy, and that is why I do open source and it is what I believe very firmly in. I believe I'm giving, but the whole essence for me of what giving is, is that there is no expectation. No expectation in
+
+00:15:07.875 --> 00:15:08.115
+<v Chad Whitacre>Yeah.
+
+00:15:08.115 --> 00:15:36.775
+<v Daniel Roe>So I don't expect that someone is going to give back. Partly, I think not only is that I think what giving is, but also I think it's essential for sustainability in terms of Because I think one of the things we don't talk about often in sustainability is the role of our own mental health and mental well-being. Because sustainability isn't a money question. Sustainability is a holistic question. So you can have someone who's getting paid loads.
+
+00:15:36.775 --> 00:15:55.210
+They've got lots of money, but they're stressed, they're burnt out, they can't keep going. The question isn't how do we get Well, I mean, obviously we want more money in open source, but the reason we want more money in open source is not just because of the value of it, but because it enables people to keep going. It enables them to find meaning in what they're doing.
+
+00:15:55.210 --> 00:15:56.090
+<v Rijk van Zanten>It's a means to end.
+
+00:15:56.685 --> 00:16:34.695
+<v Daniel Roe>And I think when you have an expectation of return, I'm giving, and now I think, as you were saying, right? I think now that I've given that there's an implicit expectation that you will give back and then you don't. That produces frustration, it produces bitterness and it produces burnout. Now, the thing is, if I give and I have no expectation that you'll give back, which honestly, Chad, if I give you something or if I pay for dinner at a restaurant, I don't actually expect you to do it. And that means when you do pay the next time, I feel a sense of joy that is life giving to me.
+
+00:16:34.855 --> 00:16:49.180
+Whereas if I had an expectation the first time around, then I would one, feel a sense of frustration if you didn't. And two, when you did, I'd be like, okay, well, now the thing that I was expecting has happened. Can I say, I want to live in a world of joy?
+
+00:16:50.860 --> 00:16:57.155
+<v Chad Whitacre>Love the door slam on that one. Yeah. Yeah. This is crazy. We're into it.
+
+00:16:57.795 --> 00:16:59.315
+Mhmm. Rijk. Where are you coming from on
+
+00:17:00.115 --> 00:17:13.290
+<v Daniel Roe>I don't I don't really I I I don't obviously understand you, Chad. Like, on. I'm totally I'm totally on board. I hope this is this is a debate between between people who are on this, I'd say friends, we've not met before, but on the same side here, right?
+
+00:17:13.770 --> 00:17:29.885
+<v Rijk van Zanten>We are All friends and we're all on And I also think it's very important to call out here is any of us wanted to get rich quick, we wouldn't start with open source either. We're not here get rich or famous. We're here to do good. And what that means and how we do it, that's the discussion.
+
+00:17:30.045 --> 00:18:08.470
+So Chad, to your question of where do I come from in all this? So I started, when we open source directors and started doing that, it was very much self subsidized to use that term again. So I was just working an agency job at the same time and it was sort of able to reserve, like make enough with that to reserve sort of a day or two a week to focus on the open source project up until that project got big enough where the maintenance burden became just a full time job. And then at that point it became a question of sustainability for me, which is like, okay, I need to make a choice because there is no money coming in and I need to pay my rent. It's just very straightforward transactional at that point.
+
+00:18:08.470 --> 00:18:36.990
+Then I'm like, I want to be able to work on this full time. I know there's big companies using this because I did see the issues coming in and some emails for support requests and all that kind of stuff. Then the question just becomes, okay, how do we turn this into a thing that generates just about enough revenue to make it sustainable? And that's kind of where the term comes from for me first and foremost. And then over the years that has just happened again and again, which is like, okay, now it's big enough where it became a two person job to maintain and now a 10 person job to maintain.
+
+00:18:37.630 --> 00:18:41.310
+And how do you grow from there is where I'm coming from.
+
+00:18:41.310 --> 00:18:49.390
+<v Chad Whitacre>So forgive me, I need to understand a little more. Tell me more about Directus. Directus is a headless CMS background for every custom build. It's an open source project?
+
+00:18:49.685 --> 00:19:00.005
+<v Rijk van Zanten>Started as, so we have since Okay. We switched over to a BSL based license with delayed open source in 2022. Yeah. We chatted briefly about it finally, if
+
+00:19:00.005 --> 00:19:04.565
+<v Chad Whitacre>I gonna I was gonna say. Yeah, yeah, yeah. But not in person, we were on GitHub.
+
+00:19:19.515 --> 00:19:20.315
+<v Alexander Lichter>Maybe, it is a good opportunity to point out, because also Sentry is Fair Source Maybe it is a good point to describe what a Business Source Source license is.
+
+00:19:20.315 --> 00:19:26.075
+<v Rijk van Zanten>Is it good to do an introduction round, but licenses? Because I think we have three different approaches to solve the
+
+00:19:25.995 --> 00:19:27.995
+<v Alexander Lichter>Yeah, let's do that. That's perfect.
+
+00:19:28.235 --> 00:19:30.475
+<v Rijk van Zanten>So same order. So Daniel, you want to go first?
+
+00:19:30.475 --> 00:19:31.515
+<v Chad Whitacre>Same order? Okay.
+
+00:19:32.475 --> 00:19:47.500
+<v Daniel Roe>Nuxt is MIT licensed, which is basically you can do whatever you want with it, only we're not responsible if anything goes wrong. It's a common license used. It's very, very open license. People can build businesses on top. There's no obligation involved.
+
+00:19:47.985 --> 00:19:59.505
+No rights reserved, I guess, other than the moral right to assert ownership and copyright over something and for the license to be passed on. Attribution. Yeah.
+
+00:20:01.505 --> 00:20:18.905
+<v Rijk van Zanten>And I think I would add to that is probably the open source license. Is that fair to say? It's like the most common one. I mean, there's many of course that fit the definition. But I think when people think of open source, at least I would argue MIT is sort of what you're thinking of when you say free
+
+00:20:18.905 --> 00:20:21.465
+<v Chad Whitacre>open It's not GPL. Not GPL. That's kind
+
+00:20:21.465 --> 00:20:29.305
+<v Rijk van Zanten>of why I phrase it like this. I'm like, nowadays, if you start a new thing, is MIT the going sort of thought?
+
+00:20:29.305 --> 00:20:52.485
+<v Daniel Roe>Yes. Exactly. Because I think it used to be GPL. GPL used to be what you thought of, this sort of viral open source that sort of is Because there was this sort of movement, that's a big question, Stollman and the sort of the Free Software Foundation and open as in What kind of open source are you talking about? Free as in beer or free as in Speech.
+
+00:20:52.485 --> 00:21:07.150
+Speech. Yeah, exactly. So like, yeah, what are you talking about? But now, I don't actually see that people are licensing software primarily looking at something like the GPL. I might be wrong.
+
+00:21:07.230 --> 00:21:09.470
+Maybe it's the circles I'm in, but I don't see people
+
+00:21:10.110 --> 00:21:17.815
+<v Rijk van Zanten>That's literally why I said too, because in the sort of, especially JavaScript ecosystem, I want to say a lot of the libraries sort of default to MIT.
+
+00:21:18.455 --> 00:21:19.655
+<v Chad Whitacre>Definitely in the JavaScript ecosystem.
+
+00:21:19.815 --> 00:21:26.150
+<v Rijk van Zanten>And I think there will be a very interesting discussion about where the differences in libraries versus products and how that comes to.
+
+00:21:26.150 --> 00:21:27.030
+<v Daniel Roe>But Yeah.
+
+00:21:27.030 --> 00:21:28.710
+<v Rijk van Zanten>Absolutely. Let's start with that.
+
+00:21:29.030 --> 00:21:42.235
+<v Alexander Lichter>But also I would add to that probably especially in in the web development ecosystem more like the front end part, so JavaScript, TypeScript. A lot of libraries, frameworks, and so on would probably not be as popular if they would be like GPL licensed compared to MIT.
+
+00:21:42.235 --> 00:21:43.675
+At least my somewhat
+
+00:21:43.675 --> 00:21:50.235
+<v Rijk van Zanten>I think there is a big library versus product thing there. Anyways, but before we get too derailed there, Chad, you wanna go next?
+
+00:21:50.235 --> 00:22:04.350
+<v Chad Whitacre>Sure. Yeah. So coming from Sentry, so Sentry started life as an unlicensed side project in 2008. A year later, it went under the BSD three clause license, is like MIT. It's a permissive license, we call it.
+
+00:22:04.750 --> 00:22:24.880
+Permissive versus copyleft. Permissive is like MIT, Apache, BSD. Copyleft is the term we use for GPL, AGPL, those share alike licenses. BSD, and then in 2019, we were one of these companies that relicensed. MongoDB did this, Elastic, Cockroach, HashiCorp, Redis more recently.
+
+00:22:25.120 --> 00:22:54.260
+And so Sentry relicensed in 2019 to the business source license, the BSL that you referred to a minute ago. Then in 2023, we wrote our own license called the functional source license, FSL, which is kind of a cleanup of the business source license. And then we launched a new brand called FairSource to kind of disambiguate from open source and to be like, okay, this is not open source software. What is it? We have our own values kind of behind this that are driving us to do this.
+
+00:22:54.340 --> 00:23:07.895
+Let's start to gather together like minded companies that are in this boat with us. FairSource is our effort to do that. So FSL is our license. Fair source is the type of license that it is. It's not open source, it's fair source.
+
+00:23:07.895 --> 00:23:28.610
+Which basically is like, it's for a company's core product. And the restriction in fair source licensing, what we were just saying a minute ago about restrictions in permissive open source, the only restriction is attribution. It's like, you can take this code, you can do whatever you want with it. There's a whole another thing about trademarks, maybe not muddy this too much. But you have to attribute.
+
+00:23:28.610 --> 00:23:51.230
+So actually, we might come back to this. If you open up your phone, you guys ever do this? You open up your phone and you go into settings and you go into legal, in your phone there's pages and pages and pages. I like the scrolling there, right? Pages and pages of licenses for all of the components that Google or Apple are using to deliver the software on your phone.
+
+00:23:51.230 --> 00:24:07.735
+Okay. So attribution is there with permissive. And with fair source, the restriction is really around compete. So for Sentry, we say, hey, you can download this software, you can run it yourself, we can self host. We're not going to monetize self hosted, we only monetize SaaS.
+
+00:24:08.055 --> 00:24:26.190
+So go ahead and run it yourself. If you want to give us some patches, we'll take them into consideration, but we're primarily building the thing ourselves. We own the roadmap, we own the product, we're building this and you can run it yourself as long as you don't compete with us. So you can't stand up a competing SaaS and sell Sentry to people. That's the limitation.
+
+00:24:26.350 --> 00:24:27.470
+And so that's Fair source.
+
+00:24:27.630 --> 00:24:30.350
+<v Rijk van Zanten>With the important addition that it's also delayed open source.
+
+00:24:30.455 --> 00:24:32.055
+<v Chad Whitacre>Oh yeah, love that. Thank you.
+
+00:24:32.055 --> 00:24:32.295
+<v Rijk van Zanten>Yeah.
+
+00:24:32.295 --> 00:24:48.500
+<v Chad Whitacre>So BSL and FSL and Fair source is part of the core definition of Fair source then. Yeah, exactly. Delayed open source. So our software century in the FSL, after two years, the software goes under either MIT or Apache is the way the FSL works.
+
+00:24:48.500 --> 00:24:50.100
+<v Alexander Lichter>Oh, that's a good addition.
+
+00:24:50.420 --> 00:24:51.300
+<v Rijk van Zanten>No, I think it's very important
+
+00:24:51.300 --> 00:25:20.710
+to follow-up this whole discussion is that for both what Sentry is doing, what we're doing as well, which is very closely aligned. It is that we want to be as open source as we possibly can, but you need some sort of exclusivity window, if you will. You see it in the video game industry all the time, but that's kind of how I compare it. It's like we have just a window of exclusivity in which there is some sort of way to monetize some of it somehow. Then it becomes fully permissively open source after a certain window.
+
+00:25:20.790 --> 00:25:43.900
+<v Chad Whitacre>So this gets us right back to market economy versus gift economy because in a market economy, you have to have scarcity. Scarcity is the thing that makes the market economy function because there's that hard requirement that it's like, well, not gonna give you the thing. The robot's not gonna let me walk away with the M and Ms until I give it the money. Right? There's this scarcity that drives a market economy.
+
+00:25:43.900 --> 00:25:57.505
+And so to have any kind of business, to have any business model, you have to withhold something. You have to have something scarce that you're only giving, you know, after you've received the money or and view the transaction versus a gift economy, which has a different dynamic.
+
+00:25:57.825 --> 00:26:26.355
+<v Rijk van Zanten>And then to finish that round of intro, so Directus as a project started GPL, Copy Left. And the main intent there was to make sure that if a company would make a fork and make it super better for whatever reason, wanted to make sure that that remained accessible to the bigger ecosystem as well. And that was really the main differentiator for us to go with GPL over an MIT. There was lots of questions around what does that mean for a plug in ecosystem? And it got a bit hairy in that because there's so much gray area when it comes to copyleft like that.
+
+00:26:26.355 --> 00:26:57.325
+We switched to the BSL primarily. We were also one of those companies in 2022. The primary reason for that was that we tried to do a sort of, we offer it as a SaaS on the side to subsidize the project, but it is self hosted software at its core. And then we realized that we tried it for a bit as donation where it didn't generate enough. We tried it for a bit as make the SaaS a premium version of the open source thing that was just against the core of the platform because it is self hosted software at its core.
+
+00:26:57.325 --> 00:27:28.185
+And then we realized over time that the real contributions that we saw the most was from individuals and smaller companies investing their own free time. Whereas most of the value that people got out of it happened at the giant companies that we didn't really see much back from. Shout out to the Open Source Pledge by the way, Chad, I know you guys have been doing great work there too. So what we adopted now was the BSL license and what that the main difference there between GPL and BSL, it is a delayed open source thing as well. So it goes back to GPL after, I think we set it at three years instead of the four by default.
+
+00:27:28.185 --> 00:27:57.735
+And what the BSL license basically says is you can use it for non production, do whatever you want. And then for production, need to get some sort of commercial license from the owner of the platform. The BSL however has a sort of escape hatch for projects owners in the additional usage grant. And this is where it gets a bit different because every BSL project is different, unfortunately. And in our additional usage grant, we said, okay, if you are an individual or a company below a revenue threshold, you use it for free in production as well.
+
+00:27:57.735 --> 00:28:45.160
+And that was basically a way to try to balance those skills a bit that we don't sort of needlessly double extract from the people that are already contributing back. But we do enforce larger companies that weren't contributing before to contribute financially and therefore make the project sustainable. That has worked relatively well but it's one of those things where there's still, I mean, that's why I'm so excited about this chat because there's so many things in flux and so many attempts at solving this problem from different angles. Think the important difference though, Chad, and this is why we had an interesting chat about this is the whole, because we are sort of self hosted first, it changes the dynamic a bit. We don't really care about non competes because if you want to run your own SaaS that offers directives, then that is a good thing.
+
+00:28:45.160 --> 00:28:55.715
+We want to encourage that instead of prevent it. And so therefore it's been a very interesting time to follow along with what you guys are doing with Fair and some of these other licensing models.
+
+00:28:55.955 --> 00:29:19.955
+<v Chad Whitacre>Yeah, and I'm reviewing our GitHub thread as well from a little bit ago. It looks like that was last August. And remembering now, because we also have the fair core license under FSL, which has a provision in there for self hosting, basically a license key option so that companies that do have a business model where they're monetizing self hosted have that option in there.
+
+00:29:20.355 --> 00:29:24.115
+<v Rijk van Zanten>With the one tricky bit there, we're getting super into the weeds.
+
+00:29:24.115 --> 00:29:26.995
+<v Chad Whitacre>Exactly. But GPL, I think was an issue.
+
+00:29:27.635 --> 00:29:28.115
+Even because
+
+00:29:28.115 --> 00:29:28.995
+you wanted that on GPL.
+
+00:29:28.995 --> 00:29:50.655
+<v Rijk van Zanten>I'm more than happy to revisit that, what it converts into. But the main issue was around the permitted internal use clause because we are sort of like a backend data platform intended to become your internal backend for data. You could easily see that as internal use and therefore nothing could be monetized. So it gets things
+
+00:29:50.175 --> 00:30:09.070
+<v Chad Whitacre>Okay, let's zoom out though. Let's zoom out though, because this is about open source sustainability. And certainly at Sentry, what we're saying is like, we're not open source. Sentry is no longer We were open source. And for a long time after we relicensed, we tried to Actually, when I joined the company, I joined a year after the relicensing.
+
+00:30:09.070 --> 00:30:24.065
+Relicensed in 2019. I joined in 2020 and I I'm joining an open source company with an open source product. Then I got in and was like, Oh, it's actually BSL. And then found out that there was this whole We tried to be like, No, we're open source too. And they're like, No, you're not.
+
+00:30:24.065 --> 00:30:37.190
+It's BSL. BSL is not an open source license. And it took us a while to admit that, but now we do. Sentry is not an open source product. Sentry is not, in that term, an open source company.
+
+00:30:37.190 --> 00:30:47.965
+Now we love open source and we use other open source and we obviously are trying to fund open source in a fair way and do all this stuff, but essentially the product is fair source, it's not open source.
+
+00:30:48.125 --> 00:30:48.285
+<v Alexander Lichter>Per Definition
+
+00:30:47.965 --> 00:31:03.040
+<v Chad Whitacre>This call, per definition, is about source sustainability. So I think all of the Fair Source stuff I think is interesting. I want to set that over here and get back to Daniel. Nuxt is an MIT project.
+
+00:31:03.760 --> 00:31:16.205
+That's a true open source license. Can you tell us a little more about NuxtLabs? What's their business model? How does that work? They're not fair sources.
+
+00:31:16.205 --> 00:31:17.565
+It's open source.
+
+00:31:17.805 --> 00:31:25.805
+<v Daniel Roe>Yeah, absolutely. I think just before that, and it's very interesting that you came up so strongly to say that Sentry is not open source.
+
+00:31:25.805 --> 00:31:42.875
+I would be very interested to know if Rijk could say that Directus is open source. And the question that I would pose or think is an interesting one is, if open source is about the gift economy, what is being given? What is the thing that is being given in an open source project?
+
+00:31:42.875 --> 00:32:12.445
+Because for example, you could have an open source project. So you could say the code is being given. But there are also some other things that some open source projects have and that matter, like direction, feedback, contributions, or the opportunity to be part of a project. So you can, for example, have one project which is open source. You can see it, you can take it, you can fork it, but you cannot contribute to the vision because actually the vision is totally set.
+
+00:32:12.445 --> 00:32:37.220
+Some other organization or person and this isn't an open project, it's just code that's open. You can also imagine projects which actually, yeah, source is open, but it's also very much a community project and the direction and feedback and development is a very open thing as well. So I think there's a question there of in any kind of open source project, like
+
+00:32:37.220 --> 00:32:37.620
+what is?
+
+00:32:37.835 --> 00:33:33.965
+<v Rijk van Zanten>What is it? And to your point, we and I personally have struggled with that a lot because we were in the same boat that it was like, okay, we have to switch to this BSL license to make it sustainable. But other than that, we do everything exactly the same as the open source project did before and we remain that ethos as much as we can continuously. So therefore we were too saying for a little bit, because like, yeah, we are an open source company even though maybe the main product is not, but then we have a bunch of open source packages and therefore we're still sort of very open in ideology, even if the main thing that people see first and foremost is not. And I think similar to Sentry, we're in a similar boat now that we were also just saying, well, straightforwardly, if you look at the definition, there's 10 points, two of which are questionable, if not just not, Points five and six, if you wanna look it up in the OSI definition specifically for the main core direct product.
+
+00:33:33.965 --> 00:33:56.590
+But then at the same time, I do try to ship as many of the building blocks that we build for the product as separate MIT libraries. And therefore I'm still like, okay, is Directus as a company an open source company? What even is that? Does that have to do with company, how you run a business and how do you process feedback? Or is that truly, do you ship stuff according to the definition?
+
+00:33:56.910 --> 00:34:22.070
+So I'm still sort of juggling that a little bit. That I'm like, okay, main product is not that I agree on, because it's just BSL license and that it's just not an OSI definition license. As a company, I'd still kind of want to say, well, we are an open source group of maintainers in that sense because we're still doing it the same way we've always have in a very what you would expect. And this is again where assumptions kick in, right? What you would expect from an open source ecosystem.
+
+00:34:22.950 --> 00:34:25.110
+<v Chad Whitacre>Think the word I would bring in here is governance.
+
+00:34:26.950 --> 00:34:27.350
+You've got
+
+00:34:27.350 --> 00:34:35.755
+code and then you've got governance, You know? So what's what's the governance of the project? Who owns the trademark? What's that entity? Is it a nonprofit foundation?
+
+00:34:35.915 --> 00:34:45.690
+You know? Is it a single individual? Is it a is it a for profit company? And and who's got, the admin bit on the repo? Again, is it a nonprofit foundation?
+
+00:34:45.850 --> 00:34:53.610
+Is it an individual? Is it a for profit company? And we don't And the thing is that has not We keep sort of dancing.
+
+00:34:53.610 --> 00:35:03.505
+Maybe we should unpack this open source definition we've referred to a few times and maybe say a word about the OSI. Is that a good thing to do at this point
+
+00:35:02.545 --> 00:35:03.425
+<v Alexander Lichter>Sounds like a good idea.
+
+00:35:03.825 --> 00:35:23.175
+<v Chad Whitacre>Yeah. So the OSI stands for Open Source Initiative. That is the nonprofit founded in 1998 that launched open source as a movement. So Bruce Perrons, Eric Raymond, I think were the two founders of that and others obviously involved. Before that, we're talking about free software.
+
+00:35:23.175 --> 00:35:44.530
+So '98 is when we start talking about open source software. Open Source Initiative is this nonprofit founded to steward this movement under this name, this brand. And the open source definition is a document written by Bruce Perrons for the Debian project. It was the Debian free software guidelines. Bruce was a lawyer and he wrote this document as part of the Debian social contract.
+
+00:35:44.530 --> 00:36:18.745
+So the Debian project had the social contract where they say, Here's what free software means to us. For a package to be included in the Debian distribution, it has to meet these 10 criteria, the Debian free software guidelines. And so when Bruce and Eric started Open Source Initiative, they just changed the title. They changed it from Debian Free Software Guidelines to Open Source Definition. So it's a 10 definition that says a license, any given level we've talking about these licenses, the MIT license, the GPL license, the Apache license, etcetera.
+
+00:36:18.825 --> 00:36:45.035
+For a license to be OSI approved open source, it has to fit this 10 definition. So there's a whole license review process. It's been going on for twenty five plus years where there's a mailing list that people argue about this stuff and then there's a group that decides, like the OSI decides, well, this license fits the definition, this one doesn't. And so there's like hundreds of licenses that have gone through this review process. And yeah, so that's the open source initiative.
+
+00:36:45.035 --> 00:37:06.650
+That's the open source definition. And we can talk about open source in a broader sense because the point, I guess, and the reason that it came up at this point, says nothing about governance. It says nothing about governance. Open source definition is only about the copyright of the source code, the licensing of the source code, and says nothing about governance. So there's an ambiguity.
+
+00:37:06.650 --> 00:37:08.865
+There's a question of expectations.
+
+00:37:09.825 --> 00:37:32.010
+<v Daniel Roe>And the reason I raise that as an important thing is also because the reason that open source takes over the world is because it's easy to adopt. And so people adopt open source because it de risks you. One of the things is it de risks you. So if something goes wrong, you can take the code, use it, change it. You can do things.
+
+00:37:32.010 --> 00:37:45.585
+Also, you're not embarking on this on your own. You can contribute back, but other people contribute too. Like you're part of a movement. There's safety in numbers, there's safety and openness. So all of that de risking is a positive thing.
+
+00:37:45.585 --> 00:38:11.805
+And you can also benefit from a lot of that even if it's not technically open source. So I imagine with I'm using Sentry, I'm using Directus, even if we're saying, Hey, this isn't technically open source. I can still, if I encounter a bug, I can also look, I can fix it. And obviously there'll be people who are paid to do that. But if I fix it, then I prioritize my need and I fix the bug that I'm facing.
+
+00:38:11.805 --> 00:38:24.920
+I solve my own problem. I help other people. And it might technically not be open source, but it has a lot of the reason that I might want to use an open source project as well. Like the same benefits in some
+
+00:38:24.760 --> 00:38:25.880
+<v Chad Whitacre>There's a lot of benefit,
+
+00:38:25.880 --> 00:38:44.775
+there's a lot of value. What you don't have is the ability to start a company on that same project. You couldn't start a company. This is We talk about single vendor and multi vendor. So there's these folks doing It's single vendor open source where it's technically an open source, core is part of this or commercial open source.
+
+00:38:44.935 --> 00:39:18.670
+So Cal.com or Plausible or GitLab, they use the AGPL license, which is the most viral of the licenses. And it's it's a defensive maneuver because they're saying, so we, you know, use AGPL, so any other company that wants to come anywhere near this code is gonna have to be even, you know, as they're gonna have to share alike. Okay. But they pair that with what's called a contributor licensing agreement, a CLA. So I'm a plausible user and I have a pull request in plausible because it's just like you're saying, Daniel, I was using this there was something, an improvement I wanted to make.
+
+00:39:18.670 --> 00:39:43.550
+And because it was open, I was able, it was on GitHub. I gave them a pull request and they accepted it and that's in there now. And this was actually before when it was new enough, they didn't have the CLA. But if I did that now, I'd have to sign this contributor licensing agreement that basically gives them rights to use my contribution however they want. And what that means is that they're a single vendor commercial open source project.
+
+00:39:44.590 --> 00:40:03.785
+So it's a little bit of a gray area between a company and an open multi vendor commercial Think about Linux. It's the classic example. You've got Red Hat and IBM and Huawei and Google and Microsoft. Everybody's contributing to Linux. There's no one vendor that has a lock.
+
+00:40:04.025 --> 00:40:10.185
+And that is kind of I don't know, to me, I want that to be open source. I want to call that open source.
+
+00:40:11.170 --> 00:40:15.810
+<v Rijk van Zanten>Yet it's very much that controversial? A BDFL project in governance structure.
+
+00:40:15.810 --> 00:40:16.290
+<v Chad Whitacre>Linux is.
+
+00:40:16.290 --> 00:40:23.970
+<v Rijk van Zanten>Yeah. So it is kind of funny how you're saying it's multi vendor, but at the same time, there's one person with the final keys, right?
+
+00:40:24.930 --> 00:40:34.435
+<v Chad Whitacre>Yeah. Mean, Apache is the best at the more democratic processes. Yeah. So that's another question, right? Who owns the roadmap?
+
+00:40:34.995 --> 00:40:57.865
+<v Daniel Roe>It's a very interesting question. And I really think that there are benefits. To I can see the benefits on both sides. So there are benefits to situations like Node, which has There's committees, there's people, And there are other projects as well, which have a similar kind of thing. There's a foundation, there's governance, there's all of this.
+
+00:40:57.945 --> 00:41:09.970
+It safeguards things. It keeps them stable for the future. But on the other hand, it also slows them down. It can have an effect of friction. So it's a lot harder for things to move forward in some cases.
+
+00:41:10.050 --> 00:41:20.965
+I remember I saw when Node was looking to get a Bluesky handle, for example. Actually this wasn't just a simple, who's going to do it? How are things going to be approved?
+
+00:41:20.965 --> 00:41:38.860
+And then you look at little upstart projects like Bun, for example, or deno. And then they have It's very much a case of whatever we want to do, we can do. And so it's always going to be a tradeoff
+
+00:41:41.100 --> 00:41:47.020
+<v Chad Whitacre>But Does that distinction between the project governance and scale and size, does that bear on this question of what's the definition of open source?
+
+00:41:47.805 --> 00:41:48.205
+<v Daniel Roe>No.
+
+00:41:48.285 --> 00:41:55.245
+<v Chad Whitacre>Does Bun or Deno, because they're small and more agile, that more genuinely open source than Node? I don't think it does.
+
+00:41:55.485 --> 00:41:56.925
+<v Rijk van Zanten>It doesn't, but should it?
+
+00:41:57.565 --> 00:41:58.125
+<v Chad Whitacre>I Don't think it should
+
+00:41:57.805 --> 00:42:00.445
+<v Daniel Roe>It's the question of sustainability.
+
+00:42:02.045 --> 00:42:10.140
+I mean Bun and Dino are just examples, but you could pick any project with a BDFL. A BDFL approach to governance.
+
+00:42:10.700 --> 00:42:13.180
+<v Rijk van Zanten>Maybe quick for the listener. BDFL is
+
+00:42:12.860 --> 00:42:15.455
+<v Daniel Roe>Yeah, it's awful. It's terrible. So
+
+00:42:15.535 --> 00:42:16.655
+<v Alexander Lichter>But what is BDFL?
+
+00:42:16.655 --> 00:42:18.175
+<v Rijk van Zanten>What is BDFL about?
+
+00:42:18.175 --> 00:42:22.095
+<v Daniel Roe>It stands for Benevolent Dictator for Life.
+
+00:42:22.255 --> 00:42:34.730
+<v Chad Whitacre>It comes from the Python community. Guido van Rossen was Barry Warsaw, I believe it was, yeah, jokingly referred to Guido as the benevolent dictator for life of the Python project back in the late 90s
+
+00:42:36.410 --> 00:43:14.265
+<v Daniel Roe>You have to take it in a humorous way because the concept of a dictator is very unpleasant. I've got to say. So at some point we have a Nuxt governance document And I went through it before I stepped on as leader of the team. I went through it and tried to remove as much of the dictator language as possible from it because it's so unpleasant and doesn't describe dynamics that actually I would want to be happening in a project I was involved in.
+
+00:43:14.265 --> 00:43:16.665
+<v Chad Whitacre>What did you replace it with, Daniel?
+
+00:43:17.385 --> 00:43:18.265
+<v Daniel Roe>That's available online.
+
+00:43:18.265 --> 00:43:18.985
+<v Rijk van Zanten>Supreme leader.
+
+00:43:21.940 --> 00:43:23.220
+<v Alexander Lichter>Difficult. The president.
+
+00:43:23.220 --> 00:43:25.300
+<v Chad Whitacre>Chief Executive Officer?
+
+00:43:27.620 --> 00:43:35.805
+<v Daniel Roe>It's open source. Our governance document is open source on nuxt slash governance.
+
+00:43:35.805 --> 00:43:36.205
+<v Rijk van Zanten>Sure.
+
+00:43:36.205 --> 00:43:37.165
+<v Alexander Lichter>Link in the show notes for everyone
+
+00:43:37.965 --> 00:43:43.005
+<v Chad Whitacre>Did you just search replace the word for another word or is it more complicated
+
+00:43:43.005 --> 00:44:09.265
+<v Daniel Roe>No. I pretty much rewrote this. So rewrote the document. So it doesn't talk about Yeah, so it doesn't really talk anymore about But there are several things because one is I'm not the BDFL even in those terms. Because in the Nuxt situation, I didn't create Nuxt. So I stepped on as a project lead.
+
+00:44:09.505 --> 00:44:44.835
+So I'm effectively a CEO. If you know the distinction like that, I know you do, but if you imagine the distinction between a board of directors and a CEO, someone who's responsible for the day to day running, and yes, direction, but is still accountable to So the original project authors, people like Sebastien Chopin, Alexander Chopin, the Chopin brothers, and also Pooya Parsa, who was very influential. They sort of retain this sort of overseer role. So I can be fired. I can be got rid of.
+
+00:44:44.835 --> 00:45:13.595
+I'm not a for life situation, but at the same time, I am a benevolent dictator because unless that happens, I do set the direction of the project. And actually, really, really like that as a sense of checks and balances because when you someone who's making the day to day decisions, but also has no check on them at all, think that could produce unhealthy dynamics. I like that.
+
+00:45:14.840 --> 00:45:16.600
+<v Alexander Lichter>Like we see that in the world right now, right?
+
+00:45:19.800 --> 00:45:35.175
+<v Chad Whitacre>I'll tell you what though. This is the thing about open source. You're saying it's kind of a special episode. Usually, we get into open source because we love the tech. We love building websites and we love geeking out on tech together.
+
+00:45:35.735 --> 00:46:01.155
+But open source, you start pulling on those threads and it gets into politics. It gets into economics. And to my mind, open source, we have huge things to say to the rest of the world. And we're so disorganized and fighting about petty little things. It's like, there's so much potential in open source to heal the world is how I think of it.
+
+00:46:01.155 --> 00:46:25.720
+If we could get our act together and get organized and see clearly, we have a gift to offer. And I really like where you're going with this BDFL. Yeah, was cute in the '90s. Okay, so let's find what's genuine there and maybe get serious about reframing it because we're not kids anymore. The European Union has now written open source into its foundational structure of their economy.
+
+00:46:25.800 --> 00:46:31.855
+They invented a new economic category for open source software stewards. Do you know this? Are we aware of this?
+
+00:46:31.855 --> 00:46:33.215
+<v Alexander Lichter>Yes. Heard about it.
+
+00:46:33.215 --> 00:46:33.695
+<v Chad Whitacre>I live in the EU so.
+
+00:46:32.975 --> 00:46:47.050
+Yeah. Correct me if I'm wrong, Alex, but the CRA, which stands for the Cyber Resilience Act, Cyber Resiliency Act, in order to get that done, they had to invent a new category.
+
+00:46:47.050 --> 00:46:56.570
+You have market producers and then you have consumers. So there's all this consumer protection law in the EU that's based on, okay, so we got producers and consumers.
+
+00:46:56.730 --> 00:47:29.275
+And then, when they went to regulate software, the open source community was like, Hold on. We're not a traditional producer like you're used to. Brussels had to carve out a definition, open source software steward. So point being, open source has arrived, the pill has been swallowed, all modern digital infrastructure is built on top of open source, and we need to get serious about figuring out the implications of that. So this BDFL idea, I really like what you're saying that, know, cute thing from the past.
+
+00:47:29.275 --> 00:47:50.030
+What's genuine there is I'm going to introduce a word here, hierarchy. There's hierarchy in projects, whether we like it or not. So let's have the best hierarchy we can. I like where you're going with the model which is evolutionarily stable because we see it all over the place. In companies or in nonprofits, you have a board and then you have a director.
+
+00:47:50.030 --> 00:47:55.525
+You have a board and you have a chief executive. So is that a model that open source projects can do more of?
+
+00:47:55.685 --> 00:48:08.580
+<v Alexander Lichter>I guess especially also depending on the size. So that's also like I don't know. Nuxt, of course, is a is a project that's not quite small, so to say. For like if you are a solo dev putting out things, there's of course a whole different story.
+
+00:48:09.780 --> 00:48:11.460
+<v Rijk van Zanten>You are the whole hierarchy by yourself. Exactly.
+
+00:48:11.460 --> 00:48:25.155
+<v Alexander Lichter>You are everything. You're doing the whole thing. But it starts with, like, okay, at some point there is enough work for more than two times you. So what happens then? Like, you get contributors on, but then how do you do you formalize them?
+
+00:48:25.155 --> 00:48:34.920
+You just said, like, here's here's a team. Everybody come on and join. What what happens is then a lot of people join and then it starts with, okay. You have to, at some in some ways, structure things. Right?
+
+00:48:34.920 --> 00:48:58.465
+And that leads can lead to a hierarchy or at least a way to structure open source projects. So I wonder, have you I mean, of course you have. But have you experienced in terms of structuring that, like building up a team and maybe an advice for people maybe in open source saying, okay, I want to get on more contributors. What's the best way quote unquote or like a good way to do that?
+
+00:48:58.465 --> 00:49:08.170
+<v Rijk van Zanten>So the question sounds twofold, right? Is one, how do you grow a team and then put hierarchy in? And the other question is a bit broader of how do you get more contributors? Is that right? True.
+
+00:49:08.170 --> 00:49:08.890
+<v Alexander Lichter>I think the
+
+00:49:08.890 --> 00:49:19.965
+first part is, at least to me personally, the more interesting one because contributors, it's also like it's a whole different angle. Let's maybe focus on the first part of like, okay, you have people who want join. How do we structure it at the best way?
+
+00:49:19.965 --> 00:49:50.515
+<v Rijk van Zanten>So I think for me personally, started it's the same thing. You're a hierarchy of one or a hierarchy of two, right? Because you just have the original founders and the original starters of a project. Then the first couple of contributors that start, well, there's also the big difference between sort of one off drive by APRs or just one off fixes and things and people that sort of start to, you know, recurrently contribute things. And at those stages, it's still fairly clear because you have one or two folks with the keys and they are the ones shipping everything and clicking the merge button.
+
+00:49:50.675 --> 00:50:26.850
+Once you get to a point where you trust somebody enough to give them the keys to the castle, so to speak, to start shipping things, then it becomes interesting immediately. Because then you get into a point where, in my experience, there's a sort of a hidden assumption that the original founders have final say in the matter. And then you end up in a structure that Daniel just described. And at a certain point, you also have to just start highlighting, okay, who has the most expertise in certain areas of the thing that you're building as well? So in the case of direct signature Sentry is the same of course, because it is more of a product rather than a one off library that has one focus.
+
+00:50:26.850 --> 00:51:00.440
+It's a product that's meant to be doing a lot of different things means that you end up with people that know more about certain aspects of it than just the whole picture. And then the question becomes, okay, I might be floating on top as the sort of original BDFL person, but at the same time, I don't have the expertise over everything anymore. So at what point do you codify that or do you at least acknowledge that if one of my team members that has been hyper focused on one product area for a long time says something, what wins out? Is it just gonna be my gut feeling again as this BDFL? Probably shouldn't be.
+
+00:51:00.440 --> 00:51:17.965
+Is that something that's codified? In our case, not, we don't have this documented. I have documented what our sort of decision making process is to try to keep that as transparent as possible. But I didn't write down, which I will by the way, after this call. Will definitely fork.
+
+00:51:18.845 --> 00:51:22.540
+Hope the governance doc is MIT. But yeah, I
+
+00:51:23.100 --> 00:51:25.980
+<v Alexander Lichter>We'll link the new one. Shout outs.
+
+00:51:27.020 --> 00:51:55.570
+<v Daniel Roe>But I mean, the questions you're getting into though are questions of authority, responsibility, control, which are true of any organization. Power. For sure. Yeah. So because the degree to which you're willing to delegate authority or power and basically say to someone, You can do this thing, I think is hugely It affects It's a question of what kind of a leader are you and how good are you at being a leader?
+
+00:51:56.130 --> 00:52:21.920
+I see leaders as people I see that good leaders do delegate authority. I think you often see bad leaders delegating responsibility. Well But not I'm sure we've all been in a situation where we have responsibility for something, but we don't have the ability to make it happen. So we don't have the authority, but we do have the responsibility. And that is a very it's an awful situation to be in.
+
+00:52:22.160 --> 00:52:35.765
+<v Chad Whitacre>You all want an anecdote about open source leadership? A lesson of open source leadership that I learned? Yes. So the year was 2012, '20 '13 maybe. And the city was Montreal.
+
+00:52:35.765 --> 00:52:54.910
+The Python conference was happening in Montreal. And I was invited to go out to dinner with there were five of us. We were going out to dinner in the old city in Montreal. It's very romantic, stone streets and narrow walkways. We going to this fancy French restaurant.
+
+00:52:55.230 --> 00:53:08.055
+It was myself and three others and Guido van Rossum, was part of the group. So I went out to dinner with Guido. I had this, like, romantic dinner. Like, we were sitting across from each other in this, like, romantic date restaurant, like, sharing a sharing a dessert and everything. You know?
+
+00:53:08.055 --> 00:53:37.765
+It was, like, this this wonderful memory. It was kind of hilarious. But the story I want to tell is we left the hotel and started walking and realized that we didn't actually know where we were going. So there's five geeks wandering around Old Town Montreal trying to find a restaurant. And Guido stood behind me and said, I'll go wherever you're going.
+
+00:53:37.765 --> 00:53:55.955
+And I was like, Oh! So that's always stuck with me as an example of open source leadership. Here's this person who clearly I looked up to. He's the creator of Python and I was getting to go out to dinner with this small group with Guido. And yeah, for him to stand behind me and be like, the delegation.
+
+00:53:55.955 --> 00:54:05.955
+Right? The delegation of responsibility and authority. And yeah. And he was like, the willingness of the leader to become the follower in that situation was really I don't know. Something that stuck with me.
+
+00:54:05.955 --> 00:54:07.635
+Yeah. There's a lot here about
+
+00:54:07.635 --> 00:54:08.930
+<v Daniel Roe>leadership. Mhmm.
+
+00:54:08.930 --> 00:54:14.850
+<v Alexander Lichter>True that. And one important question, though. Which like, did you find a good restaurant versus everyone? Yeah. Was the restaurant.
+
+00:54:14.850 --> 00:54:16.290
+<v Chad Whitacre>We we did. Yeah.
+
+00:54:16.290 --> 00:54:30.725
+It was this, like, great French restaurant. So it was, like, imagine the five of us geeks, and, like, every other table was like a table for two with a candle and a rose. And it was like the five of us kind of a little out of place there. But yeah, was a really fun time. Yeah.
+
+00:54:30.725 --> 00:54:43.470
+Shout out to Kenneth Reitz for organizing that one. But yeah, there's so much here. I actually do have to wind down. This conversation's going so great. I have to start preparing for my next call.
+
+00:54:44.350 --> 00:54:57.995
+But this idea that open source leadership, power, economics, what kind of economy is it? I love this conversation. I wish I didn't have to leave. This is great.
+
+00:54:58.395 --> 00:54:58.875
+<v Alexander Lichter>We'll get into
+
+00:54:58.875 --> 00:54:59.275
+<v Chad Whitacre>the same time again.
+
+00:54:59.275 --> 00:55:11.120
+<v Daniel Roe>We're just going to gather Can I propose Edinburgh? It's a lovely place, some nice pubs, good whiskey, lots of lots of chance for chat in front of a fire, something like that.
+
+00:55:11.600 --> 00:55:19.680
+<v Chad Whitacre>Friend Vlad that works on the open source pledge with us is doing a PhD in the economics of exploitation at Edinburgh.
+
+00:55:19.875 --> 00:55:24.355
+<v Daniel Roe>So Okay. Well, mean, all the dots are aligning so. Exactly.
+
+00:55:25.955 --> 00:55:40.420
+<v Alexander Lichter>I'm in. Cool. And maybe let's end it in a nice call to action way. Michael, you have prepared something that everybody out there who's interested in open source, like a developer, might be useful for them, at least depending on the answers for our panelists here.
+
+00:55:40.420 --> 00:55:57.005
+<v Michael Thiessen>Yeah, so for our listeners, are there any key actions or next steps that someone can do maybe today, maybe in the next hour to help others with sustainability,
+
+00:55:57.005 --> 00:55:57.165
+whether
+
+00:55:57.165 --> 00:56:13.240
+it's financial, that's the obvious one that comes to mind a lot. But it's not just financial as we have discussed. It's also, it's a whole bunch of things. So from your perspective, what is like a simple thing that people can do to help with the sustainability?
+
+00:56:13.480 --> 00:56:15.240
+<v Chad Whitacre>We got our canonical order, Daniel.
+
+00:56:18.025 --> 00:56:44.685
+<v Daniel Roe>I think there's so many little things. I wrote a blog post on contributing to Nuxt, which I think sums up some of them. I think what is going to keep me going is enjoying what I'm doing. And I enjoy what I'm doing when people are kind to other people in the community, when people help other people out, when people contribute. Open source is coding with friends.
+
+00:56:44.685 --> 00:56:50.605
+It's a lot of fun. And the thing that's going to keep me going is when that carries on.
+
+00:56:50.605 --> 00:57:06.430
+I would also love to see people on my core team like Alex and others be sponsored because it enables them to keep going with open source. It enables that continued coding with friends. So that is the kind of thing I would love to see.
+
+00:57:06.430 --> 00:57:21.305
+So please, please sponsor Alex, Julian, Harlan, Anthony, Lucy, Pooya, Sebastian. A lot of people. I would love to see that. But yeah, just keep the community being a fun place to be.
+
+00:57:21.705 --> 00:57:57.150
+<v Chad Whitacre>And when you convince your company to sponsor the maintainers of Nuxt and all of the other open source maintainers that you depend on, check out the Open Source Pledge. Opensourcepledge.com is an initiative that we launched at Sentry six months ago, and now we've got 32 companies on board that over the past year collectively have given over $2,500,000 to open source maintainers and paid maintainers. So, yeah, this is an effort to really change the status quo in companies funding open source. So opensourcepledge.com, if you're a decision maker at a company, we would love to have you on board.
+
+00:57:57.870 --> 00:58:25.650
+If you're a developer and you don't necessarily control the budget, definitely start having that conversation internally would be great. But really, I would say as a developer, open source, we're going to come back to this in Edinburgh, Daniel. This question of obligation in open source. I actually don't want to use that word obligation or expectation, but invitation. The invitation with open source is like, you receive a gift, there's an invitation to freely reciprocate.
+
+00:58:25.650 --> 00:58:55.190
+We want that joy that Daniel was talking about. We want that freedom, but it's an invitation. So the invitation is, if you're using an open source project and you find a bug in it, it actually is really valuable to write a high quality bug report. If you can take half an hour out of your week to make a small contribution to open source, to fix some documentation, to provide a reproduction for a bug report. All of us do a little bit, it helps everybody else.
+
+00:58:55.190 --> 00:58:59.590
+And that's really the heart of open source, friends coding How many friends can we get here?
+
+00:58:59.845 --> 00:59:19.750
+<v Rijk van Zanten>For sure. Yeah, was going to summarize that as a lot of projects are collaborative effort or they're a product of passion and love. And let's not forget that across the board that it's like you find something on the internet you use, fantastic. Go for it, go nuts. Somebody did that just out of selflessness and out of fun and joy.
+
+00:59:20.550 --> 00:59:22.150
+Let's keep the fun and joy in there.
+
+00:59:22.630 --> 00:59:23.030
+<v Alexander Lichter>Perfect.
+
+00:59:23.030 --> 00:59:23.510
+<v Chad Whitacre>Love it.
+
+00:59:23.510 --> 00:59:37.015
+<v Alexander Lichter>I want to add one last thing, which is not even strictly related to open source, but helps a lot in all kinds of ecosystems. Content, create some content around it. It doesn't have to be crazy high like podcasts or YouTube videos, blog posts. Hey.
+
+00:59:37.015 --> 00:59:44.295
+I used this tool. I solved something. There you go. You solve it anyway. Take the time to write it up so you don't forget it for later and people looking for it as well.
+
+00:59:44.820 --> 00:59:51.860
+<v Rijk van Zanten>The contribution is so much more than a PR. Like, anything that helps an ecosystem out in any way is a meaningful contribution.
+
+00:59:52.980 --> 01:00:03.595
+<v Alexander Lichter>I think these are perfect words to end this episode, folks. Thank you so much for coming on and we have to do it again in Edinburgh, but also maybe here again. Let's see. Let's do it. Thanks, everybody.
+
+01:00:03.595 --> 01:00:17.951
+Of course, make sure to follow Daniel, Chad, and Rijk, the socials and links to everything mentioned in the show notes or YouTube description. Thank you so much for coming on. Check out the old age of the episode, or if this is if this is not the latest one, then, well, just continue listening. Thanks, everybody.
+
+01:00:17.951 --> 01:00:19.551
+<v Chad Whitacre>Alex, Michael, thanks so much.
+
+01:00:19.631 --> 01:00:20.111
+<v Rijk van Zanten>Thank you, guys.
+
+01:00:20.111 --> 01:00:21.711
+<v Chad Whitacre>Daniel Rijk. Yeah. Alright. Cheers
+
+01:00:21.711 --> 01:00:22.431
+<v Michael Thiessen>Thanks for coming on.

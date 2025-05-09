@@ -1,0 +1,47 @@
+In this episode of DejaVue, Alex sits down with James Garbutt, open source maintainer and lead of the e18e initiative. James shares his journey from writing web scrapers as a teenager to maintaining critical JavaScript libraries like parse5 or Chokidar and eventually co-creating the ecosystem performance initiative.
+
+The conversation is then all around e18e, which aims to improve performance across the JavaScript ecosystem through three pillars:
+Cleaning up dependency trees
+Speeding up popular packages
+Creating lighter alternatives to bloated libraries
+
+James explains how the community-driven approach has produced impressive results all across the web development landscape.
+
+Learn about real-world examples of performance improvements, including replacement packages like tinyglobby and nano-staged, and discover how to contribute to e18e even if you're new to open source. James shares also insights on balancing between backward compatibility and performance, bundling dependencies, and also shares future plans for e18e in 2025.
+
+Enjoy the episode!
+
+Our Guest
+
+James "43081j" Garbutt
+e18e
+Website
+Bluesky
+
+Chapters
+
+{{chapters}}
+
+Links and Resources
+
+Parse5
+Doom in TypeScript
+Flappy Bird in TS
+LitElement
+Speeding up the ecosystem blog post series by Marvin Hagemeister
+e18e issue overview
+e18e Discord
+minizlib install size improvements
+Storybook dependency tree reduction
+e18e module replacement repository
+Anthony Fu's node_modules inspector
+Publint by Bjorn Lu
+Umbrella CLI
+nano-staged (instead of lint-staged)
+npm-run-all2
+eslint-import-plugin-x (instead of eslint-plugin-import)
+tinyglobby (instead of any other glob lib like globby/fast-glob)
+fdir
+Vite Devtools announcement
+Bundling dependencies (and when not to do it)
+A lighter Nuxt CLI

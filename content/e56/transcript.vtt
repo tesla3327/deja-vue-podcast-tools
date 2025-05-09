@@ -1,0 +1,661 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.200
+<v Alexander Lichter>Welcome to DejaVue.
+
+00:00:01.840 --> 00:00:17.995
+<v Michael Thiessen>Your favorite Vue podcast. I'm Michael, and I've got my co host Alex here. And today we've got the Jared Wilcurt with us, UI architect and a prolific open source contributor. Thanks for coming on.
+
+00:00:17.995 --> 00:00:19.835
+<v The Jared Wilcurt>Thanks. Happy to be here.
+
+00:00:20.155 --> 00:00:37.070
+<v Alexander Lichter>So, Jared, we usually start with with all the guests outlining, okay, Vue. Js, how do you get into that? How do you even get into programming, web development? Before, of course, we get into the meaty stuff when today the people have seen it already probably based on the title we talk about testing in Vue. Js.
+
+00:00:37.150 --> 00:00:42.110
+But, yeah, let's start with a little bit of history, a little bit of past. How did you get into programming after all?
+
+00:00:42.190 --> 00:01:09.880
+<v The Jared Wilcurt>I mean, programming, sort of just playing around with web design, web dev stuff for a long time, and then there's more and more stuff I wanted to make and had to learn how to code to be able to make that stuff. Vue specifically, I was working at a a large tech company and so I put in charge of a greenfield project that we were told we had to use React. And, I'm using that and hating every last thing about it. So I start looking into alternatives. I find a little project called Riot JS.
+
+00:01:10.005 --> 00:01:24.965
+I'm like, okay, this is maybe good. And then it's comparing itself to other frameworks. And you consider that to be you you would guess that would be pretty biased. And I'm going now and it's like, we're better than React because of this, better than Angular because of this, blah blah blah. It goes down all these different ones and gets to Vue and it's just like, you know what?
+
+00:01:25.360 --> 00:01:34.080
+Vue is better than us. Really? Yeah. Yeah. They were like game recognized game, respect where respect do, get Vue is really good.
+
+00:01:34.560 --> 00:01:55.340
+So I was like, well, what's Vue? So I started looking at that. I saw the the scope styles and how they were doing that. I looked into it, I was like, oh, that's a really clever solution for that. I saw the single file components and the separation of features into into different files and then the separation of concerns into different sections, and then the options API organizing all your code neatly so you can go to any file.
+
+00:01:55.980 --> 00:02:30.980
+And then I started playing around with JS Fiddle, and I think I was on like maybe my second day of just learning the basics, just playing around with it. And there's a thing I wanted to do, I wasn't sure if it was possible. And I was like, surely I'm not the first person who wants to do whatever that thing was. And instead of looking it up or doing a search, I just guessed, like, if I was gonna put this in the framework, what would I call it, And not only did that feature exist and it worked exactly the way I expected it to, it was the first thing I guessed. And you can't be more intuitive than that.
+
+00:02:31.220 --> 00:02:32.980
+And so I was sold. I was immediately sold.
+
+00:02:32.980 --> 00:02:33.940
+<v Michael Thiessen>Yeah. That's pretty amazing.
+
+00:02:34.245 --> 00:02:34.725
+<v The Jared Wilcurt>Yeah.
+
+00:02:34.725 --> 00:02:55.850
+<v Michael Thiessen>That's a pretty amazing first experience with a new tool where it's like, sometimes you end up spending so much time reading through the documentation, you're like, I'm just trying to wrap my head around it, okay, they keep using this word, what does that even mean? And you're like, I don't know what's going on, but then, yeah, some things just like click for whatever reason and it's just like, you know, away you go.
+
+00:02:55.930 --> 00:03:11.775
+<v The Jared Wilcurt>Yeah. And it was night and day having just come from React where it's like never in a million years would I guess the function names they have, where it's like components, might, did, could, it might it might have it it maybe mounted.
+
+00:03:12.095 --> 00:03:12.495
+<v Alexander Lichter>Yeah.
+
+00:03:12.495 --> 00:03:24.180
+<v The Jared Wilcurt>You know? I'm like, sure. Name of that. Whatever. So night and day, I started playing around with with Vue more and really, really, really, really liked it and wanted to learn the more advanced stuff, vue-cli, vuex, vue-router.
+
+00:03:26.420 --> 00:03:46.040
+And I wanted to go to the Vue Meetup group to have somebody show me this stuff, but there wasn't one because it was this was probably early twenty seventeen. Vue really took off at the end of twenty seventeen, but there wasn't a Meetup group. So after, like, three months of just playing with my own, I was like, alright, sure. I'm gonna make my own Vue Meetup group. We had our first big event.
+
+00:03:46.040 --> 00:03:59.295
+We had a speaker, did an interview, and I think we had about 40 or so people show up, which is pretty good for Indianapolis. Nice. Someone showed up and was looking to hire Vue devs. And Uh-huh. I was like, I'll look into your company.
+
+00:03:59.295 --> 00:04:17.190
+And I was like, oh, you guys are actually like, your your glass door rating is like 99%. So that was worldwide technology. And so I I jumped ship from Salesforce, switched over to there, and I've been there for the last seven years. Recently, this past year, I got promoted to UI architect. My job role now Thanks.
+
+00:04:18.230 --> 00:04:58.335
+Yeah. My job role now mainly, involves helping across multiple teams whenever people have anything front end related, helping different front end devs with more complex difficult issues, being sort of a bridge between the UX designers and the front end devs, and writing code. That's I do a lot of cross project code including component libraries where I actually maintain an internal component library and do all the documentation using Vue Doxin, which is another open source project that I maintain that is not finished yet. But when it is, I'll pitch you guys up to see if you're interested. It does some pretty revolutionary stuff with component documentation.
+
+00:04:58.335 --> 00:05:09.620
+If anyone's doing Vue docs Yeah. And they're looking to get away from the pain that is Storybook, look up Vue doxen. I've already got random people. I don't know who they are, but they're making pull requests if they're using it. Nice.
+
+00:05:10.500 --> 00:05:10.660
+<v Alexander Lichter>That's exciting.
+
+00:05:10.660 --> 00:05:17.860
+<v The Jared Wilcurt>And then other other open source stuff that I do outside of work is the unit testing library we're gonna be talking about today for snapshot testing.
+
+00:05:17.860 --> 00:05:20.020
+So that sort of segues into the rest of the
+
+00:05:20.100 --> 00:05:20.180
+<v Michael Thiessen>Yeah.
+
+00:05:20.180 --> 00:06:07.990
+It's really interesting this this story you bring up, and I'd like to go back just a little bit because you said when you were first learning Vue, it sounded like the first thing that you were thinking of was, oh, I wanna see if other people have learned this and get them to show me this. If there's like a meetup, I can talk to other people about that. Do you typically, like when you are trying to learn something, is that your first go to to find someone who's already figured it out and like get them to just tell you how it works versus my own first thoughts are usually like, oh, let me play around with it myself. Maybe I'll read the entire documentation or maybe that's just my own wiring personality is like, I'll try to figure it out on my own for maybe too long first, and then I'll ask for help. You know?
+
+00:06:07.990 --> 00:06:47.025
+<v The Jared Wilcurt>Yeah. I mean, nowadays, where I'm at career wise, I I just I've evolved from the Stack Overflow copy paste to the go to the docs and figure things out to the to now, basically, all my life is spent on GitHub issues and tracking down weird obscure problems. But for, like, conceptual things, like Vuex as a concept and state management, it's like that really works well as like a talk. So now that's once I made my my Vue meetup group and have been hosting it for years, I've given talks on everything related to Vue at this point. So now I am the person who gives the intro to Mhmm.
+
+00:06:47.185 --> 00:07:06.820
+Client side routing and state management and explains those concepts. I've got a Pina talk and a a talk on everything, the different ways styling works in in Vue. But, yeah, we still have a COVID killed off the all the meetup scene here, Indy, but we do still have a Sunday meetup where we meet up, talk about Vue, and drink tea.
+
+00:07:07.220 --> 00:07:28.330
+<v Alexander Lichter>Yeah. The problem of COVID in the meetup scene, I think we have we see it almost everywhere, sadly. But I feel like now slowly but surely, it's, like, growing back in terms of people enjoy meeting more and more and more meetups come either back or get, a a new addition. Also in the Vue space, which is is really lovely to see. Then it sparks that interest of, okay, that's cool.
+
+00:07:28.330 --> 00:08:01.000
+I also wanna give a talk or maybe my company can host that because we're using Vue in production and it doesn't hurt to make a little bit of advertisement for, I don't know, a couple of drinks and pizza or whatever you serve in the end. And, yeah, I I really hope that that Meetups, well, will become more and more popular again because I I remembered, like, my beginning times, it was so valuable to just, talk with people. Not even of course, it's great to, like, watch the talks and get in touch with the speakers, but just find like minded people that you can get in touch with, maybe start cool projects or also ask for help or the other way around that you can be there to help them
+
+00:08:01.000 --> 00:08:09.135
+<v The Jared Wilcurt>as well. Yeah. I'm I'm really hoping that we were I used like, 2019, I was going to, like, 20 different tech meetings a month. Like, it was huge.
+
+00:08:09.135 --> 00:08:09.695
+<v Alexander Lichter>Wow.
+
+00:08:09.935 --> 00:08:19.295
+<v The Jared Wilcurt>So That's we had a we had a really good tech space here in Indianapolis back then. I'm hoping to get something like that growing back up. It's it is, like you said, slowly but surely coming back.
+
+00:08:19.870 --> 00:08:31.150
+<v Alexander Lichter>Fingers crossed for that. So can you roughly pinpoint time wise when you started to use Vue. Js? Because you said, like, Riot Js, also a name I have heard before, but for, I mean, for a long time not.
+
+00:08:31.150 --> 00:08:33.790
+Yeah. So do remember when it was?
+
+00:08:34.030 --> 00:08:58.240
+<v The Jared Wilcurt>I mean, this would have been, like, tail end of 2016, started 2017 is when I started playing around with Vue. And then the the Vue Meetup group was in, like, mid twenty seventeen. And then by the end of twenty seventeen, Vue had really skyrocketed and taken off and had this huge hype cycle through 2017, '20 '18. And then by the end of twenty eighteen, I think it had outpaced React with, like, GitHub stars or something. Like, it was really Yeah.
+
+00:08:58.240 --> 00:09:01.840
+The hype was huge in that that era. Good old Vue two. Miss it.
+
+00:09:02.385 --> 00:09:25.220
+<v Alexander Lichter>Yeah. And then Vue three happened and then, let's say, the the Trough of despair happened in typical life cycles, and then things went down. And now, apparently, also according to, like, State of JS and I feel like the general vibe in the community, people are pretty happy with the current state view is in to most degrees, I would say. As in like, okay, it's not your frameworks. There won't be like this crazy new things.
+
+00:09:25.220 --> 00:09:46.515
+I mean, sure, there will be like new things coming out like vapor mode, still improvements. And we've seen features in the last minor versions as well, like the dehydration finally being built into the core and so on and so on. But in a way, all is kind of steady so to say. Plus we've seen so many libraries in the ecosystem being built, component libraries but also like solutions for everything like forms and so on and so on.
+
+00:09:46.780 --> 00:09:55.020
+<v The Jared Wilcurt>Yeah. That's what I'm trying to do is just find those gaps in the the Vue ecosystem and sort of pave over those to make life a little bit easier for all the Vue devs out there.
+
+00:09:55.180 --> 00:10:08.355
+<v Alexander Lichter>So what was the first gap that you found then? If, say, you're looking for these gaps, what was the first if you're like, okay. This might be good. But you already mentioned another open source project, which also the link is, of course, for everybody in the show notes or description. But, yeah, where where did you start?
+
+00:10:08.835 --> 00:10:53.130
+<v The Jared Wilcurt>I mean, there was I I switched over in to the company I'm at now in December of twenty seventeen, and we started up a large project that's still going to this day. It's, it was a greenfield project, now it's a legacy product, but it's still got a whole team of, like, five devs that maintain it. When we started doing that, we definitely wanted to do testing because this is a, important internal application that lots of people within the company use. And we wanted to be have high confidence that it's going to work and be able to solve their problems reliably and that it's something they can trust, and not feel buggy or unreliable. It's basically like solving a lot of processes that people have and like fixing workflows and it's also like a glorified inventory management system and reservation system.
+
+00:10:53.130 --> 00:11:08.760
+It does a lot of stuff, but we went on testing. And testing was still very new in the Vue landscape back in 2017. Ed Yarbrough had had created the Vue test utils, but it was still in beta. Yeah. And and so we were we were trying that out.
+
+00:11:09.000 --> 00:11:38.770
+We were doing jest and and Vue test utils and we got stuff to work, but there was some friction, some clunkiness around that. And one of the areas that that we saw was snap shots were really cool. We wanted to use those, but they had a lot of these downsides. And looking at them, like, there's a reason we couldn't solve those downsides programmatically. So I started working on there was a a Jest serializer snapshot Vue plugin, so I just forked that, assuming that would be really complex.
+
+00:11:38.770 --> 00:11:43.490
+But there's really, like, 40 lines of code. I was like, oh, I can work with this. This isn't so bad.
+
+00:11:43.650 --> 00:11:44.930
+<v Alexander Lichter>That sounds doable. Yeah.
+
+00:11:45.170 --> 00:12:09.110
+<v The Jared Wilcurt>Yeah. Yeah. So I started adding in more and more and more features, and I think the original had, like, two features, and then I got it to, like, 20, and it was, like, a fairly robust library. And then recently went back and rewrote the whole thing from scratch to take advantage of all the new technologies with Vue three and ESM and, vitest and Jest, all that new stuff. So that's kind of what we're gonna be talking about today is is that the library.
+
+00:12:09.110 --> 00:12:32.010
+That was the first thing where I was like, oh, I can I can do something here? I can I can make this a lot easier for our team and open source it so all teams can use it? And I got a lot of people who are, in the very narrow space of people who are using Vue and doing unit testing and using Jest and doing snapshots. Those people love the library. And we've seen that that pie grow over time.
+
+00:12:32.010 --> 00:12:40.250
+More and more people are using more Vue, more and more people are using writing tests, and, yeah, that's kinda where the first gap that I wanted to really fill out.
+
+00:12:40.490 --> 00:13:07.920
+<v Michael Thiessen>Yeah. So before we get into the snapshot testing and stuff, because I'm I'm very interested in that. I haven't done it myself so I have some questions for you about that. Before we get into that, maybe we can Can you describe a bit about unit testing for if someone hasn't really done it or doesn't see the point, I think is unfortunately a lot of people out there or don't think that it's worth their time. Can you give like your argument in favor of unit testing?
+
+00:13:07.920 --> 00:13:11.120
+Why is it good? What are you even doing when you do unit testing in Vue?
+
+00:13:11.120 --> 00:13:30.780
+<v The Jared Wilcurt>Yeah. Before the why, there's the what. Like, what is it? And for anyone who's completely foreign to this, testing is a way to write code that runs your code and validates that it works correctly. And the reason you do it is so you have confidence that when you change something in one place, you don't break something and it's somewhere else in your code.
+
+00:13:30.780 --> 00:13:41.100
+And that's basically it. It just gives you confidence. And how much confidence you have is dependent on how much tests you wrote and how much you trust those tests, how good they are. And that's the gist of it. It comes down to that.
+
+00:13:41.100 --> 00:14:05.480
+And then there's like, if you're writing like, life or death software for, like, heart monitors or, like, the landing gear on an airplane, then you need really high coverage to make sure you catch all the bugs that you possibly can. They can, catch bugs as well before they make it to production. It's really the only reliable way anyone's found to catch bugs before they get to production is through good testing practices. Yeah. That's that's the gist of it.
+
+00:14:05.480 --> 00:14:33.780
+How much testing you do is really dependent on how much you care on the project. If it's like a library, I try to do a 100% test coverage where that means that when your tests run, it will show you if any lines of code were hit during that and if any lines of code weren't hit. And that's a good way to know like, oh, this section of the code has a bunch of functions that never actually get hit in the tests. Do I care about if those break or not? If so, I'll I'll throw in a couple extra tests for that.
+
+00:14:33.780 --> 00:14:53.020
+But for like a library, it's usually good to do a 100% for like, software development, if it's not life or death, I usually say around 85% is good. There's this, like, siren song of trying to get a 100% in software development, but just don't avoid the siren song. There's too many weird edge cases. It's it's it's a diminishing returns in software development.
+
+00:14:53.020 --> 00:15:10.435
+<v Michael Thiessen>Yeah. Exactly. And you spend all your time just writing tests to cover that last bit. Or you end up devolving into writing tests that do the coverage but don't actually test anything and will never catch anything because they're just like, yeah, look, it does the coverage, but yeah, it doesn't it doesn't actually do anything.
+
+00:15:10.435 --> 00:15:19.635
+<v The Jared Wilcurt>Yeah. Doesn't it gets you no value. It checks the box, but doesn't actually do anything of of real value. Yeah. And and when you're making software, there's a lot of complexity you need to deal with.
+
+00:15:19.635 --> 00:15:46.575
+You need to decide where the complexity goes. Either it goes in your code or it goes in the end user's head or you try to offload it to like a library. But it's got to go somewhere. And when you eventually have really complex parts with it, you'll have these hotspots in your software where it's like this area is very complex. And writing tests for that means the tests are going to be very complex and you're going to run into weird, wacky issues that you can't search your way out of.
+
+00:15:46.575 --> 00:16:11.445
+You know, our test tooling is still kind of in the dark ages compared to where we're at with like the rest of our like JavaScript frameworks, which are like the flying cars of the future. And our testing tools are kind of like horse and buggy still. So if you're at a skill level where you can improve those, I highly recommend making the the the future dev's lives easier, which is what I'm trying to do. I'm trying to, like, improve that test tooling landscape.
+
+00:16:11.605 --> 00:16:47.475
+<v Alexander Lichter>It's super interesting that you mentioned that because I also have the feeling very often, like, everybody says, like, yeah, write tests. And everybody, if you ask, like, do write do your test, everybody's, like nodding except the people that are honest like, ah, you know. But I often have the feeling when there is something new and shiny out there that like the topic of how can you test that and can be related to a framework or sometimes also a library. But I think with a framework it's trickier because of the version of control in a way like, Okay, if you let's say have no good way to test, I don't know, your Nuxt JS application for example as Nuxt being meta framework. Nowadays with Nuxt test utils we have ways to do that.
+
+00:16:47.860 --> 00:17:05.955
+But also for a while, that wasn't that easy. So you can do end to end tests, of course, and say I run that headless browser to make sure I don't know, sure, the shopping cart works and that can go through payment flow. But you also don't want to do all the end to end tests for everywhere. So I feel often this is, at some degree, like, Let's push it out. Here's a feature.
+
+00:17:05.955 --> 00:17:16.435
+People can play around with that. But to actually make it testable is not only a lot of effort, but it's often not done straight away, I feel like, at least. Maybe you have similar opinions on that.
+
+00:17:16.840 --> 00:17:32.175
+<v The Jared Wilcurt>Yeah. It's it's one of those things where it is a it is a mountain. It is a skill set and it takes a long time to get good at it. And if you say we're gonna do that later, you're not gonna do it later. Or somebody years later will join the team and be like, why is everything broken?
+
+00:17:32.175 --> 00:17:54.220
+How do I fix this? And they'll start adding tests at that point. And just like, there's a a few different philosophies on writing tests. The the big famous one is test driven developments where you write out the the least amount of code possible to test what you wanna do and then you write out the least amount of code possible to make that test pass. And then you add a little bit more to your test, add a little bit more to code, you go back and forth.
+
+00:17:54.220 --> 00:18:23.290
+That's the idea. It's just like red green cycle. There have been studies to show that that isn't actually as useful as we thought it was, test driven development. We we found that that there was a huge improvement on writing small tests and then a small amount of code, a little bit of tests, a little bit of code, and it didn't really matter the order you did that in. And we saw a lot of people switch over to TDD and they switched from long cycles of writing a lot of code and then a lot of tests to switching to writing a little bit of tests on a little bit of code.
+
+00:18:23.445 --> 00:18:28.725
+And they saw the benefits of the shorter cycles and misattributed that to to test driven development.
+
+00:18:28.725 --> 00:18:32.965
+<v Michael Thiessen>Right. It like forces you into a tighter feedback loop then.
+
+00:18:33.125 --> 00:18:44.030
+<v The Jared Wilcurt>Yeah. Exactly. And and it forces you to really think about your code in a testable way because Mhmm. That's another thing. Our testing tools aren't great, so you need to write your code in a way that it can be tested.
+
+00:18:44.030 --> 00:18:59.815
+And that's the thing, but it's also a skill that people take time to learn. So there's other ways of doing it other than TDD. My favorite is, bug driven development where you don't write any tests and then a bug happens and you write a test to make sure the bug doesn't come back. And that's So
+
+00:18:59.815 --> 00:19:05.255
+<v Alexander Lichter>it's a test that that doesn't pass, then you fix the bug and then a test passes and then you send a PR basically.
+
+00:19:05.495 --> 00:19:09.510
+<v The Jared Wilcurt>Yeah. Yeah. And that's like the opposite end of the spectrum.
+
+00:19:09.510 --> 00:19:49.865
+<v Michael Thiessen>Yeah. And it's a good way of like figuring out, okay, you were talking about these hotspots of complexity in your app. Sometimes it's really obvious that like, okay, this logic here is really gnarly and there's like no way for me to simplify this, so I gotta test this. Other times it's not so obvious until you start to see all these bug reports come in and you're like, ugh, it's that component again, it's that API endpoint that keeps, you know, whatever or something about it just keeps breaking, who knows what's going on there, maybe we need to like, maybe that thing should have 100% test coverage and you can kind of like prioritize based on that because it gives you some extra feedback, the the bug reports that come in.
+
+00:19:49.865 --> 00:20:09.860
+<v The Jared Wilcurt>Yeah. Yeah. The the project that I was working on for six and a half years here, we we aimed around 85, 90 five percent coverage. But then we ended up having basically every page of the app had a customized table in it. And we wanted to go through and rewrite the whole table system from scratch and make it so that it can handle all the weird custom stuff we sort of hacked on over the years.
+
+00:20:09.940 --> 00:20:43.440
+And just, you know, let's add this one thing one more thing to this giant file and then refactoring that massive table component down to like 35 little itty bitty components. And in the process of that, because it's used everywhere, the folder that has all the table stuff, that folder has a 100% test coverage. We wanna make sure everything in there is covered. You can automate that from like a CI standpoint so that whenever you push your code up, it will run all your tests and your linting and all that and will it will validate. And you can actually say, oh, for this folder, I wanna have a hundred and test coverage and it won't be mergeable unless you have that in there.
+
+00:20:43.440 --> 00:20:49.435
+Or across the whole code base, need a minimum threshold of 80% or whatever. That's sort of an arbitrary thing.
+
+00:20:49.515 --> 00:21:00.475
+Like, I don't think - every everyone will tell you that code coverage is like a metric is not good because it's very easy to get a lot of tests that make coverage go up and not have any actual value, which we sort of mentioned earlier.
+
+00:21:00.475 --> 00:21:11.060
+<v Alexander Lichter>I should just say this well. Yeah. Exactly. Also, it doesn't mean that just because a lot of code is traversed that this is actually checked or that the code is actually relevant as well.
+
+00:21:11.300 --> 00:21:17.705
+<v The Jared Wilcurt>Yeah. Yeah. And that's it's a good litmus test. In general, 80% is still like, better than zero percent.
+
+00:21:18.425 --> 00:21:40.280
+<v Alexander Lichter>True. That's right. Now that all could be applied, I would say, even to any kind of programming language or project when it comes to testing. Now especially in the front end development where I feel like, don't know, in the backend tests are at least I feel way more common. It's like, Okay, you write down all your controller, you have your models whatsoever and you run some tests on that.
+
+00:21:40.520 --> 00:21:52.425
+In the front end somehow people, at least I feel, have a hard time testing components while testing a function. It could be like utility or whatsoever. It's a bit easier. We have that function. Okay, you import it.
+
+00:21:52.425 --> 00:22:06.390
+You run some things. Input, output is the pure function. That's that. But for components, even if it's like a simple component, there is a little bit more to do, I would say, in terms of setup, in terms of thinking behind it. It's not just like, Okay, throw a b test on it and that's it.
+
+00:22:06.390 --> 00:22:13.385
+Maybe you could talk a little bit about that, especially if people out here say, like, yeah, I've never tested a single component in my life. How to do that?
+
+00:22:13.545 --> 00:22:32.580
+<v The Jared Wilcurt>Yeah. There's a decent amount of setup you have to and that's the same thing with, like, just creating a Vue app in general. Like, you've gotta you have a folder with your main dot j s and your app dot Vue and, you know, there's a decent amount of setup there. Same goes for testing. First, have to pick what tools you wanna use, and we didn't even mention end to end testing, but there's a bunch of stuff there.
+
+00:22:32.580 --> 00:22:48.155
+Playwright is very good. Cypress also exists. But what on the unit testing side, there are unit testing tools. And the two big ones that everybody likes are Jest and Vitest. Under the hood, Vitest uses about 80% of the same code as Jest, so they're very similar.
+
+00:22:48.155 --> 00:22:58.490
+They both share a lot of the same roots. I like Vitest like two, maybe 5% more. It's very similar. They're very close. So I I prefer that one, but only by a little bit.
+
+00:22:58.490 --> 00:23:32.095
+They're basically the same. Then when it comes to actually doing your Vue components, you need a way to mount them because you're not actually running them in a browser, you're running them in the command line in in a terminal. So you need a way to take your singular Vue component that you wanna test, mount that in this virtual space and have a have that stored in a variable that you can access and use. Vue test utils is the official library for doing that, and that lets you mount your components. It has a lot of deep low level stuff that you can use to interact with that virtual component and virtual DOM.
+
+00:23:32.095 --> 00:24:07.365
+And then there's also testing library, which is a third party tool. It's built on top of Vue test utils and adds some abstractions to let you treat it more from the perspective of either I am a user who is clicking on a thing, like clicking on a button or inputting text, or I am the screen and I am rendering the stuff on the screen and sort of thinking of it more from that perspective. It's it's not as low level. Both of them do the same thing under the hood, so it's really more preference as to like philosophy or writing style. You will find with the testing library view that you will run into complexity where you have to switch over to Vue Test Utils.
+
+00:24:07.525 --> 00:24:50.180
+And you can either say, I'm gonna use Vue Test Utils for everything, I get good at that for when I get to those hard spots, I'll be able to do that. Or you can say, wanna stick with the easier mode that's a little bit more fun to use and then maybe have one person on the team who's really skilled and we can sort of isolate that complexity and just to to let that one person deal with that that more complex stuff when it when it shows up. Kinda your call as a team. But yeah, you you basically write a block of code in a big group, a testing group, which we call a describe block, which just sort of describes everything in this group. And then inside of that, you have a bunch of tests and each test is just a function that has a name and then you pass in all of the stuff in it that you wanted to run when that test happens.
+
+00:24:50.340 --> 00:25:27.730
+That's where you would mount your components. During the mounting process, you would set up, pass in whatever prompts you want the component to have when it's initialized. Then once it's created and mounted, you can then interact with it, maybe click on this button, check that box, fill in this text, whatever, and you can automate all of that by targeting the specific elements in the virtual DOM and clicking on them or whatever. And then you have an expect function that you pass in something and you say, I expect whatever this resolves to to equal this other value. And that's where you're validating that the the code is working as you expect.
+
+00:25:27.730 --> 00:25:30.965
+Those are your assertions. So that's that's the basics of it.
+
+00:25:31.045 --> 00:26:03.365
+<v Michael Thiessen>Yeah. So we've got this like main type of testing, unit testing, and it's very programmatic like you described. You basically are like, okay, I'm gonna find this particular part of the page, then I'm going to click that button, then I'm going to find another part of the page and check to see that this, that value changed to what I think it should be. And that's how you'd write most unit tests. But then there's this whole thing called snapshot testing.
+
+00:26:03.365 --> 00:26:10.245
+Can you describe I guess this is a good point to describe the differences between the two and and when we might we might wanna use snapshots.
+
+00:26:10.680 --> 00:26:21.400
+<v The Jared Wilcurt>Yeah. Yeah. So where we've we just sort of talked about it from a Vue component perspective, but unit testing was designed for just regular programming stuff. We've sort of used it for this.
+
+00:26:21.400 --> 00:26:27.865
+So in regular programming, well, you'll have a function and you'll pass in arguments and it will return an output of some kind.
+
+00:26:27.865 --> 00:26:59.055
+And so you'd say, expect function with these inputs when that runs to equal this output. And that's that's your basic like hello world of testing. And let's say you've got a function and it doesn't just return a string of hello world, it returns an object with 500 lines long, like a huge object. And it's really important based off of giving it these specific inputs that everything comes back as you expect. And you have a bunch of tests where you pass a bunch of different inputs and you get a bunch of outputs.
+
+00:26:59.055 --> 00:27:29.635
+You wanna make sure that, you know, it only affects these three lines in that 500 line thing. It doesn't break anything else in it. That's really important. So if that's the case, then you're gonna have these tests that are basically two lines long, two or three lines long, but then the expect is gonna bloat that to like 500 lines. Your test each test becomes massive. And that's sort of tedious and annoying, especially if you make fundamental changes to whatever that function is, and now you need to go back and manually update hundreds of lines of code in all your tests.
+
+00:27:29.635 --> 00:28:21.050
+So they invented this concept of to match snapshot and what that does is you expect passing your function and instead of dot to equal, you do dot to match snapshot and it will run the function the first time, take whatever the output is, convert that to a nice serialized string of text and store that in a file that mirrors wherever you're at. So if you have a a test file called hello world, it would make a folder called snapshots slash hello-world.test.js. And in that hello world dot test dot js file, that's for dot snap dot js, sorry, the snapshot file, it would have that huge 500 long line of code.snap.js as a string of text stored there. And then every time you run the test after that, it's gonna go through that same process of creating that string and then it's gonna see it's already been stored.
+
+00:28:21.050 --> 00:28:57.165
+So it's gonna compare those two strings to each other character for character and do a diff and show you of this specific character's change. Just like in git, there's a diff on git or github, you'll see a diff, does that same exact diffing algorithm and it shows you what changed there. And there's also a command you can run to update all your snapshots. So Jest and Vtest both have a dash dash update snapshots or dash u for short. And that will go through and say whatever is being passed in, instead of comparing it to what's stored, we'll just remove what's stored and store the whatever we got, just overwrite it basically.
+
+00:28:57.165 --> 00:29:22.605
+Which is really convenient if you've looked at all the diffs and you say, yes, those were intentional changes. I meant to do that and the snapshots are now wrong, I want to update snapshots. So, it's a it gives you a convenient way of updating across all those things. So, that's where this sort of started. And then we looked at the virtual DOM in a Vue component and we said, oh, this is this is basically a DOM tree, it's basically a giant object.
+
+00:29:22.765 --> 00:29:44.840
+We could serialize this to a bunch of HTML and store that in a snapshot. So that's sort of the the idea where we took this to match snapshot idea that's built in and instead of serializing it from a a JavaScript object to a nice printed stream, we're taking the the Vue virtual DOM and serializing that to a nice string of HTML. Does that does that match sort of what you guys know about snapshot testing?
+
+00:29:45.265 --> 00:29:53.185
+<v Alexander Lichter>Yeah. Absolutely. Absolutely. I I think there is always one thing, and you mentioned already the convenience of these snapshots by just saying, okay. Hey.
+
+00:29:53.185 --> 00:30:04.270
+Look. The snap there's a difference. Do you wanna update that? Or well, otherwise, the test fails, of course. So I just know a lot of people who like that convenience so much that they just be like, oh yeah, that's fine.
+
+00:30:04.270 --> 00:30:25.165
+That's fine. Especially with like larger components or like, oh, then there are a few flaky parts possibly or must probably just like the DataV for the scope styling. I'll just update it. I don't wanna look through the thousand lines of HTML in there if it's a big component. How do you think, like, can one avoid that except by, well, disciplined reviews?
+
+00:30:25.405 --> 00:30:58.450
+<v The Jared Wilcurt>Yeah. So the main problem with with snapshotting the DOM is noise, signal to noise ratio where there is value in there, but there can also be a lot of noise. And so the best thing to do is find ways to to reduce the noise, to diminish that so that there's more signal getting through, you're getting more value out of it. Another way to think of this, because you could, in your tests, target a specific button and validate that it has some inner text. Right?
+
+00:30:58.450 --> 00:31:35.920
+You could say, expect wrapper dot find apply now button dot text to equal apply now. And you could write a line of code like that in your test that does that. Or you can say, expect wrapper dot find apply now button to match snapshot. And that would then target just that button and snapshot just did and it would have the button tag and then the classes that are on it and any other attributes, and then it would have the apply now text inside of it and then have the end button tag at the end of it. And to me, like, there's not really a huge difference between those two things.
+
+00:31:35.920 --> 00:32:10.435
+You could argue that I'm getting more value basically for the same amount of effort by doing the snapshot because now I'm validating the tag is correct. I'm validating it has the attributes that I expect it to. It doesn't have attributes I don't expect, and it has these specific classes, and it has the text that I'm expecting, and there's no other nested child. It's not like the button and then a span and then a text. So there's like I'm basically doing seven different tests in this one line, where I could have checked all those things individually, but that's really tedious to do.
+
+00:32:10.435 --> 00:32:36.805
+So I'm kinda getting that for free. The downside then is it's more brittle because if I change anything related to that button, if I change it from a button to an a tag, if I add more classes, if I change attributes, if I do add a span tag inside there, I don't care that I added a span tag in there. Don't really care about that. So now this test is breaking and I've got to update it so that it's no longer breaking. So you could say that it makes it more brittle or more fragile.
+
+00:32:36.805 --> 00:32:50.005
+It's more likely to break as you make changes that are intentional that you don't really care about, which is why you wouldn't have written a test for them to begin with. It's sort of a a trade off there. Right? I'm not trying to come on the podcast and tell everyone, you gotta use snapshot testing for everything. It's the greatest thing.
+
+00:32:50.320 --> 00:33:04.000
+But on large code bases for apps, I'd say about 25% of the tests I write are snapshot tests. So they're they're still super common and useful. And then for like a component library, it's probably closer to like 35%.
+
+00:33:04.385 --> 00:33:36.545
+<v Michael Thiessen>So there's also a trade off on readability I think. And it goes I think probably in both ways. So like the button example, if all you wanted to check for was the apply now, if you have that string apply now in your test, then you could argue that well if when I'm reading through the test I can really easily understand, okay this is what I'm testing. Whereas if you do the snapshot then it's like okay, is there something specific I'm trying to test of this button or just like the whole thing? It's a little bit less clear.
+
+00:33:37.105 --> 00:34:01.720
+But then on the flip side, like you were saying before with like, if you are trying to test like this big 500 line thing, if you put that 500 line string in your tests, you're just gonna scroll right past it and you're not gonna read it. So having the snapshot in there is makes it more readable. So it's almost like this there's like a threshold maybe, where it flips back and forth to like which which is better.
+
+00:34:02.200 --> 00:34:14.105
+<v The Jared Wilcurt>Yeah. Exactly. And and it is very it's a skill. It's a it's a craft that you have to learn and get better at. The biggest thing there is to know that the you could you don't need to snapshot the entire component.
+
+00:34:14.265 --> 00:34:40.175
+You can just target a a specific child node within that and say, I just wanna see this and all of its children. That's a a good improvement on getting rid of a lot of the noise. There is now to match snapshot and to match inline snapshot and they're the exact same thing. It's just it'll store the value either in a separate file or right there in the test. So if it's a release, like, two or three lines of code, then I'll just do to match inline snapshot, like the button example we just had.
+
+00:34:40.175 --> 00:35:00.605
+Or if it's massive, then I'll just show that to another file. Because once it's snapshot, I don't really care about it anymore until the snapshot breaks, and then the diff will just show me the one line of code that changed. And then I can say, okay, why did that break? Let me go look at my source code and find out, okay, that makes sense. I I didn't mean to to change this.
+
+00:35:00.605 --> 00:35:18.280
+Oh, it's it's using 1200. Oh, it's always because we multiplied it by 10 or divided it by 10 and should have been $12 instead of 1.2. Like, those kind of things, the snapshot would would find that. And so you could you could say, oh, let me go fix the code for that. Or, oh, no.
+
+00:35:18.280 --> 00:35:40.400
+I I intentionally changed this thing. So let me just update the snapshot. Yeah. The It is very much a trade off there that you can sort of figure out what works best for you. You also need to take a look at it and say, if this snapshot is doing 20 things, I need to treat this one expectation as though it's 20 expectations.
+
+00:35:40.640 --> 00:36:06.135
+I need to treat each snapshot with the weights of all of the tests that they represent and not just as a single thing. You need to you need to give them a little bit more respect than a normal test fail because they're doing a lot more stuff. So you need to if you're not giving them that respect, then you're just gonna your eyes will glaze over. You'll say, don't wanna look at this. You'll move on and just update the test, update the snapshot when you should have gone and fixed your code.
+
+00:36:06.350 --> 00:36:09.710
+<v Alexander Lichter>So maybe to iterate on that a bit more, because I think that's quite interesting.
+
+00:36:09.710 --> 00:36:30.275
+Let's say you do a snapshot testing for, as you said, like testing all these different things or maybe even, okay, here is that, like, let's say, bigger component. So you have various responsibilities that are tested by, okay, does that look like it should? How do you document that the best way? Because, of course, if you don't use snapshot testing, it's very explicit on what you do.
+
+00:36:30.275 --> 00:36:44.470
+Okay. You check the label. You check for this property possibly or like you you check how that tag is. While I said before, for snapshot, it's basically, okay, doesn't measure snapshot, yes or no. So how do you make the tests expressive enough?
+
+00:36:44.470 --> 00:37:16.130
+<v The Jared Wilcurt>I think that the intent should be in the test name. So you have a test function and the first thing you pass in the string, that's the name of this test, and then you do all of your setup and then you check the the output. And the test name should be describing what your intent and what the goal of this test is, what value it's trying to get. And from that, you should be able to see, okay, this is what the snapshot well, how is this relevant to what the test name is? How does this work with that?
+
+00:37:16.290 --> 00:38:06.100
+Yeah. There there's another thing that I found that sort of occurred to me recently is people who haven't written, used a lot of snapshot testing have a very different style and approach to writing tests. And I found that that it's very different from what I do now because I've gotten so used to using them. And I will find that the people who do stuff differently on me, they will make a test function and in that test, they will just check these specific values and they'll make a whole test just for that thing. And what I end up doing is I will have a a test that will be doing something else unrelated where I just wanna fill out this form and then submit it and validate that the network request that was sent and it came back with a specific value, I'll mock out all the network stuff.
+
+00:38:06.100 --> 00:39:02.730
+But I wanna make sure it always calls them with the correct inputs from based off what I put in the form. And right before that, I'll go I'll mount the component, I'll fill in the whole form, fill out all this stuff, and then I'll right before I click the submit button to do all the network stuff, I'll just do a quick snapshot because I know that in the template, there is logic for conditional rendering with v-if and v-else and v-show. And there's the double curly braces and v-text and v-html logic in there. There's your dynamic classes and attributes. There's a bunch of stuff that is just logic that lives in the template area. And I know that given this scenario, when the state of the component has been interacted in this way, there's a bunch of stuff that's going to change in the template based off of that state to do form validation and to give me warning messages or errors or hints.
+
+00:39:02.890 --> 00:39:28.560
+And I just wanna make sure all that stuff pops up correctly. So I'll do a snapshot, just throw one in real quick. And then I don't need to go through and make a whole separate test where I go through and fill out the form again and then check every single item explicitly. I can just do a quick snapshot test. So it's a lot less effort and I'm basically kind of getting a bunch of template logic testing for free, just by adding in one extra line.
+
+00:39:28.560 --> 00:39:56.655
+And I don't need I probably wouldn't have gone through and been as thorough and written a ton of tests for all those different things. So it's a way where you kind of just can throw them in into tests you're already doing as an extra expectation and see like, okay, so in this test I'm actually seeing if the form submits properly. And I look at the test, I see, okay, we fill out all the stuff, then we took a snapshot. Now I know the context as to like what the snapshot is for. It's for the scenario of filling everything out and then submitting it.
+
+00:39:57.110 --> 00:40:21.485
+And this is just checking with the DOM looks as we expected as it would in this in this scenario. So like, it's a different way of testing. You end up writing a lot less tests and they're easier to maintain because I'm getting, you know, a hundred tests for free with one line of code. And if anything changes, I'll catch that. And if I don't care about those changes, I can just update the snapshot and it's one command to update it.
+
+00:40:21.485 --> 00:40:24.365
+So it's a it's a really convenient way of writing tests.
+
+00:40:24.860 --> 00:41:00.100
+<v Michael Thiessen>It's a really interesting point you brought up about the snapshot tests. You get tests that you maybe wouldn't have even written in the first place. And so like, you could maybe argue that some of those tests, if you had written them out without snapshot testing, maybe they'd be better in some way or maybe they'd be, you could argue that that would be the ideal in some cases. But like most of the time you maybe wouldn't have even gotten to them because you would have said, it's good enough and you would have moved on. With the snapshot testing, can get a little bit more just without all that extra effort.
+
+00:41:00.100 --> 00:41:02.260
+That's an interesting to think about.
+
+00:41:02.260 --> 00:41:13.555
+<v The Jared Wilcurt>Yeah. And when it comes down to like, well, I could have done it better if I just written the thing out by hand. Do that. Like straight up, I'm not telling you not to do that. Like Yeah.
+
+00:41:13.635 --> 00:41:36.155
+Snapshots shouldn't be the default. Like I said, 75% of the tests in that massive six year old app are not snapshot tests. Like But quarter of them are. They're very useful but they shouldn't be the only thing you use. And if if you are explicitly just wanting to check it at a very specific thing, then you don't need a snapshot.
+
+00:41:36.155 --> 00:41:38.555
+Just just target that thing, check it, and it's fine.
+
+00:41:38.635 --> 00:42:19.810
+<v Michael Thiessen>There's also like like an ROI that you have to be thinking about when when writing tests. Like because you could spend like two weeks writing tests for some feature and get like, Oh, I'm gonna test this crazy edge case and this crazy, and you get really deep into the weeds and go forever. But at some point you have to say, Well, okay, it's better if I just move on to the next ticket that I've got and implement the next thing and then go from there. So I think that's, it's good to have all these different tools in your toolbox of that when you're thinking about the ROI and the testing and getting test coverage, but the value from the tests and and thinking about all of that and how it comes together.
+
+00:42:20.050 --> 00:42:39.255
+<v The Jared Wilcurt>Yeah. And that's that's everything. Everything comes down to your different time constraints, your different priorities. And so this is a great tool to have in your toolkit and to, again, it's a craft, it's a skill, it takes a discipline. You have to learn how to use it well, and that takes practice and it takes time to learn it just like with anything in programming, especially in testing.
+
+00:42:39.255 --> 00:42:46.310
+But, yeah, I I think it may be good to dive more deeply into that, like, signal to noise side of things. Is that kind
+
+00:42:46.230 --> 00:43:13.810
+<v Alexander Lichter>I just want to say it actually. That's a perfect perfect segue there because so for example, you already mentioned before, oh, when classes change, they are in the snapshot usually. So let's say you use Palin CSS and you don't have a class like card, but have your, I don't know, 20 classes to describe the style, then obviously the test shouldn't break just because you changed the style because that's not necessarily what you test. So by default, at least to my experience, it's not that easy to get rid of. Okay.
+
+00:43:13.810 --> 00:43:25.490
+Just ignore the classes. Like, sure, you can start, I don't know, parsing the HTML, like doing some regex magic, which you should not do with HTML. That's yeah. I I heard there are some other options around there, Jared.
+
+00:43:26.185 --> 00:43:36.585
+<v The Jared Wilcurt>Yeah. Yeah. So that's that's where the the library that I made. It's called, Vue three snapshot serializer. This is the, you know, the library I made five, six years ago.
+
+00:43:36.585 --> 00:44:06.375
+Basically, we wrote the whole thing recently and did a bunch of releases of it and added a lot of new features. But what that's doing, we should I guess explain what a serializer is. A serialization is a as a as a concept. You've got parsing and serializing, so you can take a string of text and parse that into something more valuable like a string of HTML can be parsed into the actual DOM tree in the browser. But you can also take that JavaScript object of of the DOM and you can serialize that back to a string of text.
+
+00:44:06.535 --> 00:44:31.545
+And that's what that serialization process is like. So the two max snapshot feature allows you to install a plugin like the one I've I've written, the vue three snapshot serializer. Install that plugin and when it goes and it runs that expectation, it will pass that input into the serializer. It will test to see is this a view component because if so, now I will do my job. And if not, I'll ignore this and you'll go to the where the next serialization plugin is.
+
+00:44:31.545 --> 00:44:58.845
+And if it is, then we will take that new component and serialize that to a string of HTML. In the process, we have a whole bunch of options that you can you can control. There's also a lot of stuff that's just turned on by default to give you a better experience. So one thing, for example, is you got a bunch of classes like you just mentioned, and let's say you you decided I wanna move these around and group them in a more logical way. Well, you didn't actually add or remove anything, you just moved them around.
+
+00:44:58.845 --> 00:45:25.145
+So it'd be really annoying if a bunch of snapshots just broke and you had to go through and look at all the diffs and see and I was like, nothing changed, it's just moving them around, that's annoying. So by default, we will go through and alphabetize all of your HTML attributes and all of your classes will sort them for you. Your snapshots are always sorted consistently and it doesn't matter if you move stuff around in any way, the snapshots aren't gonna break. And that's just like signal to noise. Right?
+
+00:45:25.145 --> 00:45:35.530
+We don't wanna give you all this noise of this stuff changing that you're never gonna care about. So let's just eliminate that. So that's like a you get that for free. It's just turned on by default. If you don't like it, you can turn it off.
+
+00:45:35.530 --> 00:46:08.300
+There's a setting for it. But that's an example. You can also target any HTML elements in your virtual DOM and say, I don't actually care about this element and its and its attributes and its child nodes. And you can stub that out with just any CSS selector. You have stubs built into Vue test utils where you can stub out child components, and that's really useful if the child component has emits that are going to get funky to deal with or they have a bunch of network calls they're gonna make the auto mock out, that kind of stuff.
+
+00:46:08.620 --> 00:46:40.085
+But if the only reason you're stubbing out a child component is because you just don't want it in your snapshot, Stubs are kind of hard to deal with and they're kind of they're kind of a pain to deal with. So this is a much easier way where you can just pass in a CSS selector and say, oh, I I just stub out this thing once it gets to that point in the snapshot. And that way you can target in this massive snapshot just down to the child node you care about, and then get rid of all the child nodes inside of that you don't care about. So it really isolates it down to the stuff. And it's very granular.
+
+00:46:40.165 --> 00:46:53.845
+If you want, you can say, well, actually, wanna keep the child nodes, but I don't wanna have this specific attribute, like the class attribute, for example. I don't care about that. In this case, I wanna specifically target that. You can get as granular as you want with that. It's very easy to use.
+
+00:46:54.140 --> 00:47:15.145
+But that's that's an example there, of that. But I would say actually having the the classes, especially with Tailwind is maybe a good thing to have in the snapshot because that tells you what the output of your component will look like on the screen. And there's another type of testing we haven't mentioned, which people kinda confuse with snapshot testing, and that's screenshot testing. They both sound very similar.
+
+00:47:15.545 --> 00:47:18.745
+<v Alexander Lichter>It's like visual regression testing, more or less. Yeah.
+
+00:47:18.745 --> 00:47:35.750
+<v The Jared Wilcurt>Yeah. Visual regression testing or screenshot testing. That's what what it's commonly called. And in those cases, you use a real browser and you take an actual screenshot of a portion of the screen and then you compare pixel to pixel. Whereas we are taking the DOM itself and storing that as text and comparing character to character.
+
+00:47:36.065 --> 00:47:55.060
+So that's sort of the difference there. But if you're exclusively using Tailwind and you're not doing any custom classes at all or using any third party libraries or just using Gelwind, you're kind of getting the same benefit as the screenshot testing. You don't see the difference, but the only difference will come from those atomic classes.
+
+00:47:55.380 --> 00:48:30.830
+<v Alexander Lichter>I think there the the big question is what you actually wanna cover in your tests. Should that also cover, as you said, like, basically the visuals as an okay, the test should fail because the component now looks different, though it behaves as expected. So, like, I don't know, I increased my padding for that button a little bit. Should that be something where the snapshot should say like, okay, hey, here's a change. You have to either verify and either accept if that's a thing or not or I don't know through storybook or whatnot or like any other, let's say a way to show your component library for like presentation components or histoire for example.
+
+00:48:31.175 --> 00:48:35.655
+You could just say, okay, this is this is how it looks like. People are happy with that or not.
+
+00:48:36.135 --> 00:48:39.335
+<v The Jared Wilcurt>Yeah. Yeah. And and it comes down to what your goals are.
+
+00:48:39.575 --> 00:48:40.375
+<v Alexander Lichter>Absolutely. I mean,
+
+00:48:40.695 --> 00:48:44.055
+<v The Jared Wilcurt>I'm saying like what your goal is. Yeah. Either way, It makes
+
+00:48:43.895 --> 00:48:59.365
+If you don't care enough to do all the tooling around visual regression testing, it's a lot of tooling, and you you kinda give a little bit of that for free with your snapshot tests. Kind of. Not not a ton, but you get, you know, 20 to 40% of it, good enough. And
+
+00:48:59.445 --> 00:49:10.245
+<v Alexander Lichter>At least the base work. Yeah. I mean, you still can't see is the component actually when it's like rendered, I don't know, overlaid by the pop up here because, well, the the classes would just tell you something changed, but at least they will tell you something changed.
+
+00:49:10.245 --> 00:49:17.850
+<v The Jared Wilcurt>You should take a look at. Exactly. Yeah. That's a case where that's more of like an integration or end to end testing where like True. Yeah.
+
+00:49:18.010 --> 00:49:20.090
+Michael, I think you have a you're about to say something.
+
+00:49:20.410 --> 00:49:59.975
+<v Michael Thiessen>I I do wonder about, like, that gap between visual regression and, like you say, like, the snapshot testing kind of gives you some of the benefits of UI testing, but visual regression testing can be pretty flaky sometimes and hard to, you get all these false positives or false negatives and it can be challenging from what I've heard. I haven't said it myself because every time I've looked into it, the conclusion was maybe we don't do this and we just verify the change on a staging environment first, we just
+
+00:49:59.975 --> 00:50:41.980
+visually eyeball it and then that's good enough. And I was wondering, your experience, do you have recommendations for, is there something in between that? Because if you have an app that's responsive and there's all these different views and you make a change, it can be hard to actually verify those changes because it could look fine on desktop but then on mobile it's totally weird or on mobile when you open up the menu that overlays then it's weird and there's all these things where you just can't catch that really easily in testing. Or do you just say, it's hard and you move on?
+
+00:50:42.940 --> 00:50:51.555
+<v The Jared Wilcurt>Yeah. And that's, you know, that's why those that testing approach works or or why it exists, for that pixel based checking of things.
+
+00:50:52.115 --> 00:51:07.710
+<v Michael Thiessen>So really there's if you want to test that the UI is gonna still work the way that it is, the best bet is the visual regression testing and you just have to bite the bullet and put all of that infrastructure and tooling in.
+
+00:51:07.710 --> 00:51:08.670
+<v The Jared Wilcurt>Yeah. The the
+
+00:51:09.310 --> 00:51:10.270
+<v Michael Thiessen>Is that what you'd say?
+
+00:51:10.270 --> 00:51:46.520
+<v The Jared Wilcurt>Yeah. I mean, that there's there's a reason why that that tool exists. There is a lot of downsides to it where for visual regression testing where every person's computer is very different and your screen resolution and your font legibility settings. And even if you're both on the same OS with the same browser, if you've got a newer OS update, then the pixels on the screen may be slightly different for some reason. So it's very, very unlikely that you will ever have pixel perfect, accurate representations on two different people's machines, which means to be able to get screenshot testing to work or visual regression testing, you basically need to do it server side.
+
+00:51:46.905 --> 00:52:07.360
+You need to have a CI tool and have the server create the the screenshot and compare the screenshot. So it's always the same exact virtual machine running the code. And that's a lot of complexity to set up and try to do yourself. That's why most people go with a service like Chromatic, they'll pay them to do that for them, because this is a lot of work. And at that point, you're kind of vendor locked with whoever that is.
+
+00:52:07.360 --> 00:52:27.990
+And if you wanted to change, it's going to be very difficult to get your stuff to work against a different vendor or to do it yourself. And, you know, not something you really want to deal with with something as tedious as as testing. So I love the idea of screenshot testing. I just wish that it wasn't so hard to do. And that, yeah, and as you mentioned, there's a lot of downsides to it.
+
+00:52:27.990 --> 00:52:56.440
+A lot of the same downsides that you have with snapshot testing, actually. But with snapshot testing, it's easier to remove those downsides because it's just text. So, you know, you can solve that programmatically much more easily than, like, I can remove a child node from a text, a string very easily. That's not you can't do that as well with if you have a screenshot, and you're trying to remove the child pixels. That's a little more complex.
+
+00:52:57.080 --> 00:53:40.245
+<v Alexander Lichter>As you just mentioned, it's pretty interesting that, like, yeah, with the pixel perfect screenshot testing, that's really, really difficult, though. Daniel Rowe who was on here a couple episodes ago, who's the leader of the Nuxt team, he had a really nice suggestion when we talked about web fonts actually. So slightly related by just saying, yeah, make a screenshot of your, let's say, main page or one page per category, like I don't know, product detail page, product listing page, not anything like blocking the CI. Just like, hey, here are the screenshots so you can at least if you are in the PR scrolling through the changes anyway, you would see if there's something horribly wrong. So of course, this is not fully automated, but at least that's one way to at least catch huge mistakes, so to say.
+
+00:53:40.485 --> 00:53:44.165
+<v The Jared Wilcurt>Yeah. Everyone's trying to figure this stuff out.
+
+00:53:44.885 --> 00:53:45.445
+<v Alexander Lichter>Absolutely. Absolutely.
+
+00:53:45.525 --> 00:53:50.170
+<v The Jared Wilcurt>Testing is a lot of just figuring out what what what value you're trying to get, how can you get that.
+
+00:53:50.170 --> 00:54:23.670
+Back back to the the snapshot stuff, there's a lot of features that, I've added into this library that I wanted to kind of go over quickly, but make your life a lot easier. A lot of it there's kind of two halves of it. Half of it is the noise removal, that's kind of the main focus. So there's a bunch of different attributes in HTML that you're never going to care about in your tests in the snapshot. So for example, data dash test is usually how you would target a specific element in the DOM, or data dash QA or data dash test dash ID or whatever.
+
+00:54:23.670 --> 00:54:24.550
+There's a bunch of these.
+
+00:54:24.550 --> 00:54:24.870
+<v Alexander Lichter>Yes.
+
+00:54:24.870 --> 00:54:50.500
+<v The Jared Wilcurt>And it finds and removes all of those from the snapshots because you don't those are there to target things and stuff. You don't actually care about them for your production code. So all of that gets removed. If you're using Vue scope styles, the way that works is it adds a data dash v dash randomized ID attributes to all of your HTML elements. Vue test utils already removes that from your components, it actually never adds it in to begin with.
+
+00:54:50.660 --> 00:55:37.355
+So that's fine. But if you're using a third party component that has scope styles I see. When that component is built, if you're using a built version of that component, those scope styles, it produces render functions that that creates the DOM nodes and those data dash vids are hard coded in it, which means that they never change, but there's just noise you don't care about until you update that dependency and then it gets a new build with new randomized tokens, and then all of your snapshots break because of that. So that's a thing that's also turned on by default, we just remove all Data dash v ids. So that was the original impetus that started me down this path of like, oh, that's so annoying that every time I update this this components, this third party component for tables or dropdowns or whatever, all my snapshots break, like 58 snapshots.
+
+00:55:37.355 --> 00:56:03.295
+That's so annoying. And it's so it's so I just update that one dependency on its own, so I know that snapshots aren't actually breaking. But I was like, this shouldn't be a problem, so I wouldn't have fixed it. So that's that was like the main reason why I started down this path. You can also just target any attributes you want globally and be like, anytime there's a data dash UUID, or a timestamp or something, let's go ahead and just remove all of those globally across all snapshot.
+
+00:56:03.295 --> 00:56:33.375
+Or you can on just this one test, I just want to remove this one attribute on this one test, cause it's it's a randomized value or something that will break the snapshot. Yeah. So there's that. The other part of producing noise is the formatting itself. If you go to the the Vue three snapshot serializer website, there's a little if you scroll down a few, you know, page down a couple times, there's this little flashing back and forth GIF of what the snapshots look like by default if you're not using library, and then what it looks like when you aren't using them.
+
+00:56:33.455 --> 00:57:06.750
+And you'll see that by default, when you take a Vue component and you serialize it to a string of HTML, a lot of lines of HTML end up all on the same line. So it's like a div, and then there's a p tag, and then there's a span, and then there's a strong tag, and all of those are on the same line and they don't break up into multiple lines. So one of the things that we've done here is I'm doing my own custom formatting with this where it will actually break everything up in a readable way. There's a lot of options around how you can control that. There's a ton of formatting options that you can you can choose.
+
+00:57:06.910 --> 00:57:32.495
+You can also pass in your own custom formatter if you want to use that instead, or there's a follow-up post processing function. So, after all the formatting is done, we'll give you the string, you can do whatever you want to that string, and then return a string back to it. And that's what actually sort of the snapshot. So we give you a lot of control over the formatting, you can do kind of whatever you want. But the defaults break everything up in a way that is super easy to diff.
+
+00:57:32.975 --> 00:58:02.190
+So if you have a bunch of attributes online, we'll actually break those up and have each attribute on its own. A bunch of classes will break the classes up to have each class on its own line. So that way when the diff changes, you just see that, oh, it added a class, I don't need to read 500 tailwind classes to see what thing changed in the in the line diff. So that's from the the like reducing noise side of things. From the the other side, the other half of this is sort of adding value into the snapshots that you wouldn't have had otherwise.
+
+00:58:02.590 --> 00:58:54.550
+So, for example, in the actual DOM, if you have an input elements and you click on it and you type in the word kitten, and then you look at the DOM node, it's not going to show you that word kitten. It doesn't actually update any HTML attributes to show you that value. So when you do a snapshot of it, you don't know what that input field is actually equal to, what its inner elements dot value is. But if you pass in the components, the view component, we can loop over the virtual DOM and find what the inner value is, pull that out, create an HTML attribute and put that value in there so it shows up in the snapshot. And that's really useful to know as like, oh, okay, at this point, once I've mounted the component, I've filled out these forms, when I snapshot it, I can see these check boxes are checked, this radio dial is checked, this text field has this value in it, this is what I expect to be.
+
+00:58:54.550 --> 00:59:15.105
+And if it doesn't show me that, then something weird is happening and I know I can I need to do something in my test to fix that? So that's that's some of the the cool stuff that it can do there. But also, if you pass in anything that is not a string into an attribute, then Vue will just do a dot to string on it and it just creates the angle, the the square brackets
+
+00:59:15.425 --> 00:59:17.025
+<v Alexander Lichter>Object object. Yeah. Classic.
+
+00:59:17.105 --> 00:59:36.720
+<v The Jared Wilcurt>Yeah. Yeah. And so that's not very useful, from in a in a snapshot to see that. So anytime you see a non string, if you pass them the component, we'll loop over the virtual DOM, find what the original value was, and convert that to a readable string of text, and then update the the attribute to be that readable string where we serialized that object or whatever it was.
+
+00:59:37.155 --> 00:59:59.630
+<v Alexander Lichter>Very interesting. And I think like I checked out the playground a little bit ago and I really enjoyed that clarity where you have, for example, the classes each in their own lines to exactly see, oh, deadline is gone so the class is not there anymore, but that was maybe added. Same with like properties as well. So that feels way better than just having everything almost minified like and then look like, oh, that doesn't look the same because what's missing there?
+
+00:59:59.630 --> 01:00:32.650
+<v Michael Thiessen>You can actually read it and it's very clear. And like, yeah, if you go to the page for this tool, which will be in the description, you can find that link there. Yeah, this screenshot that flips back and forth like you're describing, it's pretty obvious that like without this, it's really hard to read the diff and it's like so many characters that it's diffing. But with the the serializer on it, it's like a couple things and you can really like instantly see exactly what changed and it's yeah. It's so much nicer.
+
+01:00:32.945 --> 01:00:40.225
+I don't think I would use snapshots without this serializer because like, it just seems like it would be so tedious.
+
+01:00:40.545 --> 01:01:02.735
+<v The Jared Wilcurt>Yeah. There's a bunch of problems with snapshots and 95% of them can be solved programmatically and I've I've solved every problem I can for you. The other 5% is you gotta know how to use them. It's a skill thing, it's a discipline. You gotta you gotta do the practicing, you gotta learn how to do it yourself and you don't wanna snapshot too much stuff.
+
+01:01:02.735 --> 01:01:22.330
+You gotta know when to when to snapshot stuff, when not to, and how much to snapshot. And that's a skill that you just if you just use them, you'll get used to that and you'll start to find that they are a huge time saver. But there's a lot of problems, and that's that's why I made the library to make your life easier. This is trying to make unit testing easier for people in the Vue community.
+
+01:01:22.650 --> 01:01:44.850
+<v Alexander Lichter>Yeah. Jared, I think, first of all, thank you for for building and maintaining that and open sourcing that. It's also, not taken for granted. I was, on that, wondering, do you think there is any chance that this maybe could even be the default when it comes to testing with Vtest or Jest in a way that a lot of improvements are sure that can be customized. So we have some sensible defaults like they are in there.
+
+01:01:44.850 --> 01:01:53.010
+Do you think there's some room for collaboration? Did you maybe even reach out to someone and say, hey, maybe these are all good solutions. Can we have a little bit of opinionated things on the defaults?
+
+01:01:53.775 --> 01:02:22.745
+<v The Jared Wilcurt>When I when I originally forked off of the official one, the gesturalizer view, my intent was just to fix the data dash v ids and to and to get that passed back in. So I did do a a PR to get that merged back in. I think they did eventually did merge that one in. I also did a once I added, you know, 20 other features to it, I did do a PR for that, but it's also like I I kind of rewrote your entire library. There's not really anything of the original left here.
+
+01:02:22.745 --> 01:02:23.145
+<v Alexander Lichter>I see.
+
+01:02:23.145 --> 01:02:44.000
+<v The Jared Wilcurt>Okay. So so it's it's sort of like, maybe this should live in user space, third party space. I'm not sure. I would have no problem if they wanted to have this as the default, sort of like with Pina, where Pina is a third party external thing and they just said, alright, going forward, it's Pina is ridiculously good. Everyone just use Pina.
+
+01:02:44.080 --> 01:02:50.720
+This is the right way to do stuff. Everyone switch over to that. We're gonna keep it named Pina. You can keep using it. I'd be fine if they wanted to do the same thing there.
+
+01:02:51.205 --> 01:03:00.405
+So I'm I'm open to that if anyone in the Vue Core team wants to pull this in. When it comes to, like, the settings for it, everything is just on the the global object.
+
+01:03:00.405 --> 01:03:00.885
+<v Michael Thiessen>Yep.
+
+01:03:00.885 --> 01:03:05.925
+<v The Jared Wilcurt>So in in Node or in a browser, you'd have global dot or window dot.
+
+01:03:05.970 --> 01:03:12.850
+<v Alexander Lichter>So global this for the alias, I guess, just like global this dot, what is it, v three snapshots Yeah. Something like that.
+
+01:03:12.850 --> 01:03:34.485
+<v The Jared Wilcurt>Yep. Yeah. I think it's global this dot view snapshots or global one snapshots dots and then whatever setting you wanna change. And you can do that in your global before each, so you have your global snapshot settings if you want to tweak anything, have it apply across everything. And then in individual tests, you can say, right before I do my two match snapshot, I'm going to just change this one setting.
+
+01:03:34.725 --> 01:04:15.030
+And it doesn't matter because the next test that runs, it's going to run the global before each and reset everything back to defaults. So I can override just this one little thing for this one test where I think the snapshot will look a little bit better if I changed it from what the defaults are. So that's a huge improvement on this new version of the library. It used to be kind of a pain for per test changes, but now it's just super easy and super convenient. And I don't know, I feel like that's that would play nice with the rest of the Vue ecosystem if people wanted to if they wanted to pull that in, I'd be all for At this point though, I've been running this library for about five years and there's a lot of new features in the new one, but I think it's kind of feature complete at this point.
+
+01:04:15.030 --> 01:04:22.615
+I think it's kind of done, so pretty stable. I don't expect it to change much at this point, but maybe an influx of people will try it out now and
+
+01:04:23.015 --> 01:04:27.175
+<v Alexander Lichter>That could be. More feature requests, more more support things.
+
+01:04:27.175 --> 01:04:30.215
+<v The Jared Wilcurt>Yeah. I'm all I'm all here for it.
+
+01:04:30.295 --> 01:04:58.435
+<v Alexander Lichter>Perfect. Because I I think, like, this adds a lot of good things to snapshot testing and makes it a bit easier for people, especially for the people who might not be aware it does the thing that's trying out like, oh, hey, can even have it nicer than this right now. So that's why it could be good for a lot of people to use this plus choosing what they want as it's not like take it all, leave it all. You can customize it, which is which is key there. So, yeah, if it's not the default so far, which is probably isn't when the podcast comes out, but maybe who knows?
+
+01:04:58.435 --> 01:05:11.570
+You'll, like, listen to that in a year from now, and it's default already. You probably have the description then. But, otherwise, check check that out. The link to the GitHub repository and the website, of course, the playground is, of course, in the show notes. Alright.
+
+01:05:11.570 --> 01:05:28.485
+And then, Jared, I think there is the the last question we ask everyone in here. Where can people follow you along for further projects? You already mentioned that this is not your only open source project on the go. So where can people follow you? Maybe seeing some news on socials or, of course, on GitHub, I suppose.
+
+01:05:28.940 --> 01:05:30.460
+So where where is it?
+
+01:05:30.700 --> 01:05:51.965
+<v The Jared Wilcurt>Yeah. the jared wilcurt everywhere. I would in the past, I don't know, six, seven years, I would say, I exclusively use Twitter.com to post whenever I do a new a new thing. That's basically all I ever put on there. But in the last two weeks, I've gotten, like, 40 different cam girls liking every single post.
+
+01:05:51.965 --> 01:05:57.200
+I'm like, alright. I gotta get off this thing. So what's this blue sky thing everyone's talking about?
+
+01:05:57.200 --> 01:05:57.520
+<v Alexander Lichter>Yeah.
+
+01:05:57.520 --> 01:06:11.335
+<v The Jared Wilcurt>So I may be I may be switching over to that. But my edit on Dev.two, on YouTube, on everywhere, I don't really post stuff. I'm not a content creator, I'm not publishing a lot of things. But, DJerdWalker at everywhere. Perfect.
+
+01:06:11.335 --> 01:06:12.775
+Basically, any website.
+
+01:06:12.855 --> 01:06:30.430
+<v Alexander Lichter>Yeah. We'll we'll link to that. And, if you decide to create a Blue Sky account, which I can only recommend, we're we're also on there, every like, lot of cool people are, then we'll also, of course, put that all the way in the show notes. Jared, thank you so much for coming on. Thank you so much to talk about unit testing, snapshot testing, and your library.
+
+01:06:30.430 --> 01:06:38.555
+And for everybody out there, of course, check out all the DejaVue episodes. And if that's not the last one, then just keep listening. Thanks, everybody, and see you soon all.

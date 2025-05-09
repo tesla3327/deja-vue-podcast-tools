@@ -1,0 +1,32 @@
+In this episode of DejaVue, Alex and Michael are joined by Jared Wilcurt, UI architect and open source contributor, to get knee-deep into the world of testing in Vue.js, especially Snapshot Testing.
+
+Jared shares his journey from React frustration to Vue enthusiasm, and explains how he identified gaps in Vue's testing ecosystem that led to the creation of his Vue 3 Snapshot Serializer library.
+No matter if you are a testing novice, wondering why you should bother with tests at all, or an experienced developer looking to improve your snapshot testing workflow, this episode got something for you - from reducing test noise, improving readability, and gaining confidence in your Vue applications and components.
+
+Discover how snapshot testing complements traditional assertion-based tests and why it might be the missing piece in your testing strategy.
+
+Enjoy the episode!
+
+Our Guest
+
+The Jared Wilcurt
+Vue 3 Snapshot Serializer
+Website
+Bluesky
+Twitter
+
+Chapters
+
+{{chapters}}
+
+Links and Resources
+
+Riot JS
+Vue Indy Meetup
+Vue Doxen
+Old Jest Snapshot Serializer
+Vue Test Utils
+Testing Library Vue
+Playwright
+Vue 3 Snapshot Serializer
+DejaVue #E043 - The Year in ReVue (with Daniel Roe)

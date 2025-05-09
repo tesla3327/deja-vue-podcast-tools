@@ -1,0 +1,30 @@
+00:00
+Welcome to DejaVue
+00:20
+How did you get into Programming?
+05:20
+Learning Vue
+09:46
+Finding gaps in the ecosystem
+12:40
+What is unit testing?
+21:40
+Testing in the frontend
+25:31
+Snapshot Testing
+29:45
+Snapshot Updating Fatigue
+36:09
+Responsibilities & ROI of a Snapshot Test
+42:46
+Using the Snapshot Serializer
+46:40
+Snapshot vs. Visual Regression Testing
+52:57
+A good tip from Daniel Roe
+53:50
+Further Noise Reduction
+01:01:22
+A tighter integration?
+01:05:11
+Wrapping up
