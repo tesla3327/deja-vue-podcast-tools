@@ -1,6 +1,10 @@
 import { generateText, generateObject } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { z } from 'zod'
+import {
+  extractSpeakerChanges,
+  SpeakerChange,
+} from './extract-speaker-changes'
 
 export interface Chapter {
   title: string
@@ -63,7 +67,8 @@ Create at most ${maxChapters} chapters. Each chapter should have a descriptive t
 export async function findChapterTimestamps(
   chapter: Chapter,
   fullTranscript: string,
-  previousChapter?: Chapter
+  previousChapter?: Chapter,
+  speakerChanges?: SpeakerChange[]
 ): Promise<Chapter> {
   // First chapter always starts at 00:00:00
   if (!previousChapter) {
@@ -76,30 +81,55 @@ export async function findChapterTimestamps(
   // For subsequent chapters, set minimum start time to be previous chapter + 30 seconds
   // if not otherwise determined
   const previousStartTime = previousChapter.startTime || 0
-  const minimumStartTime = previousStartTime + 60 // Minimum 30-second increment
+  const minimumStartTime = previousStartTime + 60 // Minimum 60-second increment
 
-  const prompt = `Given the podcast transcript, I need to find exactly where the new topic "${
-    chapter.title
-  }" begins.
+  // If we have speaker changes, find a suitable change point
+  let potentialBreakpoints: SpeakerChange[] =
+    speakerChanges || []
+  if (speakerChanges && speakerChanges.length > 0) {
+    // Find speaker changes that happen after the previous chapter start
+    potentialBreakpoints = speakerChanges.filter(
+      (change) =>
+        change.timestamp > previousStartTime &&
+        change.timestamp >= minimumStartTime
+    )
+  }
 
+  // Reformat all the timestamps
+  const formattedPotentialBreakpoints =
+    potentialBreakpoints.map((change) => ({
+      ...change,
+      timestamp: formatSecondsToTimeString(
+        change.timestamp
+      ),
+    }))
+
+  console.log(
+    `Potential breakpoints: ${JSON.stringify(
+      formattedPotentialBreakpoints
+    )}`
+  )
+
+  const prompt = `
 <previous_chapter_info>
 Previous chapter title: "${previousChapter.title}"
 </previous_chapter_info>
+
+<potential_breakpoints>
+${formattedPotentialBreakpoints.join('\n')}
+</potential_breakpoints>
 
 <full_transcript>
 ${fullTranscript}
 </full_transcript>
 
 <instructions>
-1. Search the transcript carefully to find where the topic shifts to "${
+1. Search the transcript carefully and think through where the topic shifts to "${
     chapter.title
   }"
-2. Look for clear transitions, introductions of new concepts, or changes in speaker focus
-3. The timestamp MUST be after ${formatSecondsToTimeString(
-    minimumStartTime
-  )}
+2. Look for clear transitions, introductions of new concepts
+3. The timestamp MUST be chosen from one of the <potential_breakpoints>
 4. Return the timestamp in HH:MM:SS format (e.g., "00:10:00" for 10 minutes)
-5. Be precise - do not default to the previous chapter's time or add an arbitrary offset
 
 Your task is to analyze the transcript and provide the exact timestamp where this specific topic begins.
 </instructions>
@@ -210,6 +240,7 @@ function parseTimeToSeconds(
  */
 export async function processTranscriptChapters(
   transcript: string,
+  transcriptPath?: string,
   maxChapters: number = 5
 ): Promise<Chapter[]> {
   // Step 1: Split transcript into chapters
@@ -218,7 +249,34 @@ export async function processTranscriptChapters(
     maxChapters
   )
 
-  // Step 2: Find timestamps for each chapter sequentially
+  // Step 2: Extract speaker changes if transcript path is provided
+  let speakerChanges: SpeakerChange[] = []
+  if (transcriptPath) {
+    try {
+      speakerChanges = await extractSpeakerChanges(
+        transcriptPath
+      )
+      console.log(
+        `Extracted ${speakerChanges.length} speaker changes from transcript.`
+      )
+
+      // Log the extracted speaker changes for review
+      speakerChanges.forEach((change) => {
+        console.log(
+          `Speaker change at ${formatSecondsToTimeString(
+            change.timestamp
+          )}: ${change.speaker}`
+        )
+      })
+    } catch (error) {
+      console.error(
+        'Failed to extract speaker changes:',
+        error
+      )
+    }
+  }
+
+  // Step 3: Find timestamps for each chapter sequentially
   const chaptersWithTimestamps: Chapter[] = []
 
   for (let i = 0; i < chapters.length; i++) {
@@ -228,7 +286,8 @@ export async function processTranscriptChapters(
       await findChapterTimestamps(
         chapters[i],
         transcript,
-        previousChapter
+        previousChapter,
+        speakerChanges
       )
     chaptersWithTimestamps.push(chapterWithTimestamp)
   }

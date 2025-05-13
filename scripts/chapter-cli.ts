@@ -18,7 +18,9 @@ import {
   splitTranscriptIntoChapters,
   findChapterTimestamps,
   Chapter,
+  SpeakerChange,
 } from './transcript-chapters'
+import { extractSpeakerChanges } from './extract-speaker-changes'
 
 // Extend the Chapter type to include formattedTime
 interface ChapterWithFormattedTime extends Chapter {
@@ -52,6 +54,12 @@ async function main() {
       String(filePath)
     )
 
+    // Extract speaker changes
+    const speakerChanges =
+      await extractSpeakerChangesIfPossible(
+        String(filePath)
+      )
+
     const initialChapters = await generateInitialChapters(
       transcript,
       maxChapters
@@ -67,7 +75,8 @@ async function main() {
     const chaptersWithTimestamps =
       await processSelectedChapters(
         selectedChapters,
-        transcript
+        transcript,
+        speakerChanges
       )
 
     const chaptersWithFormattedTime =
@@ -89,6 +98,42 @@ async function main() {
     )
     process.exit(1)
   }
+}
+
+/**
+ * Extract speaker changes from VTT file if possible
+ */
+async function extractSpeakerChangesIfPossible(
+  filePath: string
+): Promise<SpeakerChange[] | undefined> {
+  const extension = path.extname(filePath).toLowerCase()
+
+  // Only extract speaker changes from VTT files
+  if (extension === '.vtt') {
+    const loadingSpinner = spinner()
+    loadingSpinner.start('Extracting speaker changes')
+
+    try {
+      const speakerChanges = await extractSpeakerChanges(
+        filePath
+      )
+      loadingSpinner.stop(
+        `Found ${speakerChanges.length} speaker changes`
+      )
+
+      return speakerChanges
+    } catch (error) {
+      loadingSpinner.stop(
+        'Failed to extract speaker changes'
+      )
+      return undefined
+    }
+  }
+
+  consola.info(
+    `File format ${extension} doesn't support speaker extraction`
+  )
+  return undefined
 }
 
 /**
@@ -273,7 +318,8 @@ async function selectChapters(
  */
 async function processSelectedChapters(
   selectedChapters: Chapter[],
-  transcript: string
+  transcript: string,
+  speakerChanges?: SpeakerChange[]
 ): Promise<Chapter[]> {
   const loadingSpinner = spinner()
   loadingSpinner.start('Processing selected chapters')
@@ -293,7 +339,8 @@ async function processSelectedChapters(
         await findChapterTimestamps(
           selectedChapters[i],
           transcript,
-          previousChapter
+          previousChapter,
+          speakerChanges
         )
       chaptersWithTimestamps.push(chapterWithTimestamp)
     }
