@@ -1,10 +1,11 @@
 import { generateText, generateObject } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { z } from 'zod'
-import {
-  extractSpeakerChanges,
-  SpeakerChange,
-} from './extract-speaker-changes'
+import { extractSpeakerChanges } from './extract-speaker-changes'
+import type { SpeakerChange } from './extract-speaker-changes'
+import { format } from 'path'
+
+export type { SpeakerChange }
 
 export interface Chapter {
   title: string
@@ -104,24 +105,21 @@ export async function findChapterTimestamps(
       ),
     }))
 
-  console.log(
-    `Potential breakpoints: ${JSON.stringify(
-      formattedPotentialBreakpoints
-    )}`
-  )
-
   const prompt = `
+<full_transcript>
+${fullTranscript}
+</full_transcript>
+
 <previous_chapter_info>
 Previous chapter title: "${previousChapter.title}"
 </previous_chapter_info>
 
 <potential_breakpoints>
-${formattedPotentialBreakpoints.join('\n')}
+${formattedPotentialBreakpoints
+  .map((change) => change.timestamp)
+  .join('\n')}
 </potential_breakpoints>
 
-<full_transcript>
-${fullTranscript}
-</full_transcript>
 
 <instructions>
 1. Search the transcript carefully and think through where the topic shifts to "${
@@ -131,7 +129,7 @@ ${fullTranscript}
 3. The timestamp MUST be chosen from one of the <potential_breakpoints>
 4. Return the timestamp in HH:MM:SS format (e.g., "00:10:00" for 10 minutes)
 
-Your task is to analyze the transcript and provide the exact timestamp where this specific topic begins.
+Your task is to analyze the transcript and provide the exact timestamp where this specific topic begins from the <potential_breakpoints>.
 </instructions>
 `
 
