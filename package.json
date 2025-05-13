@@ -1,18 +1,9 @@
 {
-  "name": "video-to-audio-converter",
-  "version": "1.0.0",
-  "description": "Recursively convert videos to audio files",
+  "name": "deja-vue-podcast-tools",
+  "version": "0.0.1",
+  "description": "Podcast tools for Deja Vue",
   "main": "videoToAudio.ts",
   "scripts": {
-    "extract-audio": "ts-node scripts/videoToAudio.ts",
-    "transcribe": "ts-node scripts/transcribeAudio.ts",
-    "process-transcripts": "ts-node scripts/process-transcripts.ts",
-    "find-lesson-commits": "ts-node scripts/find-lesson-commits.ts",
-    "log-transcripts": "ts-node scripts/log-transcripts.ts",
-    "analyze-durations": "ts-node scripts/analyze-durations.ts",
-    "find-links": "ts-node scripts/linkExtractor.ts",
-    "extract-lesson-patches": "ts-node scripts/extract-lesson-patches.ts",
-    "generate-release": "ts-node scripts/generate-release-description.ts",
     "chapters": "ts-node scripts/chapter-cli.ts"
   },
   "dependencies": {
